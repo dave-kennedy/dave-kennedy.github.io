@@ -1,0 +1,110 @@
+body {
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  margin: 0;
+}
+a {
+  color: #ccc;
+  text-decoration: none;
+  text-shadow: 1px 1px 3px #333;
+  -webkit-transition: color 0.3s;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #fff;
+}
+div.inner {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 16px;
+}
+div.outer:first-child div.inner {
+  background: rgba(200, 50, 20, 1);
+}
+div.outer:nth-child(2) div.inner {
+  background: rgba(30, 114, 194, 1);
+}
+div.outer:nth-child(3) div.inner {
+  background: rgba(112, 138, 40, 1);
+}
+div.outer:last-child div.inner {
+  background: rgba(172, 135, 38, 1);
+}
+@media (min-width: 768px) {
+  div.outer {
+    -webkit-background-size: cover;
+    background-size: cover;
+  }
+  div.outer:first-child {
+    background-image: url('../img/PlasterColoured0175_2_S.jpg');
+  }
+  div.outer:nth-child(2) {
+    background-image: url('../img/GrungePaint0014_S.jpg');
+  }
+  div.outer:nth-child(3) {
+    background-image: url('../img/PlasterColoured0229_3_S.jpg');
+  }
+  div.outer:last-child {
+    background-image: url('../img/GrungePaint0008_1_S.jpg');
+  }
+  div.inner {
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  div.outer:first-child div.inner {
+    background: rgba(200, 50, 20, 0.8);
+  }
+  div.outer:nth-child(2) div.inner {
+    background: rgba(30, 114, 194, 0.8);
+  }
+  div.outer:nth-child(3) div.inner {
+    background: rgba(112, 138, 40, 0.8);
+  }
+  div.outer:last-child div.inner {
+    background: rgba(172, 135, 38, 0.8);
+  }
+  div.outer:first-child:hover div.inner {
+    background: rgba(200, 50, 20, 1);
+  }
+  div.outer:nth-child(2):hover div.inner {
+    background: rgba(30, 114, 194, 1);
+  }
+  div.outer:nth-child(3):hover div.inner {
+    background: rgba(112, 138, 40, 1);
+  }
+  div.outer:last-child:hover div.inner {
+    background: rgba(172, 135, 38, 1);
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  div.inner > * {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+}
+@media (min-width: 992px) {
+  div.outer {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 25%;
+  }
+  div.outer:first-child {
+    left: 0;
+  }
+  div.outer:nth-child(2) {
+    left: 25%;
+  }
+  div.outer:nth-child(3) {
+    left: 50%;
+  }
+  div.outer:last-child {
+    left: 75%;
+  }
+  div.inner {
+    height: 100%;
+    width: 100%;
+  }
+}
