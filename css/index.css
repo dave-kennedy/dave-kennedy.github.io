@@ -4,6 +4,7 @@ html {
 }
 
 body {
+    background-attachment: fixed;
     background-image: url('../img/background.jpg');
     background-size: cover;
     color: #fff;
@@ -29,19 +30,19 @@ div.outer {
 }
 
 div.outer:first-child {
-    background-color: rgba(92, 72, 26, 0.8);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 div.outer:nth-child(2) {
-    background-color: rgba(98, 102, 68, 0.8);
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 div.outer:nth-child(3) {
-    background-color: rgba(76, 82, 86, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 div.outer:last-child {
-    background-color: rgba(104, 104, 104, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 div.outer:first-child:hover {
