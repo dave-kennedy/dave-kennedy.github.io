@@ -1,0 +1,136 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    height: 100%;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* bootstrap classes */
+
+.list-group-item.active {
+    border-bottom: 2px solid;
+}
+
+/* color palettes */
+
+.color-palette-0 {
+    background-color: #0B486B;
+    color: #3B8686;
+}
+
+.color-palette-0 h2 {
+    color: #CFF09E;
+}
+
+.color-palette-0 a {
+    color: #A8DBA8;
+}
+
+.color-palette-1 {
+    background-color: #556270;
+    color: #FF6B6B;
+}
+
+.color-palette-1 h2 {
+    color: #C7F464;
+}
+
+.color-palette-1 a {
+    color: #4ECDC4;
+}
+
+.color-palette-2 {
+    background-color: #6A4A3C;
+    color: #EDC951;
+}
+
+.color-palette-2 h2 {
+    color: #EB6841;
+}
+
+.color-palette-2 a {
+    color: #00A0B0;
+}
+
+.color-palette-3 {
+    background-color: #490A3D;
+    color: #F8CA00;
+}
+
+.color-palette-3 h2 {
+    color: #E97F02;
+}
+
+.color-palette-3 a {
+    color: #8A9B0F;
+}
+
+/* color utils */
+
+.text-muted {
+    color: #ccc;
+}
+
+/* display utils */
+
+.d-inline-block {
+    display: inline-block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+/* flex utils */
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+/* position utils */
+
+.position-fixed {
+    position: fixed;
+}
+
+.top-0 {
+    top: 0;
+}
+
+/* sizing utils */
+
+.h-100 {
+    height: 100%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* spacing utils */
+
+.p-3 {
+    padding: 1rem;
+}
+

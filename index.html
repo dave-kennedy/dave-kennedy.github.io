@@ -3,23 +3,18 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>dave-kennedy.github.io</title>
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-        <link href="css/index.css" rel="stylesheet">
+        <title>Hi</title>
+        <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
     </head>
-    <body>
-        <div class="outer">
-            <h2>Apps</h2>
-            <p>
-                <a href="https://github.com/dave-kennedy/calc">Calc</a><br>
-                An extremely basic interactive calculator.
-            </p>
-            <p>
-                <a href="https://github.com/dave-kennedy/recall">Recall</a><br>
-                A glorified sticky note that I use to look up cryptic shell commands.
-            </p>
+    <body data-spy="scroll" data-target="#scrollspy" data-offset="0">
+        <div class="list-group position-fixed top-0 w-100" id="scrollspy">
+            <a class="list-group-item d-inline-block p-3" href="#web-apps">Web</a>
+            <a class="list-group-item d-inline-block p-3" href="#non-web">Non-web</a>
+            <a class="list-group-item d-inline-block p-3" href="#libs">Libs</a>
+            <a class="list-group-item d-inline-block p-3" href="#misc">Misc</a>
         </div>
-        <div class="outer">
+        <div class="color-palette-0 d-flex flex-column justify-content-center h-100 p-3" id="web-apps">
             <h2>Web apps</h2>
             <p>
                 <a href="https://github.com/dave-kennedy/CharacterSheet">D&amp;D v3.5 Character Sheet</a><br>
@@ -38,8 +33,19 @@
                 <a href="https://dave-kennedy.github.io/por-code-wheel">Demo</a>
             </p>
         </div>
-        <div class="outer">
-            <h2>Libs</h2>
+        <div class="color-palette-1 d-flex flex-column justify-content-center h-100 p-3" id="non-web">
+            <h2>Non-web apps</h2>
+            <p>
+                <a href="https://github.com/dave-kennedy/calc">Calc</a><br>
+                An extremely basic interactive calculator.
+            </p>
+            <p>
+                <a href="https://github.com/dave-kennedy/recall">Recall</a><br>
+                A glorified sticky note that I use to look up cryptic shell commands.
+            </p>
+        </div>
+        <div class="color-palette-2 d-flex flex-column justify-content-center h-100 p-3" id="libs">
+            <h2>Libraries</h2>
             <p>
                 <a href="https://github.com/dave-kennedy/DivineGrid">Divine Grid</a><br>
                 A fluid, responsive CSS grid framework based on the divine proportion, also known as the golden ratio.
@@ -61,7 +67,7 @@
                 <a href="https://dave-kennedy.github.io/Knockoff">Demo</a>
             </p>
         </div>
-        <div class="outer">
+        <div class="color-palette-3 d-flex flex-column justify-content-center h-100 p-3" id="misc">
             <h2>Everything else</h2>
             <p>
                 <a href="https://github.com/dave-kennedy/blacklist">DNS Blacklist</a><br>
@@ -72,6 +78,9 @@
                 An intranet application for configuring dnsmasq as a whitelist.
             </p>
         </div>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
 
