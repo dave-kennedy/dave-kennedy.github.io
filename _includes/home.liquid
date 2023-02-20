@@ -1,32 +1,97 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    {% if title %}
-      <title>{{ title }} | {{ metadata.siteTitle }}</title>
-    {% else %}
-      <title>{{ metadata.siteTitle }}</title>
-    {% endif %}
+---
+layout: base.liquid
+---
 
-    <link href="/css/normalize.css" rel="stylesheet" />
-    <link href="/css/base.css" rel="stylesheet" />
-    <link href="/css/home.css" rel="stylesheet" />
+<style>
+  .caret::after {
+    animation: cursor-blink 1s steps(2) infinite;
+    background: #fff;
+    content: '';
+    display: inline-block;
+    height: 1em;
+    vertical-align: top;
+    width: 0.1em;
+  }
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
+  @keyframes cursor-blink {
+    0% {
+      opacity: 0;
+    }
+  }
 
-  <body>
-    <div class="page">
-      <div class="main">
-        <div class="title">{{ metadata.siteTitle }}</div>
+  .container {
+    display: none;
+  }
 
-        {% render '_nav' %}
-      </div>
+  @media (min-width: 940px) {
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
 
-      <footer>
-        &copy; {{ 'now' | date: '%Y' }}
-      </footer>
-    </div>
-  </body>
-</html>
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      align-items: center;
+      flex-basis: 95%;
+      justify-content: center;
+    }
+
+    header .title {
+      flex-basis: 5em; /* 300px */
+      font-size: 3em; /* 60px */
+      text-align: right;
+    }
+
+    header nav {
+      border-left: 4px solid var(--border-color);
+      flex-basis: 12em; /* 240px */
+      flex-direction: column;
+      padding-left: 1em;
+    }
+
+    footer {
+      flex-basis: 5%;
+    }
+  }
+</style>
+
+<script>
+  (async () => {
+    async function replaceText(selector, replacement) {
+      const element = document.querySelector(selector);
+      element.classList.add('caret');
+      element.innerHTML = '';
+      await sleep(1000);
+
+      for (let i = 0; i < replacement.length; i++) {
+        element.innerHTML += replacement[i];
+        await sleep(100);
+      }
+
+      await sleep(1000);
+      element.classList.remove('caret');
+    }
+
+    async function sleep(time) {
+      await new Promise(r => setTimeout(r, time));
+    }
+
+    await sleep(3000);
+    await replaceText('nav div:nth-child(1) a', 'You Are Here');
+    await sleep(1000);
+    await replaceText('nav div:nth-child(2) a', 'Idea Escape Hatch');
+    await sleep(1000);
+    await replaceText('nav div:nth-child(3) a', 'Electronic Telepathy');
+    await sleep(1000);
+    await replaceText('nav div:nth-child(4) a', 'Own Your Data');
+    await sleep(1000);
+    await replaceText('nav div:nth-child(5) a', 'Character Sheet');
+    await sleep(1000);
+    await replaceText('nav div:nth-child(6) a', 'Trophy Case');
+  })();
+</script>
 
