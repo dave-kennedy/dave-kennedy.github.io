@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>Better Vim-Style Key Bindings in Tmux | David Kennedy</title>
+    
+
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <header>
+      <div class="title">David Kennedy</div>
+
+      <nav>
+  <div>
+    <a href="/">Home</a>
+  </div>
+  <div>
+    <a href="/blog">Blog</a>
+  </div>
+  <div>
+    <a href="/portfolio">Portfolio</a>
+  </div>
+  <div>
+    <a href="/resume">Resume</a>
+  </div>
+  <div>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div>
+    <a href="/contact">Contact</a>
+  </div>
+</nav>
+
+
+    </header>
+
+    <div class="container">
+      
+<style>
+  article .date, article .tags {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
+  @media (min-width: 940px) {
+    article .title {
+      font-size: 3em; /* 60px */
+      margin-bottom: 2em;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    .pagination {
+      display: flex;
+    }
+
+    .pagination .previous {
+      flex-basis: 50%;
+      text-align: left;
+    }
+
+    .pagination .next {
+      flex-basis: 50%;
+      text-align: right;
+    }
+  }
+</style>
+
+<article>
+  
+    <h1 class="title">Better Vim-Style Key Bindings in Tmux</h1>
+  
+
+  
+
+  
+    <div class="date">July 15, 2022</div>
+  
+
+  
+
+  
+    <div class="tags">
+      
+        <a href="/blog/tags/computering">#Computering</a>
+      
+        <a href="/blog/tags/nix">#Nix</a>
+      
+        <a href="/blog/tags/til">#TIL</a>
+      
+        <a href="/blog/tags/tmux">#Tmux</a>
+      
+        <a href="/blog/tags/vim">#Vim</a>
+      
+    </div>
+  
+
+  <p>I was confused by tmux's &quot;vi-style&quot; key bindings in copy mode, which don't behave at all like I expected: <code>Space</code> starts the selection (like <code>v</code> in vim), <code>Enter</code> copies and clears the selection (like <code>y</code>), while <code>Ctrl-V</code> toggles block selection mode but doesn't start the selection.</p>
+<p><img src="overload.gif" alt="overload.gif"></p>
+<p>Fortunately, tmux supports braces and conditionals in key bindings. This confused me too because there are two constructs: the <code>%if</code> keyword and the <code>if-shell</code> command.</p>
+<p><code>%if</code> conditions are only evaluated once when the config is loaded. This binding doesn't work because <code>#{selection_present}</code> evaluates to <code>0</code> when tmux starts:</p>
+<pre><code>bind-key -T copy-mode C-v {
+    %if &quot;#{selection_present}&quot;
+    display-message yes
+    %else
+    display-message no
+    %endif
+}
+</code></pre>
+<p>On the other hand, the <code>if-shell</code> command in this binding will be called every time <code>&lt;Ctrl-v&gt;</code> is pressed:</p>
+<pre><code>bind-key -T copy-mode C-v {
+    if-shell -F &quot;#{selection_present}&quot; {
+        display-message yes
+    } {
+        display-message no
+    }
+}
+</code></pre>
+<p>The <code>-F</code> flag tells tmux to evaluate the condition without calling an external shell command, as the name implies. Otherwise it would try to run <code>0</code> or <code>1</code> in the shell and fail.</p>
+<p>In addition, <code>if-shell</code> commands can be nested, so we can mimic vim's behavior with the following config:</p>
+<pre><code>set-option -g mode-keys vi
+
+bind-key -T copy-mode-vi v {
+    if-shell -F &quot;#{selection_present}&quot; {
+        if-shell -F &quot;#{rectangle_toggle}&quot; {
+            send-keys -X rectangle-off
+        } {
+            send-keys -X clear-selection
+        }
+    } {
+        send-keys -X begin-selection
+    }
+}
+
+bind-key -T copy-mode-vi C-v {
+    if-shell -F &quot;#{selection_present}&quot; {
+        if-shell -F &quot;#{rectangle_toggle}&quot; {
+            send-keys -X clear-selection
+        } {
+            send-keys -X rectangle-on
+        }
+    } {
+        send-keys -X begin-selection
+        send-keys -X rectangle-on
+    }
+}
+
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+</code></pre>
+
+</article>
+
+
+
+
+<div class="pagination">
+  <div class="previous">
+    
+      <a href="/blog/posts/special-replacements-in-sed/">« Special Replacements in Sed</a>
+    
+  </div>
+
+  <div class="next">
+    
+      <a href="/blog/posts/seamless-pane-window-switching-between-tmux-and-vim/">Seamless Pane-Window Switching Between Tmux and Vim »</a>
+    
+  </div>
+</div>
+
+
+    </div>
+
+    <footer>
+      &copy; 2023
+    </footer>
+  </body>
+</html>
+

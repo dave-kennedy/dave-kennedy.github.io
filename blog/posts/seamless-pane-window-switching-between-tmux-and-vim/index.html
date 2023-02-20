@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <title>Seamless Pane-Window Switching Between Tmux and Vim | David Kennedy</title>
+    
+
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <header>
+      <div class="title">David Kennedy</div>
+
+      <nav>
+  <div>
+    <a href="/">Home</a>
+  </div>
+  <div>
+    <a href="/blog">Blog</a>
+  </div>
+  <div>
+    <a href="/portfolio">Portfolio</a>
+  </div>
+  <div>
+    <a href="/resume">Resume</a>
+  </div>
+  <div>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div>
+    <a href="/contact">Contact</a>
+  </div>
+</nav>
+
+
+    </header>
+
+    <div class="container">
+      
+<style>
+  article .date, article .tags {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
+  @media (min-width: 940px) {
+    article .title {
+      font-size: 3em; /* 60px */
+      margin-bottom: 2em;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    .pagination {
+      display: flex;
+    }
+
+    .pagination .previous {
+      flex-basis: 50%;
+      text-align: left;
+    }
+
+    .pagination .next {
+      flex-basis: 50%;
+      text-align: right;
+    }
+  }
+</style>
+
+<article>
+  
+    <h1 class="title">Seamless Pane-Window Switching Between Tmux and Vim</h1>
+  
+
+  
+
+  
+    <div class="date">July 20, 2022</div>
+  
+
+  
+
+  
+    <div class="tags">
+      
+        <a href="/blog/tags/computering">#Computering</a>
+      
+        <a href="/blog/tags/nix">#Nix</a>
+      
+        <a href="/blog/tags/til">#TIL</a>
+      
+        <a href="/blog/tags/tmux">#Tmux</a>
+      
+        <a href="/blog/tags/vim">#Vim</a>
+      
+    </div>
+  
+
+  <p>I can't be arsed with an extra keystroke when switching between windows in vim, so I've had this in my vimrc for years:</p>
+<pre><code>&quot; Move the cursor to the next window left/down/up/right
+nnoremap &lt;C-H&gt; &lt;C-W&gt;&lt;C-H&gt;
+nnoremap &lt;C-J&gt; &lt;C-W&gt;&lt;C-J&gt;
+nnoremap &lt;C-K&gt; &lt;C-W&gt;&lt;C-K&gt;
+nnoremap &lt;C-L&gt; &lt;C-W&gt;&lt;C-L&gt;
+</code></pre>
+<p>And because the arrow keys are a stretch, I have this in my tmux.conf:</p>
+<pre><code># Select the next pane left/down/up/right
+bind h selectp -L
+bind j selectp -D
+bind k selectp -U
+bind l selectp -R
+</code></pre>
+<p>With this configuration, jumping out of vim into another tmux pane only requires one extra keystroke: the tmux prefix. Fortunately, <a href="https://github.com/christoomey/vim-tmux-navigator">Vim Tmux Navigator</a> solves that problem. But it's a bit complicated and messy. Turns out all it requires is a tiny vimscript and a few relatively simple tmux bindings.</p>
+<p>Here's the vimscript:</p>
+<pre><code>&quot; Only load this plugin if running inside tmux
+if empty($TMUX)
+    finish
+endif
+
+function! NextWindow(direction)
+    let l:win_num = winnr()
+    execute &quot;wincmd&quot; a:direction
+
+    &quot; If the window number changed, then the command succeeded. Otherwise,
+    &quot; we're at an edge window and we'll let tmux handle it.
+    if l:win_num != winnr()
+        return
+    endif
+
+    let l:tmux_direction = tr(a:direction, 'hjkl', 'LDUR')
+    call system('tmux select-pane -' . l:tmux_direction)
+endfunction
+
+nmap &lt;silent&gt; &lt;C-H&gt; :call NextWindow('h')&lt;CR&gt;
+nmap &lt;silent&gt; &lt;C-J&gt; :call NextWindow('j')&lt;CR&gt;
+nmap &lt;silent&gt; &lt;C-K&gt; :call NextWindow('k')&lt;CR&gt;
+nmap &lt;silent&gt; &lt;C-L&gt; :call NextWindow('l')&lt;CR&gt;
+</code></pre>
+<p>The tmux bindings are a little tricky. At first, I tried this:</p>
+<pre><code>bind -n C-h if -F &quot;#{==:#{pane_current_command},nvim}&quot; &quot;send C-h&quot; &quot;selectp -L&quot;
+</code></pre>
+<p>That funky nested format is required for comparing strings in tmux commands. Other than that, it's pretty straightforward. The problem is this doesn't work if vim is used as a pager, is reading from stdin, or was started from a script. In those cases, <code>pane_current_command</code> might be bash, less, man, or whatever command was entered at the command line. Instead, we have to get a list of processes belonging to the terminal attached to the pane:</p>
+<pre><code># If nvim is running in the foreground of the current pane, let it handle these
+# keys. Otherwise, select the next pane left/down/up/right.
+is_nvim=&quot;[ $(ps -o comm -t #{pane_tty} | tail -1) = nvim ]&quot;
+
+bind -n C-h if &quot;$is_nvim&quot; &quot;send C-h&quot; &quot;selectp -L&quot;
+bind -n C-j if &quot;$is_nvim&quot; &quot;send C-j&quot; &quot;selectp -D&quot;
+bind -n C-k if &quot;$is_nvim&quot; &quot;send C-k&quot; &quot;selectp -U&quot;
+bind -n C-l if &quot;$is_nvim&quot; &quot;send C-l&quot; &quot;selectp -R&quot;
+</code></pre>
+<p>Obviously, if you don't use nvim, just change the bindings accordingly.</p>
+<p>Finally, if you use emacs-style shortcuts in your shell, you might prefer to use the alt key instead of the control key to keep the default behavior of <code>Ctrl-H</code> (backspace) and <code>Ctrl-K</code> (delete from cursor to end of line). In that case, just replace <code>C-</code> with <code>M-</code> in the vim mappings and the tmux bindings. Also, make sure to use lowercase <code>-h</code>, <code>-j</code>, etc. in the vim mappings due to how vim/xterm handles the alt key.</p>
+
+</article>
+
+
+
+
+<div class="pagination">
+  <div class="previous">
+    
+      <a href="/blog/posts/better-vim-style-key-bindings-in-tmux/">« Better Vim-Style Key Bindings in Tmux</a>
+    
+  </div>
+
+  <div class="next">
+    
+  </div>
+</div>
+
+
+    </div>
+
+    <footer>
+      &copy; 2023
+    </footer>
+  </body>
+</html>
+
