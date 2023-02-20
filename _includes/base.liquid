@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% if title %}
+      <title>{{ title }} | {{ metadata.siteTitle }}</title>
+    {% else %}
+      <title>{{ metadata.siteTitle }}</title>
+    {% endif %}
+
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+    <header>
+      <div class="title">{{ metadata.siteTitle }}</div>
+
+      {% render '_nav' %}
+    </header>
+
+    <div class="container">
+      {{ content }}
+    </div>
+
+    <footer>
+      &copy; {{ 'now' | date: '%Y' }}
+    </footer>
+  </body>
+</html>
+

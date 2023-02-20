@@ -1,0 +1,114 @@
+<style>
+  article {
+    margin-bottom: 2em;
+  }
+
+  article .date {
+    margin-bottom: 0.5em;
+  }
+
+  article .title {
+    font-size: 1.5em; /* 30px */
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+
+  @media (min-width: 940px) {
+    article {
+      display: flex;
+      gap: 1em;
+    }
+
+    article .date {
+      flex: 0;
+      text-align: right;
+    }
+
+    article .date .day {
+      font-size: 2em; /* 40px */
+    }
+
+    article .details {
+      border-left: 4px solid var(--border-color);
+      padding-left: 1em;
+    }
+
+    .pagination {
+      display: flex;
+    }
+
+    .pagination .previous {
+      flex-basis: 25%;
+      order: 1;
+      text-align: left;
+    }
+
+    .pagination .current {
+      flex-basis: 50%;
+      order: 2;
+    }
+
+    .pagination .next {
+      flex-basis: 25%;
+      order: 3;
+      text-align: right;
+    }
+  }
+</style>
+
+{% for post in posts %}
+  <article>
+    {% if post.page.date %}
+      <div class="date">
+        <span class="month">{{ post.page.date | date: '%b' }}</span>
+        <span class="day">{{ post.page.date | date: '%d' }}</span>
+        <span class="year">{{ post.page.date | date: '%Y' }}</span>
+      </div>
+    {% endif %}
+
+    <div class="details">
+      {% if post.page.url and post.data.title %}
+        <div class="title">
+          <a href="{{ post.page.url }}">{{ post.data.title }}</a>
+        </div>
+      {% endif %}
+
+      {% if post.data.author %}
+        <div class="author">{{ post.data.author }}</div>
+      {% endif %}
+
+      {% assign tags = post.data.tags | filterTags %}
+
+      {% if tags %}
+        <div class="tags">
+          {% for tag in tags %}
+            <a href="/blog/tags/{{ tag | slugify }}">#{{ tag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </article>
+{% endfor %}
+
+<div class="pagination">
+  <div class="current">
+    Page {{ pageNumber | plus: 1 }} of {{ totalPages }}
+  </div>
+
+  <div class="previous">
+    {% if previousHref %}
+      <a href="{{ previousHref }}">
+        « Page {{ pageNumber }}
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="next">
+    {% if nextHref %}
+      <a href="{{ nextHref }}">
+        Page {{ pageNumber | plus: 2 }} »
+      </a>
+    {% endif %}
+  </div>
+</div>
+

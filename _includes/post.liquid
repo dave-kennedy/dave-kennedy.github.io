@@ -1,0 +1,77 @@
+---
+layout: base.liquid
+---
+
+<style>
+  article .date, article .tags {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
+  @media (min-width: 940px) {
+    article .title {
+      font-size: 3em; /* 60px */
+      margin-bottom: 2em;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    .pagination {
+      display: flex;
+    }
+
+    .pagination .previous {
+      flex-basis: 50%;
+      text-align: left;
+    }
+
+    .pagination .next {
+      flex-basis: 50%;
+      text-align: right;
+    }
+  }
+</style>
+
+<article>
+  {% if title %}
+    <h1 class="title">{{ title }}</h1>
+  {% endif %}
+
+  {% if author %}
+    <div class="author">{{ author }}</div>
+  {% endif %}
+
+  {% if date %}
+    <div class="date">{{ date | date: '%B %d, %Y' }}</div>
+  {% endif %}
+
+  {% assign tags = tags | filterTags %}
+
+  {% if tags %}
+    <div class="tags">
+      {% for tag in tags %}
+        <a href="/blog/tags/{{ tag | slugify }}">#{{ tag }}</a>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  {{ content }}
+</article>
+
+{% assign previousPost = collections.posts | getPreviousCollectionItem %}
+{% assign nextPost = collections.posts | getNextCollectionItem %}
+
+<div class="pagination">
+  <div class="previous">
+    {% if previousPost %}
+      <a href="{{ previousPost.page.url }}">« {{ previousPost.data.title }}</a>
+    {% endif %}
+  </div>
+
+  <div class="next">
+    {% if nextPost %}
+      <a href="{{ nextPost.page.url }}">{{ nextPost.data.title }} »</a>
+    {% endif %}
+  </div>
+</div>
+

@@ -1,0 +1,13 @@
+---
+layout: base.liquid
+---
+
+<h1>{{ title }}</h1>
+
+{% render '_posts',
+   posts: tagPage.posts,
+   pageNumber: tagPage.pageNumber,
+   totalPages: tagPage.totalPages,
+   nextHref: tagPage.nextHref,
+   previousHref: tagPage.previousHref %}
+

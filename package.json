@@ -1,0 +1,33 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "A starter repository for a blog web site using the Eleventy site generator.",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "build-ghpages": "npx @11ty/eleventy --pathprefix=/homepage/",
+    "start": "npx @11ty/eleventy --serve --quiet",
+    "debug": "DEBUG=Eleventy* npx @11ty/eleventy",
+    "debugstart": "DEBUG=Eleventy* npx @11ty/eleventy --serve --quiet",
+    "benchmark": "DEBUG=Eleventy:Benchmark* npx @11ty/eleventy",
+    "clean": "rm -fr _site"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dave-kennedy/dave-kennedy.github.io"
+  },
+  "author": {
+    "name": "Dave Kennedy",
+    "email": "dave-kennedy@users.noreply.github.com",
+    "url": "https://github.com/dave-kennedy"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
+  "bugs": {
+    "url": "https://github.com/dave-kennedy/dave-kennedy.github.io/issues"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.0"
+  }
+}
