@@ -4,7 +4,13 @@ title: Privacy
 
 ## Policy
 
-This site doesn't use cookies or any form of browser storage and doesn't track you for any purpose, with one exception: Apache logs your IP address, user-agent string, and the path of every request you make to this domain. I can't do much with that information, other than block your IP address if you're spamming malicious requests.
+This site doesn't use cookies and doesn't collect, process or store any PII.
+
+However, this site is hosted on GitHub Pages, which has stated:
+
+> When a GitHub Pages site is visited, the visitor's IP address is logged and stored for security purposes, regardless of whether the visitor has signed into GitHub or not. For more information about GitHub's security practices, see GitHub Privacy Statement.[^github-pages-data-collection]
+
+[^github-pages-data-collection]: [About GitHub Pages - GitHub Docs](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#data-collection)
 
 ## Alternatives to big tech
 
