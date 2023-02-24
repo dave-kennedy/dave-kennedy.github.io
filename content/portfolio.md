@@ -8,28 +8,28 @@ title: Portfolio
 
 A dynamic character sheet the uses [Knockoff](https://github.com/dave-kennedy/Knockoff) for model binding and local storage for persistence. Can also save to and load from a JSON file.
 
-* [Demo](https://dave-kennedy.github.io/CharacterSheet)
+* [Demo](https://dkennedy.io/CharacterSheet)
 * [Source](https://github.com/dave-kennedy/CharacterSheet)
 
 ### Motivator
 
 A web app for building good habits and breaking bad ones. Uses local storage for persistence.
 
-* [Demo](https://dave-kennedy.github.io/motivator)
+* [Demo](https://dkennedy.io/motivator)
 * [Source](https://github.com/dave-kennedy/motivator)
 
 ### Old Portfolio
 
 My fancy old portfolio.
 
-* [Demo](https://dave-kennedy.github.io/old-portfolio)
+* [Demo](https://dkennedy.io/old-portfolio)
 * [Source](https://github.com/dave-kennedy/old-portfolio)
 
 ### Pool of Radiance Code Wheel
 
 Primitive DRM for the classic CRPG [Pool of Radiance](https://en.wikipedia.org/wiki/Pool_of_Radiance).
 
-* [Demo](https://dave-kennedy.github.io/por-code-wheel)
+* [Demo](https://dkennedy.io/por-code-wheel)
 * [Source](https://github.com/dave-kennedy/por-code-wheel)
 
 ### TODO
@@ -44,14 +44,14 @@ A fancy todo list built with [Stencil App Starter](https://github.com/stencil-co
 
 A fluid, responsive CSS grid framework based on the divine proportion, also known as the golden ratio.
 
-* [Demo](https://dave-kennedy.github.io/DivineGrid)
+* [Demo](https://dkennedy.io/DivineGrid)
 * [Source](https://github.com/dave-kennedy/DivineGrid)
 
 ### Divine Template
 
 A fluid, responsive CSS template based on the Divine Grid.
 
-* [Demo](https://dave-kennedy.github.io/DivineTemplate)
+* [Demo](https://dkennedy.io/DivineTemplate)
 * [Source](https://github.com/dave-kennedy/DivineTemplate)
 
 ### HTML Cleaner
@@ -65,7 +65,7 @@ An extremely configurable Node.js module for cleaning and beautifying HTML.
 
 A JavaScript model binding library inspired by [Knockout](https://knockoutjs.com/).
 
-* [Demo](https://dave-kennedy.github.io/Knockoff)
+* [Demo](https://dkennedy.io/Knockoff)
 * [Source](https://github.com/dave-kennedy/Knockoff)
 
 ### Wow Mum Component

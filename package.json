@@ -17,7 +17,7 @@
   "author": {
     "name": "Dave Kennedy",
     "email": "dave-kennedy@users.noreply.github.com",
-    "url": "https://github.com/dave-kennedy"
+    "url": "https://dkennedy.io"
   },
   "license": "MIT",
   "engines": {
@@ -26,6 +26,7 @@
   "bugs": {
     "url": "https://github.com/dave-kennedy/dave-kennedy.github.io/issues"
   },
+  "homepage": "https://dkennedy.io",
   "devDependencies": {
     "@11ty/eleventy": "^2.0.0"
   }
