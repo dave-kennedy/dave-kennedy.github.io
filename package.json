@@ -28,6 +28,7 @@
   },
   "homepage": "https://dkennedy.io",
   "devDependencies": {
-    "@11ty/eleventy": "^2.0.0"
+    "@11ty/eleventy": "^2.0.0",
+    "markdown-it-footnote": "^3.0.3"
   }
 }

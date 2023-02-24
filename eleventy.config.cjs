@@ -1,3 +1,5 @@
+const mdFootnote = require('markdown-it-footnote');
+
 module.exports = eleventy => {
 
   // Copy public directory to output
@@ -13,6 +15,8 @@ module.exports = eleventy => {
   });
 
   eleventy.addCollection('postsByTag', require('./_config/get-posts-by-tag.cjs'));
+
+  eleventy.amendLibrary('md', md => md.use(mdFootnote));
 
   return {
     dir: {
