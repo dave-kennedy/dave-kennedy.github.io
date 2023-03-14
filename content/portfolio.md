@@ -72,6 +72,8 @@ A JavaScript model binding library inspired by [Knockout](https://knockoutjs.com
 
 Enhance your web site/app/whatever with the majestic powers of [wow-mum-look-no-hands](https://github.com/hmmmsausages/wow-mum-look-no-hands). Built with [Stencil Component Starter](https://github.com/ionic-team/stencil-component-starter).
 
+* [Source](https://github.com/dave-kennedy/wow-mum-component)
+
 ## Themes
 
 ### Noir
