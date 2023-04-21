@@ -1,4 +1,4 @@
-const chunk = require('lodash.chunk');
+const { chunk } = require('@11ty/lodash-custom');
 const slugify = require('@sindresorhus/slugify');
 
 function getPostsByTag(collections) {
