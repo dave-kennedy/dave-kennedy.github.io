@@ -3,7 +3,7 @@ layout: base.liquid
 ---
 
 <style>
-  article .date, article .tags {
+  article .meta, article .tags {
     margin-bottom: 1em;
     margin-top: 1em;
   }
@@ -13,6 +13,10 @@ layout: base.liquid
       font-size: 3em; /* 60px */
       margin-bottom: 2em;
       margin-top: 2em;
+      text-align: center;
+    }
+
+    article .meta, article .tags {
       text-align: center;
     }
 
@@ -37,12 +41,18 @@ layout: base.liquid
     <h1 class="title">{{ title }}</h1>
   {% endif %}
 
-  {% if author %}
-    <div class="author">{{ author }}</div>
-  {% endif %}
+  {% if author or date %}
+    <div class="meta">
+      Posted
 
-  {% if date %}
-    <div class="date">{{ date | date: '%B %d, %Y' }}</div>
+      {% if date %}
+        <span class="date">on {{ date | date: '%b %e %Y' }}</span>
+      {% endif %}
+
+      {% if author %}
+        <span class="author">by {{ author }}</span>
+      {% endif %}
+    </div>
   {% endif %}
 
   {% assign tags = tags | filterTags %}

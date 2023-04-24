@@ -1,27 +1,34 @@
 <style>
   article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
     margin-bottom: 2em;
   }
 
-  article .date {
-    margin-bottom: 0.5em;
+  article .details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
 
   article .title {
     font-size: 1.5em; /* 30px */
     font-weight: bold;
-    margin-bottom: 0.5em;
   }
 
   @media (min-width: 940px) {
     article {
-      display: flex;
+      flex-direction: row;
       gap: 1em;
     }
 
     article .date {
-      flex: 0;
       text-align: right;
+    }
+
+    article .date span {
+      display: block;
     }
 
     article .date .day {
@@ -61,7 +68,7 @@
     {% if post.page.date %}
       <div class="date">
         <span class="month">{{ post.page.date | date: '%b' }}</span>
-        <span class="day">{{ post.page.date | date: '%d' }}</span>
+        <span class="day">{{ post.page.date | date: '%e' }}</span>
         <span class="year">{{ post.page.date | date: '%Y' }}</span>
       </div>
     {% endif %}
