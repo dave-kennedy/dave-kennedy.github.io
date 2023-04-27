@@ -44,6 +44,7 @@ code, pre {
 code {
   font-size: 0.8em; /* 16px */
   padding: 0.5em;
+  white-space: pre;
 }
 
 pre {
@@ -88,12 +89,20 @@ a:focus, a:hover {
 
 li {
   line-height: 2;
+  text-align: justify;
 }
 
 /* Paragraphs */
 
 p {
   line-height: 2;
+  text-align: justify;
+}
+
+p img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Tables */
