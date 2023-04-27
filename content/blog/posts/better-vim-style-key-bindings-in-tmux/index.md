@@ -27,7 +27,7 @@ bind-key -T copy-mode C-v {
 }
 ```
 
-On the other hand, the `if-shell` command in this binding will be called every time `<Ctrl-v>` is pressed:
+On the other hand, the `if-shell` command in this binding will be called every time `Ctrl-V` is pressed:
 
 ```
 bind-key -T copy-mode C-v {

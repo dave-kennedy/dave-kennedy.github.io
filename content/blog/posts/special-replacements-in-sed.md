@@ -14,7 +14,7 @@ I'm exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but
 "expression": "\u0026sum\u0026 ( ~input~ ) \u003e 0"
 ```
 
-I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing `<Ctrl-v>u0026` into vim inserted an ampersand. Then I turned to sed to fix up the files:
+I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing `<Ctrl-V>u0026` into vim inserted an ampersand. Then I turned to sed to fix up the files:
 
 ```
 $ sed -i 's/\u0026/&/g' data.json
