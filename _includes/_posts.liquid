@@ -84,6 +84,10 @@
         <div class="author">{{ post.data.author }}</div>
       {% endif %}
 
+      {% if post.data.description %}
+        <div class="description">{{ post.data.description }}</div>
+      {% endif %}
+
       {% assign tags = post.data.tags | filterTags %}
 
       {% if tags %}

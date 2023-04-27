@@ -1,6 +1,7 @@
 ---
 title: Seamless Pane-Window Switching Between Tmux and Vim
 date: 2022-07-20T09:48:51-0600
+description: Improve your workflow by saving a few keystrokes.
 tags:
     - Computering
     - Nix

@@ -1,6 +1,7 @@
 ---
 title: OpenWrt Wi-Fi Schedule
 date: 2023-03-06T19:58:05-0700
+description: Automatically toggle wi-fi to certain devices at specified times.
 tags:
     - Computering
     - Networking

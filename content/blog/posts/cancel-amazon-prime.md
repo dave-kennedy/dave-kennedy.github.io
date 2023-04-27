@@ -1,6 +1,7 @@
 ---
 title: Cancel Amazon Prime
 date: 2022-04-16T13:48:12-0600
+description: The real cost of two-day shipping.
 tags:
     - Amazon
     - Business

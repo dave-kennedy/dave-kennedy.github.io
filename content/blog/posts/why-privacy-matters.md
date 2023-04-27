@@ -1,6 +1,7 @@
 ---
 title: Why Privacy Matters
 date: 2022-04-16T21:24:00-0600
+description: As explained by the internet's favorite British accountant-slash-parrot-shaped comedian.
 tags:
     - Privacy
 ---

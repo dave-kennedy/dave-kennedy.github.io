@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+
+    {% if author %}
+      <meta name="author" content="{{ author | escape }}" />
+    {% endif %}
+
+    {% if description %}
+      <meta name="description" content="{{ description | escape }}" />
+    {% endif %}
+
+    {% if tags %}
+      <meta name="keywords" content="{{ tags | filterTags | join: ', ' }}" />
+    {% endif %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
     {% if title %}
       <title>{{ title }} | {{ metadata.siteTitle }}</title>
     {% else %}
       <title>{{ metadata.siteTitle }}</title>
     {% endif %}
-
-    <link href="/css/normalize.css" rel="stylesheet" />
-    <link href="/css/base.css" rel="stylesheet" />
-
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
 
   <body>

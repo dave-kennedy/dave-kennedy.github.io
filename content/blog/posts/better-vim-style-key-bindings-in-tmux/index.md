@@ -1,6 +1,7 @@
 ---
 title: Better Vim-Style Key Bindings in Tmux
 date: 2022-07-14T20:36:34-0600
+description: Make tmux's "vi-style" key bindings behave more like vim.
 tags:
     - Computering
     - Nix

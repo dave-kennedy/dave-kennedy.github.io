@@ -1,6 +1,7 @@
 ---
 title: Special Replacements in Sed
 date: 2022-07-14T16:15:58-0600
+description: Watch out for the ampersand in your sed commands.
 tags:
     - Computering
     - Nix

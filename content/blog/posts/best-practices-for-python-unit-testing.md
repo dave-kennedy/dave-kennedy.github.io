@@ -1,6 +1,7 @@
 ---
 title: Best Practices for Python Unit Testing
 date: 2022-05-23T09:25:27-0600
+description: A few simple tips to make unit testing Python code easier.
 tags:
     - Programming
     - Python
