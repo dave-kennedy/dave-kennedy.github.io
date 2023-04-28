@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+
     
-      <title>Posts tagged with TIL | David Kennedy</title>
+
     
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link href="/css/normalize.css" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+      <title>Posts tagged with TIL | David Kennedy</title>
+    
   </head>
 
   <body>
@@ -46,28 +53,35 @@
 
 <style>
   article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
     margin-bottom: 2em;
   }
 
-  article .date {
-    margin-bottom: 0.5em;
+  article .details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
 
   article .title {
     font-size: 1.5em; /* 30px */
     font-weight: bold;
-    margin-bottom: 0.5em;
   }
 
   @media (min-width: 940px) {
     article {
-      display: flex;
+      flex-direction: row;
       gap: 1em;
     }
 
     article .date {
-      flex: 0;
       text-align: right;
+    }
+
+    article .date span {
+      display: block;
     }
 
     article .date .day {
@@ -106,6 +120,46 @@
   <article>
     
       <div class="date">
+        <span class="month">Apr</span>
+        <span class="day">28</span>
+        <span class="year">2023</span>
+      </div>
+    
+
+    <div class="details">
+      
+        <div class="title">
+          <a href="/blog/posts/vims-expression-register/">Vim's Expression Register</a>
+        </div>
+      
+
+      
+
+      
+        <div class="description">Wrangling one of the beloved editor's most cryptic features.</div>
+      
+
+      
+
+      
+        <div class="tags">
+          
+            <a href="/blog/tags/computering">#Computering</a>
+          
+            <a href="/blog/tags/nix">#Nix</a>
+          
+            <a href="/blog/tags/til">#TIL</a>
+          
+            <a href="/blog/tags/vim">#Vim</a>
+          
+        </div>
+      
+    </div>
+  </article>
+
+  <article>
+    
+      <div class="date">
         <span class="month">Jul</span>
         <span class="day">20</span>
         <span class="year">2022</span>
@@ -119,6 +173,10 @@
         </div>
       
 
+      
+
+      
+        <div class="description">Improve your workflow by saving a few keystrokes.</div>
       
 
       
@@ -160,6 +218,10 @@
       
 
       
+        <div class="description">Make tmux's "vi-style" key bindings behave more like vim.</div>
+      
+
+      
 
       
         <div class="tags">
@@ -195,6 +257,10 @@
         </div>
       
 
+      
+
+      
+        <div class="description">Watch out for the ampersand in your sed commands.</div>
       
 
       

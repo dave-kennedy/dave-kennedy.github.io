@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+
     
-      <title>Better Vim-Style Key Bindings in Tmux | David Kennedy</title>
+
     
+      <meta name="description" content="Make tmux&#39;s &#34;vi-style&#34; key bindings behave more like vim." />
+    
+
+    
+      <meta name="keywords" content="Computering, Nix, TIL, Tmux, Vim" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link href="/css/normalize.css" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+      <title>Better Vim-Style Key Bindings in Tmux | David Kennedy</title>
+    
   </head>
 
   <body>
@@ -43,7 +54,7 @@
     <div class="container">
       
 <style>
-  article .date, article .tags {
+  article .meta, article .tags {
     margin-bottom: 1em;
     margin-top: 1em;
   }
@@ -53,6 +64,10 @@
       font-size: 3em; /* 60px */
       margin-bottom: 2em;
       margin-top: 2em;
+      text-align: center;
+    }
+
+    article .meta, article .tags {
       text-align: center;
     }
 
@@ -78,9 +93,15 @@
   
 
   
+    <div class="meta">
+      Posted
 
-  
-    <div class="date">July 15, 2022</div>
+      
+        <span class="date">on Jul 15 2022</span>
+      
+
+      
+    </div>
   
 
   
@@ -113,7 +134,7 @@
     %endif
 }
 </code></pre>
-<p>On the other hand, the <code>if-shell</code> command in this binding will be called every time <code>&lt;Ctrl-v&gt;</code> is pressed:</p>
+<p>On the other hand, the <code>if-shell</code> command in this binding will be called every time <code>Ctrl-V</code> is pressed:</p>
 <pre><code>bind-key -T copy-mode C-v {
     if-shell -F &quot;#{selection_present}&quot; {
         display-message yes

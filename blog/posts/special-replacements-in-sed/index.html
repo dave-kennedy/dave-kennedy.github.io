@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+
     
-      <title>Special Replacements in Sed | David Kennedy</title>
+
     
+      <meta name="description" content="Watch out for the ampersand in your sed commands." />
+    
+
+    
+      <meta name="keywords" content="Computering, Nix, Sed, TIL" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link href="/css/normalize.css" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+      <title>Special Replacements in Sed | David Kennedy</title>
+    
   </head>
 
   <body>
@@ -43,7 +54,7 @@
     <div class="container">
       
 <style>
-  article .date, article .tags {
+  article .meta, article .tags {
     margin-bottom: 1em;
     margin-top: 1em;
   }
@@ -53,6 +64,10 @@
       font-size: 3em; /* 60px */
       margin-bottom: 2em;
       margin-top: 2em;
+      text-align: center;
+    }
+
+    article .meta, article .tags {
       text-align: center;
     }
 
@@ -78,9 +93,15 @@
   
 
   
+    <div class="meta">
+      Posted
 
-  
-    <div class="date">July 14, 2022</div>
+      
+        <span class="date">on Jul 14 2022</span>
+      
+
+      
+    </div>
   
 
   
@@ -102,7 +123,7 @@
   <p>I'm exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but I find it much easier to export the data to JSON and use Python. I used GSON to export the data, but the resulting files were full of stuff like this:</p>
 <pre><code>&quot;expression&quot;: &quot;\u0026sum\u0026 ( ~input~ ) \u003e 0&quot;
 </code></pre>
-<p>I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing <code>&lt;Ctrl-v&gt;u0026</code> into vim inserted an ampersand. Then I turned to sed to fix up the files:</p>
+<p>I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing <code>&lt;Ctrl-V&gt;u0026</code> into vim inserted an ampersand. Then I turned to sed to fix up the files:</p>
 <pre><code>$ sed -i 's/\u0026/&amp;/g' data.json
 </code></pre>
 <p>Which didn't work. Turns out an ampersand means something special to sed:</p>

@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8" />
+
     
-      <title>Posts tagged with Opinion | David Kennedy</title>
+
     
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link href="/css/normalize.css" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+      <title>Posts tagged with Opinion | David Kennedy</title>
+    
   </head>
 
   <body>
@@ -46,28 +53,35 @@
 
 <style>
   article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
     margin-bottom: 2em;
   }
 
-  article .date {
-    margin-bottom: 0.5em;
+  article .details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
   }
 
   article .title {
     font-size: 1.5em; /* 30px */
     font-weight: bold;
-    margin-bottom: 0.5em;
   }
 
   @media (min-width: 940px) {
     article {
-      display: flex;
+      flex-direction: row;
       gap: 1em;
     }
 
     article .date {
-      flex: 0;
       text-align: right;
+    }
+
+    article .date span {
+      display: block;
     }
 
     article .date .day {
@@ -119,6 +133,10 @@
         </div>
       
 
+      
+
+      
+        <div class="description">The real cost of two-day shipping.</div>
       
 
       
