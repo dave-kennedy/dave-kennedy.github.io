@@ -29,5 +29,5 @@ What upsets me the most is Jeff Bezos could afford to pay all of his employees a
 [5]: https://www.cbsnews.com/news/amazon-workforce-safety-60-minutes-2020-05-10/
 [6]: https://gizmodo.com/amazons-last-mile-1820451224
 [7]: https://www.gawker.com/here-s-to-another-20-years-of-underpaid-and-soul-crushi-1717955855
-[8]: https://www.cnn.com/2021/07/20/tech/jeff-bezos-blue-origin-launch-scn/index.htmlhttps://www.cnn.com/2021/07/20/tech/jeff-bezos-blue-origin-launch-scn/index.html
+[8]: https://www.cnn.com/2021/07/20/tech/jeff-bezos-blue-origin-launch-scn
 
