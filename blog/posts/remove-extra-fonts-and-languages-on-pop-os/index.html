@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    
+
+    
+      <meta name="description" content="Make the font picker browsable by uninstalling unwanted packages." />
+    
+
+    
+      <meta name="keywords" content="Computering, Nix, Ubuntu" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
+    
+      <title>Remove Extra Fonts and Languages on Ubuntu | David Kennedy</title>
+    
+  </head>
+
+  <body>
+    <header>
+      <div class="title">David Kennedy</div>
+
+      <nav>
+  <div>
+    <a href="/">Home</a>
+  </div>
+  <div>
+    <a href="/blog">Blog</a>
+  </div>
+  <div>
+    <a href="/portfolio">Portfolio</a>
+  </div>
+  <div>
+    <a href="/resume">Resume</a>
+  </div>
+  <div>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div>
+    <a href="/contact">Contact</a>
+  </div>
+</nav>
+
+
+    </header>
+
+    <div class="container">
+      
+<style>
+  article .meta, article .tags {
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+
+  @media (min-width: 940px) {
+    article .title {
+      font-size: 3em; /* 60px */
+      margin-bottom: 2em;
+      margin-top: 2em;
+      text-align: center;
+    }
+
+    article .meta, article .tags {
+      text-align: center;
+    }
+
+    .pagination {
+      display: flex;
+    }
+
+    .pagination .previous {
+      flex-basis: 50%;
+      text-align: left;
+    }
+
+    .pagination .next {
+      flex-basis: 50%;
+      text-align: right;
+    }
+  }
+</style>
+
+<article>
+  
+    <h1 class="title">Remove Extra Fonts and Languages on Ubuntu</h1>
+  
+
+  
+    <div class="meta">
+      Posted
+
+      
+        <span class="date">on Jun 15 2023</span>
+      
+
+      
+    </div>
+  
+
+  
+
+  
+    <div class="tags">
+      
+        <a href="/blog/tags/computering">#Computering</a>
+      
+        <a href="/blog/tags/nix">#Nix</a>
+      
+        <a href="/blog/tags/ubuntu">#Ubuntu</a>
+      
+    </div>
+  
+
+  <p>I don't know about you, but I only speak, read and write fluently in my native language: English. So when I go hunting for a font I don't want to see this:</p>
+<p><img src="fonts-app.png" alt="The GNOME Fonts app"></p>
+<p>Or this:</p>
+<p><img src="font-picker.png" alt="The GNOME font picker"></p>
+<p>According to the <a href="https://notofonts.github.io/noto-docs/">documentation</a>, Noto provides &quot;high-quality fonts for writing in all modern and ancient languages.&quot; So unless you're Tolkien you probably don't need it. And according to its <a href="https://code.launchpad.net/ubuntu/focal/+package/fonts-noto-core">package description</a>:</p>
+<blockquote>
+<p>The name &quot;Noto&quot; is short for &quot;No Tofu&quot;... Tofu (豆腐) is Japanese jargon for unicode replacement character &quot;�&quot; (U+FFFD)</p>
+</blockquote>
+<p>Even after uninstalling it from my system, those Japanese characters appear to render correctly in the browser and in the terminal:</p>
+<p><img src="terminal.png" alt="Aptitude displaying the noto-fonts-core package"></p>
+<p>Now the Fonts app and font picker are more usable on my system.</p>
+<p>I also removed a ton of extra language packages that were added to my system during its initial setup. Modify as desired if you speak the Queen's English or something else:</p>
+<pre><code>#!/usr/bin/env bash
+
+aptitude purge --purge-unused \
+    fonts-arphic-ukai \
+    fonts-arphic-uming \
+    fonts-noto-cjk \
+    fonts-noto-cjk-extra \
+    fonts-noto-core \
+    fonts-noto-ui-core \
+    gnome-user-docs-de \
+    gnome-user-docs-es \
+    gnome-user-docs-fr \
+    gnome-user-docs-it \
+    gnome-user-docs-ja \
+    gnome-user-docs-pt \
+    gnome-user-docs-ru \
+    gnome-user-docs-zh-hans \
+    hunspell-ar \
+    hunspell-de-at-frami \
+    hunspell-de-ch-frami \
+    hunspell-de-de-frami \
+    hunspell-en-au \
+    hunspell-en-ca \
+    hunspell-en-gb \
+    hunspell-en-za \
+    hunspell-es \
+    hunspell-fr \
+    hunspell-fr-classical \
+    hunspell-it \
+    hunspell-pt-br \
+    hunspell-pt-pt \
+    hunspell-ru \
+    hyphen-de \
+    hyphen-en-ca \
+    hyphen-en-gb \
+    hyphen-es \
+    hyphen-fr \
+    hyphen-it \
+    hyphen-pt-br \
+    hyphen-pt-pt \
+    hyphen-ru \
+    ibus-chewing \
+    ibus-libpinyin \
+    ibus-mozc \
+    ibus-table-cangjie3 \
+    ibus-table-cangjie5 \
+    ibus-table-quick-classic \
+    ibus-table-wubi \
+    language-pack-ar \
+    language-pack-ar-base \
+    language-pack-de \
+    language-pack-de-base \
+    language-pack-es \
+    language-pack-es-base \
+    language-pack-fr \
+    language-pack-fr-base \
+    language-pack-gnome-ar \
+    language-pack-gnome-ar-base \
+    language-pack-gnome-de \
+    language-pack-gnome-de-base \
+    language-pack-gnome-es \
+    language-pack-gnome-es-base \
+    language-pack-gnome-fr \
+    language-pack-gnome-fr-base \
+    language-pack-gnome-it \
+    language-pack-gnome-it-base \
+    language-pack-gnome-ja \
+    language-pack-gnome-ja-base \
+    language-pack-gnome-pt \
+    language-pack-gnome-pt-base \
+    language-pack-gnome-ru \
+    language-pack-gnome-ru-base \
+    language-pack-gnome-zh-hans \
+    language-pack-gnome-zh-hans-base \
+    language-pack-gnome-zh-hant \
+    language-pack-gnome-zh-hant-base \
+    language-pack-it \
+    language-pack-it-base \
+    language-pack-ja \
+    language-pack-ja-base \
+    language-pack-pt \
+    language-pack-pt-base \
+    language-pack-ru \
+    language-pack-ru-base \
+    language-pack-zh-hans \
+    language-pack-zh-hans-base \
+    language-pack-zh-hant \
+    language-pack-zh-hant-base \
+    libchewing3 \
+    libchewing3-data \
+    libmarisa0 \
+    libopencc-data \
+    libopencc1.1 \
+    libpinyin-data \
+    libpinyin13 \
+    libreoffice-help-de \
+    libreoffice-help-en-gb \
+    libreoffice-help-es \
+    libreoffice-help-fr \
+    libreoffice-help-it \
+    libreoffice-help-ja \
+    libreoffice-help-pt \
+    libreoffice-help-pt-br \
+    libreoffice-help-ru \
+    libreoffice-help-zh-cn \
+    libreoffice-help-zh-tw \
+    libreoffice-l10n-ar \
+    libreoffice-l10n-de \
+    libreoffice-l10n-en-gb \
+    libreoffice-l10n-en-za \
+    libreoffice-l10n-es \
+    libreoffice-l10n-fr \
+    libreoffice-l10n-it \
+    libreoffice-l10n-ja \
+    libreoffice-l10n-pt \
+    libreoffice-l10n-pt-br \
+    libreoffice-l10n-ru \
+    libreoffice-l10n-zh-cn \
+    libreoffice-l10n-zh-tw \
+    mozc-utils-gui \
+    mythes-ar \
+    mythes-de \
+    mythes-de-ch \
+    mythes-en-au \
+    mythes-es \
+    mythes-fr \
+    mythes-it \
+    mythes-pt-pt \
+    mythes-ru \
+    wbrazilian \
+    wbritish \
+    wfrench \
+    witalian \
+    wngerman \
+    wogerman \
+    wportuguese \
+    wspanish \
+    wswiss
+</code></pre>
+<p>Note the following packages were not included in the script above:</p>
+<ul>
+<li>hunspell-en-us</li>
+<li>hyphen-en-us</li>
+<li>language-pack-en</li>
+<li>language-pack-gnome-en</li>
+<li>libreoffice-help-en-us</li>
+<li>mythes-en-us</li>
+<li>wamerican</li>
+</ul>
+<p>Also note I'm running Pop!_OS, which might include different packages than Ubuntu.</p>
+
+</article>
+
+
+
+
+<div class="pagination">
+  <div class="previous">
+    
+      <a href="/blog/posts/vims-expression-register/">« Vim's Expression Register</a>
+    
+  </div>
+
+  <div class="next">
+    
+  </div>
+</div>
+
+
+    </div>
+
+    <footer>
+      &copy; 2023
+    </footer>
+  </body>
+</html>
+
