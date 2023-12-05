@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    
+
+    
+
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+
+    
+      <title>Web Development 101 | David Kennedy</title>
+    
+  </head>
+
+  <body>
+    <header>
+      <div class="title">David Kennedy</div>
+
+      <nav>
+  <div>
+    <a href="/">Home</a>
+  </div>
+  <div>
+    <a href="/blog">Blog</a>
+  </div>
+  <div>
+    <a href="/portfolio">Portfolio</a>
+  </div>
+  <div>
+    <a href="/resume">Resume</a>
+  </div>
+  <div>
+    <a href="/privacy">Privacy</a>
+  </div>
+  <div>
+    <a href="/contact">Contact</a>
+  </div>
+</nav>
+
+
+    </header>
+
+    <div class="container">
+      
+<h1>Web Development 101</h1>
+
+<h2>HTML</h2>
+<ul>
+<li>Websites consist of one or more web pages.</li>
+<li>Web pages consist of HTML, CSS, and JavaScript.</li>
+<li>All web pages begin with an HTML file, i.e. a plain text file ending in <code>.html</code>.</li>
+<li>HTML files can be edited in any plain text editor, like Notepad on Windows or TextEdit on Mac, or in an IDE, like IntelliJ or Visual Studio.</li>
+<li>When you open an HTML file in your web browser, the browser parses (reads) its contents and renders (draws) it on the screen.</li>
+<li>The browser's <strong>address bar</strong> displays the URL of the file, which is the location where the file is stored.</li>
+<li>If the file is stored on your hard drive, the URL will begin with <code>file:///</code>.</li>
+<li>If the file is stored on another computer, the URL will most likely begin with <code>http://</code> or <code>https://</code>.</li>
+<li>HTML consists of <strong>directives</strong>, <strong>comments</strong>, and <strong>nodes</strong>.</li>
+</ul>
+<h3>Directives</h3>
+<ul>
+<li>A <strong>directive</strong> looks like this: <code>&lt;!doctype html&gt;</code></li>
+<li>Directives aren't rendered. They're just instructions for the browser.</li>
+<li>The <code>doctype</code> directive tells the browser to use the latest version of HTML.</li>
+<li>The first line of every HTML file must contain the <code>doctype</code> directive and nothing else.</li>
+</ul>
+<h3>Comments</h3>
+<ul>
+<li>A <strong>comment</strong> looks like this: <code>&lt;!-- This is a comment --&gt;</code></li>
+<li>Comments aren't rendered either. Developers can leave comments for others or for themselves to serve as notes or reminders or whatever.</li>
+</ul>
+<h3>Nodes and elements</h3>
+<ul>
+<li>Almost everything else in an HTML file is a <strong>node</strong>.</li>
+<li>There are two primary types of nodes: <strong>text</strong> and <strong>elements</strong>.</li>
+<li>There's not much to say about text nodes. This is one of them.</li>
+<li>An <strong>element</strong> looks like this: <code>&lt;div&gt;...&lt;/div&gt;</code></li>
+<li>In the above example, <code>&lt;div&gt;</code> is the <strong>opening tag</strong> and <code>&lt;/div&gt;</code> is the <strong>closing tag</strong>.
+<ul>
+<li>Notice the forward slash (<code>/</code>) at the beginning of the closing tag.</li>
+</ul>
+</li>
+<li>Most elements can have one or more <strong>child nodes</strong>. Anything inserted between the opening and closing tag is a <strong>descendant node</strong>.</li>
+<li>Every node has a <strong>parent element</strong> and can have many <strong>ancestor element</strong>.</li>
+<li>Here's an example of an element with children:<pre><code>&lt;div&gt;
+    &lt;p&gt;
+        This is some text.
+    &lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+In this example:
+<ul>
+<li>The <code>div</code> element is the parent of the <code>p</code> element and an ancestor of the text node.</li>
+<li>The <code>p</code> element is the parent of the text node and the only child of the <code>div</code> element.</li>
+<li>The text node is the only child of the <code>p</code> element and a descendant of the the <code>div</code> element.</li>
+<li>Notice each child node is indented one additional level from its parent. This isn't strictly required but makes it easier for developers to visualize the hierarchy of nodes. This hierarchy is sometimes called a <code>tree</code>, because it resembles a tree on its side.</li>
+</ul>
+</li>
+<li><strong>Void elements</strong> can't have children, so they don't have a closing tag.</li>
+<li>Here's an example of a void element: <code>&lt;br /&gt;</code>
+<ul>
+<li>Notice the forward slash (<code>/</code>) at the end of the opening tag. This isn't strictly required but serves as another visual indicator for developers.</li>
+</ul>
+</li>
+<li>Elements can have <strong>attributes</strong>, which appear inside the opening tag, like this: <code>&lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;MDN&lt;/a&gt;</code></li>
+<li>Void elements can have attributes too, like this: <code>&lt;img src=&quot;logo.jpg&quot; /&gt;</code></li>
+<li>Every type of element has a distinct purpose:
+<ul>
+<li>The <code>div</code> element is used to group content.</li>
+<li>The <code>p</code> element is used to insert a paragraph.</li>
+<li>The <code>br</code> element is used to insert a line break.</li>
+<li>The <code>a</code> element is used to insert a link. Its <code>href</code> attribute usually contains the URL for another web page.</li>
+<li>The <code>img</code> element is used to insert an image. Its <code>src</code> attribute contains the URL for an image file.</li>
+</ul>
+</li>
+<li>For a complete list of all available elements and documentation, including examples, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">HTML elements reference</a>.</li>
+</ul>
+<h3>A complete example</h3>
+<ul>
+<li>In addition to the <code>doctype</code> directive, every HTML file should contain:
+<ul>
+<li>a top-level <code>html</code> element. Aside from the <code>doctype</code> directive, all other nodes should be inside this element.</li>
+<li>a <code>head</code> element. This should be the first child of the <code>html</code> element.</li>
+<li>a <code>meta</code> element with a <code>charset</code> attribute containing a valid character encoding, usually <code>utf-8</code>. This should be the first child of the <code>head</code> element.</li>
+<li>a <code>title</code> element inside the head element. This sets the text shown in the browser tab as well as in bookmarks and search results.</li>
+<li>a <code>body</code> element. This should be the second child of the <code>html</code> element.</li>
+</ul>
+</li>
+<li>The contents of the <code>body</code> element are completely up to you, but it typically includes:
+<ul>
+<li>An <code>h1</code> element, containing the page title.</li>
+<li>One or more links. A web page without links is a <strong>dead end</strong>.</li>
+</ul>
+</li>
+<li>Here's an example of a complete HTML file:<pre><code>&lt;!doctype html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot; /&gt;
+        &lt;title&gt;My Notes&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;My Notes&lt;/h1&gt;
+        &lt;ul&gt;
+            &lt;li&gt;HTML is neat&lt;/li&gt;
+            &lt;li&gt;
+                Answers to all your questions can be found
+                &lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;here&lt;/a&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+</li>
+</ul>
+
+
+
+    </div>
+
+    <footer>
+      &copy; 2023
+    </footer>
+  </body>
+</html>
+
