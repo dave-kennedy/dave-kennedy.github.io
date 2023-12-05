@@ -48,6 +48,7 @@ code {
 }
 
 pre {
+  line-height: normal;
   overflow: auto;
   padding: 1em;
 }
