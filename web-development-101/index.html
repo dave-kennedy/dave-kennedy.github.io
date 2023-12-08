@@ -127,11 +127,11 @@ In this example:
 <ul>
 <li>In addition to the <code>doctype</code> directive, every HTML file should contain:
 <ul>
-<li>a top-level <code>html</code> element. Aside from the <code>doctype</code> directive, all other nodes should be inside this element.</li>
-<li>a <code>head</code> element. This should be the first child of the <code>html</code> element.</li>
-<li>a <code>meta</code> element with a <code>charset</code> attribute containing a valid character encoding, usually <code>utf-8</code>. This should be the first child of the <code>head</code> element.</li>
-<li>a <code>title</code> element inside the head element. This sets the text shown in the browser tab as well as in bookmarks and search results.</li>
-<li>a <code>body</code> element. This should be the second child of the <code>html</code> element.</li>
+<li>A top-level <code>html</code> element. Aside from the <code>doctype</code> directive, all other nodes should be inside this element.</li>
+<li>A <code>head</code> element. This should be the first child of the <code>html</code> element.</li>
+<li>A <code>meta</code> element with a <code>charset</code> attribute containing a valid character encoding, usually <code>utf-8</code>. This should be the first child of the <code>head</code> element.</li>
+<li>A <code>title</code> element inside the head element. This sets the text shown in the browser tab as well as in bookmarks and search results.</li>
+<li>A <code>body</code> element. This should be the second child of the <code>html</code> element.</li>
 </ul>
 </li>
 <li>The contents of the <code>body</code> element are completely up to you, but it typically includes:
@@ -159,6 +159,79 @@ In this example:
 &lt;/html&gt;
 </code></pre>
 </li>
+</ul>
+<h2>CSS</h2>
+<ul>
+<li>CSS is used to modify the style (appearance) of elements on the page.</li>
+<li>A CSS file, i.e. a plain text file ending in <code>.css</code>, is often called a <strong>stylesheet</strong>.</li>
+<li>Like HTML files, stylesheets can be edited in any plain text editor or in an IDE.</li>
+<li>CSS consists primarily of <strong>selectors</strong> and <strong>rules</strong>.</li>
+</ul>
+<h3>Rules</h3>
+<ul>
+<li>A <strong>rule</strong> looks like this: <code>color: red;</code></li>
+<li>In the above example, the <code>color</code> <strong>property</strong> is assigned a <strong>value</strong> of <code>red</code>.</li>
+<li>Other properties include:
+<ul>
+<li><code>background-color</code></li>
+<li><code>border-color</code></li>
+<li><code>border-width</code></li>
+<li><code>font-family</code></li>
+<li><code>font-size</code></li>
+<li><code>margin</code></li>
+<li><code>padding</code></li>
+</ul>
+</li>
+<li>For a complete list of all available properties and documentation, including examples, see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index">CSS reference</a>.</li>
+</ul>
+<h3>Selectors</h3>
+<ul>
+<li>A <strong>selector</strong> looks like this: <code>body &gt; div:first-child</code></li>
+<li>The above example would match the first <code>div</code> element that is a child of the <code>body</code> element.</li>
+<li>Selectors group one or more rules and apply them to all elements that match, like this:<pre><code>a {
+    color: red;
+    text-decoration: none;
+}
+</code></pre>
+In this example, the selector would match all <code>a</code> elements, modifying their <code>color</code> and <code>text-decoration</code> properties.</li>
+<li>Selectors can be extremely broad or specific. Here are a few examples:
+<ul>
+<li>All elements on the page: <code>*</code></li>
+<li>All <code>div</code> elements: <code>div</code></li>
+<li>All <code>div</code> elements with a <code>title</code> attribute: <code>div[title]</code></li>
+<li>All <code>div</code> elements with a <code>title</code> attribute of Products: <code>div[title=Products]</code></li>
+<li>All <code>div</code> elements that are descendants of the <code>body</code> element: <code>body div</code></li>
+<li>All <code>div</code> elements that are children of the <code>body</code> element: <code>body &gt; div</code></li>
+<li>The first <code>div</code> element that is a child of the <code>body</code> element: <code>body &gt; div:first-child</code></li>
+<li>All elements with a <code>class</code> attribute of <code>product</code>: <code>.product</code></li>
+<li>The element with an <code>id</code> attribute of <code>products</code>: <code>#products</code></li>
+</ul>
+</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators">CSS selectors and combinators</a> for documentation and examples.</li>
+</ul>
+<h3>Adding styles to HTML</h3>
+<ul>
+<li>The <strong>style attribute</strong> can be used to modify the style of a single element, like so: <code>&lt;div style=&quot;color: red;&quot;&gt;Warning!&lt;/div&gt;</code></li>
+<li>Stylesheets must be added to the <code>head</code> element and can be <strong>inline</strong> or <strong>external</strong>.</li>
+<li>An <strong>inline stylesheet</strong> is added with the <strong>style element</strong>:<pre><code>&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;My Notes&lt;/title&gt;
+    &lt;style&gt;
+        a {
+            color: red;
+            text-decoration: none;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+</code></pre>
+</li>
+<li>An <strong>external stylesheet</strong> is added with the <strong>link element</strong>:<pre><code>&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;title&gt;My Notes&lt;/title&gt;
+    &lt;link href=&quot;styles.css&quot; rel=&quot;stylesheet&quot; /&gt;
+&lt;/head&gt;
+</code></pre>
+In order for this example to work, the <code>style.css</code> file must be located in the same directory as the HTML file that links to it.</li>
 </ul>
 
 
