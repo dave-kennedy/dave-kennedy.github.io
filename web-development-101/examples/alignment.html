@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Alignment</title>
+        <link href="examples.css" rel="stylesheet" />
+        <style>
+            img {
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Alignment</h1>
+
+        <h2>text-align</h2>
+
+        <p>
+            This property only applies to a container's content. It has no
+            effect on void elements. To center a void element, wrap it in a
+            <code>div</code> element, then change the parent's
+            <code>text-align</code> property to <code>center</code>.
+        </p>
+
+        <h3>left (default)</h3>
+
+        <div>
+            <img src="basketball.jpg" />
+            <br />
+            Basketball is a team sport in which two teams, most commonly of
+            five players each, opposing one another on a rectangular court,
+            compete with the primary objective of shooting a basketball through
+            the defender's hoop, while preventing the opposing team from
+            shooting through their own hoop.
+        </div>
+
+        <h3>center</h3>
+
+        <div style="text-align: center;">
+            <img src="basketball.jpg" />
+            <br />
+            Basketball is a team sport in which two teams, most commonly of
+            five players each, opposing one another on a rectangular court,
+            compete with the primary objective of shooting a basketball through
+            the defender's hoop, while preventing the opposing team from
+            shooting through their own hoop.
+        </div>
+
+        <h3>right</h3>
+
+        <div style="text-align: right;">
+            <img src="basketball.jpg" />
+            <br />
+            Basketball is a team sport in which two teams, most commonly of
+            five players each, opposing one another on a rectangular court,
+            compete with the primary objective of shooting a basketball through
+            the defender's hoop, while preventing the opposing team from
+            shooting through their own hoop.
+        </div>
+
+        <h2>float</h2>
+
+        <p>
+            This property pulls an element out of its default position to the
+            left or right, allowing other content to "wrap around" it until
+            it's "cleared" by another element with a <code>clear</code>
+            property set to <code>left</code>, <code>right</code>, or
+            <code>both</code>.
+        </p>
+
+        <h3>left</h3>
+
+        <img src="basketball.jpg" style="float: left;" />
+
+        <p>
+            This is a paragraph. Its top-left corner aligns with the top-right
+            corner of the image. When its content fills the available
+            horizontal space, it wraps to a new line, leaving enough room for
+            the image to fit on the left. In other words, it "wraps around" the
+            image.
+        </p>
+
+        <p>This text also wraps around the image.</p>
+
+        <p style="clear: left;">
+            This text does not wrap around the image because it "clears the float."
+        </p>
+
+        <h3>right</h3>
+
+        <img src="basketball.jpg" style="float: right;" />
+
+        <p>
+            This is a paragraph. Its top-right corner aligns with the top-left
+            corner of the image. When its content fills the available
+            horizontal space, it wraps to a new line, leaving enough room for
+            the image to fit on the right. In other words, it "wraps around"
+            the image.
+        </p>
+
+        <p>This text also wraps around the image.</p>
+
+        <p style="clear: right;">
+            This text does not wrap around the image because it "clears the float."
+        </p>
+    </body>
+</html>

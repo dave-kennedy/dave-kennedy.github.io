@@ -1,0 +1,22 @@
+pre, code {
+    background-color: lightgray;
+}
+
+pre {
+    padding: 1em;
+}
+
+code {
+    font-size: 1.25em;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.flex.column {
+    flex-direction: column;
+}
