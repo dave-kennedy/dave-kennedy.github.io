@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Layout</title>
+        <link href="examples.css" rel="stylesheet" />
+    </head>
+    <body>
+        <h1>Layout</h1>
+
+        <h2>display</h2>
+
+        <p>
+            Some elements are arranged vertically by default. These elements
+            have a <code>display</code> property of <code>block</code> and are
+            called <strong>block-level elements</strong>.
+        </p>
+
+        <p>
+            Other elements are arranged horizontally by default. These elements
+            have a <code>display</code> property of <code>inline</code> and are
+            called <strong>inline elements</strong>.
+        </p>
+
+        <p>
+            Block-level elements are as wide as their parents by default,
+            but they can be resized by their <code>height</code> and
+            <code>width</code> properties.
+        </p>
+
+        <p>
+            Inline elements are only as big as their contents and can't be
+            resized.
+        </p>
+
+        <h3>block</h3>
+
+        <p>
+            By default, <code>div</code> elements are block-level.
+        </p>
+
+        <div style="background-color: red;">Red</div>
+        <div style="background-color: green;">Green</div>
+        <div style="background-color: blue;">Blue</div>
+
+        <p>
+            Inline elements like <code>span</code> can be made block-level by
+            changing their <code>display</code> property to <code>block</code>.
+        </p>
+
+        <h3>inline</h3>
+
+        <p>
+            By default, <code>span</code> elements are inline.
+        </p>
+
+        <span style="background-color: red;">Red</span>
+        <span style="background-color: green;">Green</span>
+        <span style="background-color: blue;">Blue</span>
+
+        <p>
+            Block-level elements like <code>div</code> can be made inline by
+            changing their <code>display</code> property to <code>inline</code>.
+        </p>
+
+        <p>
+            Any whitespace between the elements is replaced by a single space
+            character.
+        </p>
+
+        <h3>inline-block</h3>
+
+        <p>
+            As previously mentioned, inline elements are only as big as their
+            content. <code>inline-block</code> allows us to arrange elements
+            horizontally and change their size.
+        </p>
+
+        <span style="background-color: red; display: inline-block; width: 33.33%;">Red</span>
+        <span style="background-color: green; display: inline-block; width: 33.33%;">Green</span>
+        <span style="background-color: blue; display: inline-block; width: 33.33%;">Blue</span>
+
+        <p>
+            These elements should each be one-third the width of the page and
+            fit on one line, but the spaces between cause the last element to
+            wrap.
+        </p>
+
+        <h3>flex</h3>
+
+        <p>
+            Any element with a <code>display</code> property of
+            <code>flex</code> becomes a <strong>flex container</strong>.
+            Its children automatically become <strong>flex items</strong>
+            without requiring any additional styling.
+        </p>
+
+        <p>
+            Flex items can grow and shrink as needed without introducing any
+            space between the elements.
+        </p>
+
+        <div style="display: flex;">
+            <span style="background-color: red;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id ante ut lacus sollicitudin aliquam.</span>
+            <span style="background-color: green;">Cras eu viverra ligula, in aliquet augue.</span>
+            <span style="background-color: blue;">Ut justo sem, consequat non blandit vel, scelerisque a urna. Fusce pretium, ante eu condimentum tincidunt, ante arcu bibendum risus, ut aliquet libero nibh non elit.</span>
+        </div>
+
+        <p>Or they can easily be set to a fixed size.</p>
+
+        <div style="display: flex;">
+            <span style="background-color: red; width: 33.33%;">Red</span>
+            <span style="background-color: green; width: 33.33%;">Green</span>
+            <span style="background-color: blue; width: 33.33%;">Blue</span>
+        </div>
+    </body>
+</html>
