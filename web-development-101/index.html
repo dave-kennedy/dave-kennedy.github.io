@@ -87,11 +87,11 @@
 <li>An <strong>element</strong> looks like this: <code>&lt;div&gt;...&lt;/div&gt;</code></li>
 <li>In the above example, <code>&lt;div&gt;</code> is the <strong>opening tag</strong> and <code>&lt;/div&gt;</code> is the <strong>closing tag</strong>.
 <ul>
-<li>Notice the forward slash (<code>/</code>) at the beginning of the closing tag.</li>
+<li>Notice the forward slash (/) at the beginning of the closing tag.</li>
 </ul>
 </li>
 <li>Most elements can have one or more <strong>child nodes</strong>. Anything inserted between the opening and closing tag is a <strong>descendant node</strong>.</li>
-<li>Every node has a <strong>parent element</strong> and can have many <strong>ancestor element</strong>.</li>
+<li>Every node has a <strong>parent element</strong> and can have many <strong>ancestor elements</strong>.</li>
 <li>Here's an example of an element with children:<pre><code>&lt;div&gt;
     &lt;p&gt;
         This is some text.
@@ -109,7 +109,7 @@ In this example:
 <li><strong>Void elements</strong> can't have children, so they don't have a closing tag.</li>
 <li>Here's an example of a void element: <code>&lt;br /&gt;</code>
 <ul>
-<li>Notice the forward slash (<code>/</code>) at the end of the opening tag. This isn't strictly required but serves as another visual indicator for developers.</li>
+<li>Notice the forward slash (/) at the end of the opening tag. This isn't strictly required but serves as another visual indicator for developers.</li>
 </ul>
 </li>
 <li>Elements can have <strong>attributes</strong>, which appear inside the opening tag, like this: <code>&lt;a href=&quot;https://developer.mozilla.org/&quot;&gt;MDN&lt;/a&gt;</code></li>
@@ -212,11 +212,11 @@ In this example, the selector would match all <code>a</code> elements, modifying
 </li>
 <li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators">CSS selectors and combinators</a> for documentation and examples.</li>
 </ul>
-<h3>Adding styles to HTML</h3>
+<h3>Adding styles to a web page</h3>
 <ul>
 <li>The <strong>style attribute</strong> can be used to modify the style of a single element, like so: <code>&lt;div style=&quot;color: red;&quot;&gt;Warning!&lt;/div&gt;</code></li>
 <li>Stylesheets must be added to the <code>head</code> element and can be <strong>inline</strong> or <strong>external</strong>.</li>
-<li>An <strong>inline stylesheet</strong> is added with the <strong>style element</strong>:<pre><code>&lt;head&gt;
+<li>An <strong>inline stylesheet</strong> is added with the <code>style</code> element:<pre><code>&lt;head&gt;
     &lt;meta charset=&quot;utf-8&quot; /&gt;
     &lt;title&gt;My Notes&lt;/title&gt;
     &lt;style&gt;
@@ -228,10 +228,10 @@ In this example, the selector would match all <code>a</code> elements, modifying
 &lt;/head&gt;
 </code></pre>
 </li>
-<li>An <strong>external stylesheet</strong> is added with the <strong>link element</strong>:<pre><code>&lt;head&gt;
+<li>An <strong>external stylesheet</strong> is added with the <code>link</code> element:<pre><code>&lt;head&gt;
     &lt;meta charset=&quot;utf-8&quot; /&gt;
     &lt;title&gt;My Notes&lt;/title&gt;
-    &lt;link href=&quot;styles.css&quot; rel=&quot;stylesheet&quot; /&gt;
+    &lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; /&gt;
 &lt;/head&gt;
 </code></pre>
 In order for this example to work, the <code>style.css</code> file must be located in the same directory as the HTML file that links to it.</li>
@@ -249,9 +249,9 @@ In order for this example to work, the <code>style.css</code> file must be locat
 <li>A comment can appear at the beginning or the end of a line.</li>
 <li>Everything after the two forward slashes is ignored by the engine.</li>
 <li>Long comments that span multiple lines look like this:<pre><code>/*
-Four score and seven years ago our fathers brought forth on this continent, a
-new nation, conceived in Liberty, and dedicated to the proposition that all
-men are created equal.
+The greatest danger facing us is ourselves, and irrational
+fear of the unknown. There is no such thing as the unknown. Only
+things temporarily hidden, temporarily not understood.
 */
 </code></pre>
 </li>
@@ -267,65 +267,300 @@ men are created equal.
 <ul>
 <li>A <strong>variable</strong> is a name that refers to some data.</li>
 <li>A variable must be declared and assigned a value before it can be referenced.</li>
-<li>Here are some examples:<pre><code>// This statement declares a new variable named `firstName`:
-let firstName;
+<li>Here are some examples:<pre><code>// This statement declares a new variable named `x`:
+let x;
 
 // Its value is `undefined` until it's assigned, like this:
-firstName = 'Bill';
+x = 2;
 
-// This statement declares and initializes the variable `lastName`:
-let lastName = 'Gates';
+// This statement declares and initializes the variable `y`:
+let y = 3;
 </code></pre>
 </li>
 <li>Instead of the <code>let</code> keyword, a variable can be declared with <code>const</code> or <code>var</code>.</li>
 <li><code>const</code> declares a <strong>constant</strong> variable. Constants must be initialized and can't be reassigned.</li>
 <li><code>var</code> is an older syntax with complicated side-effects that can lead to bugs. It is best avoided.</li>
 </ul>
-<h3>Strings</h3>
+<h3>Data types</h3>
 <ul>
-<li>A <strong>String</strong> is a sequence of letters enclosed in single quotes (''), double quotes (&quot;&quot;), or backticks (``).</li>
-<li><code>'Bill'</code> and <code>&quot;Gates&quot;</code> are examples of __Strings.</li>
-</ul>
-<h3>Numbers</h3>
-<ul>
-<li>A <strong>Number</strong> can be an integer or a floating-point number.</li>
-<li><code>42</code> and <code>3.14159</code> are examples of Numbers.</li>
+<li>Every value has a type: <code>Boolean</code>, <code>Number</code>, <code>String</code>, etc.</li>
+<li>In JavaScript, a variable can be assigned a value of one type and subsequently reassigned a value of another type. This is called <strong>dynamic typing</strong>.</li>
+<li>Also in JavaScript, an operation involving two dissimilar types will often succeed through <strong>type coercion</strong>. This is called <strong>weak typing</strong>.</li>
+<li>If these big words are confusing, don't worry about it. I just feel like I need to mention it.</li>
 </ul>
 <h3>Booleans</h3>
 <ul>
-<li>A <strong>Boolean</strong> value is either <code>true</code> or <code>false</code>.</li>
+<li>A <strong>boolean</strong> is either <code>true</code> or <code>false</code>.</li>
+<li>Booleans are mostly used for as <strong>conditions</strong> in <strong>control structures</strong> (addressed later).</li>
+</ul>
+<h3>Numbers</h3>
+<ul>
+<li>A <strong>number</strong> can be an integer or a floating-point number.</li>
+<li>Here are some examples:<pre><code>let answer = 42;
+let pi = 3.14159;
+</code></pre>
+</li>
+<li>Numbers can be added, subtracted, multiplied, and divided as you would expect:<pre><code>2 + 3; // 5
+2 - 3; // -1
+2 * 3; // 6
+2 / 3; // 0.6666666666666666
+</code></pre>
+</li>
+<li>A shorthand exists for assigning the result of an arithmetic operation to a variable:<pre><code>answer += 2; // 44
+answer -= 2; // 42
+answer *= 2; // 84
+answer /= 2; // 42
+</code></pre>
+</li>
+<li>Another shorthand exists for incrementing or decrementing a variable by 1:<pre><code>++answer; // 43
+--answer; // 42
+</code></pre>
+If the increment or decrement operator appears after the variable name, the value is returned before it is incremented or decremented:<pre><code>answer++; // 42
+answer;   // 43
+
+answer--; // 43
+answer;   // 42
+</code></pre>
+</li>
+<li>Modular arithetic also works as you would expect:<pre><code>22 % 12; // 10
+</code></pre>
+</li>
+</ul>
+<h3>Strings</h3>
+<ul>
+<li>A <strong>string</strong> is a sequence of letters enclosed in single quotes (''), double quotes (&quot;&quot;), or backticks (``).</li>
+<li>Here are some examples:<pre><code>let firstName = 'James';
+let middleInitial = &quot;T.&quot;;
+let lastName = `Kirk`;
+</code></pre>
+</li>
+<li>Strings can be added together like this:<pre><code>let fullName = firstName + ' ' + middleInitial + ' ' + lastName;
+</code></pre>
+This is called <strong>string concatenation</strong>.</li>
+<li>String concatenation can be used to create long strings spanning multiple lines, like this:<pre><code>let quote = 'The greatest danger facing us is ourselves, and irrational ' +
+    'fear of the unknown. There is no such thing as the unknown. Only ' +
+    'things temporarily hidden, temporarily not understood.';
+</code></pre>
+</li>
+<li>Backticks can be used to inject variables into a string without concatenation:<pre><code>let greeting = `Hello, my name is ${fullName}.`;
+</code></pre>
+This is called <strong>string interpolation</strong>.</li>
+<li>Backticks can also be used to create long strings without concatentation:<pre><code>let quote = `The greatest danger facing us is ourselves, and irrational
+    fear of the unknown. There is no such thing as the unknown. Only
+    things temporarily hidden, temporarily not understood.`;
+</code></pre>
+</li>
+<li>A string's characters can be accessed by <strong>index</strong>, starting at zero:<pre><code>fullName[0];  // 'J'
+fullName[1];  // 'a'
+fullName[12]; // 'k'
+fullName[13]; // undefined
+</code></pre>
+</li>
+<li>Strings come with many useful properties and methods. Here are a few:<pre><code>// This property returns the number of characters in the string
+fullName.length; // 13
+
+// This method returns true if the string starts with the argument
+fullName.startsWith('James'); // true
+
+// This method returns true if the string ends with the argument
+fullName.endsWith('Kirk'); // true
+
+// This method returns true if the string includes the argument
+fullName.includes('T.'); // true
+
+// This method returns the first index where the argument occurs in the string
+// or -1 if it doesn't
+fullName.indexOf('T'); // 6
+fullName.indexOf('Z'); // -1
+
+// These methods return the part of the string between the arguments
+fullName.slice(0, 5);      // 'James'
+fullName.substring(9, 13); // 'Kirk'
+
+// This method splits the string into an array (discussed below)
+fullName.split(' '); // ['James', 'T.', 'Kirk']
+</code></pre>
+</li>
 </ul>
 <h3>Functions</h3>
 <ul>
-<li>A <strong>Function</strong> is a reusable block of code.</li>
-<li>Here's an example:<pre><code>function sayHello() {
+<li>A <strong>function</strong> is a reusable block of code.</li>
+<li>A function can accept one or more input values, called its <strong>arguments</strong> or <strong>parameters</strong>.</li>
+<li>A function can only return one output value.</li>
+<li>Here are some examples:<pre><code>// This function accepts no arguments and returns nothing
+function sayHello() {
     console.log('Hello, World!);
+}
+
+// This function accepts two arguments and returns their sum
+function add(a, b) {
+    return a + b;
 }
 </code></pre>
 </li>
-<li>The Function defined above is called like this: <code>sayHello()</code></li>
-<li>Here's an example of a function with inputs, called its <strong>arguments</strong>:<pre><code>function sayHello(name) {
-    console.log('Hello, ' + name + '!');
-}
+<li>Functions are <strong>called</strong> or <strong>invoked</strong> by name, like this:<pre><code>sayHello(); // undefined
+add(2, 3);  // 5
 </code></pre>
 </li>
-<li>The Function defined above is called like this: <code>sayHello('Dave')</code></li>
-<li>Functions can also be declared like this:<pre><code>const sayHello = function () {
-    console.log('Hello, World!);
+<li>When a function is called with arguments, we say the arguments are <strong>passed</strong> to the function.</li>
+<li>A function without a name is called an <strong>anonymous function</strong>.</li>
+<li>Here are some examples of anonymous functions:<pre><code>// This anonymous function is assigned to the variable `logTime`
+let logTime = function () {
+    console.log(new Date().toISOString());
 };
+
+// It's called just like a named function
+logTime(); // '2023-12-31T00:57:00.448Z'
+
+// `setTimeout` is a global function provided by the engine.
+// It calls a function (first argument) after a delay (second argument).
+// In this example, `logTime` will be called after a delay of three seconds.
+setTimeout(logTime, 3000);
+
+// Alternatively, we can pass the function directly without a variable
+setTimeout(function () {
+    console.log(new Date().toISOString());
+}, 3000);
 </code></pre>
-In this example, an unnamed function is assigned to the variable <code>sayHello</code>. But it's still called the same way: <code>sayHello()</code>.</li>
+</li>
+<li>Arrow function expressions allow more compact anonymous functions, like this:<pre><code>let multiply = (x, y) =&gt; {
+    return x * y;
+};
+
+// The parens are optional if there's only one argument
+let double = x =&gt; {
+    return x * 2;
+};
+
+// The curly brackets and `return` are optional if there's only one statement
+// in the function body
+let triple = x =&gt; x * 3;
+
+// Each of these is still called just like a named function
+multiply(2, 3); // 6
+double(4);      // 8
+triple(5);      // 15
+</code></pre>
+</li>
 </ul>
 <h3>Arrays</h3>
 <ul>
-<li>An <strong>Array</strong> is a list of values.</li>
-<li>Here's an example: <code>const fruits = ['Apple', 'Banana', 'Orange'];</code></li>
-<li>An Array's values are accessed by <strong>index</strong>, like this: <code>fruits[0]</code></li>
+<li>An <strong>array</strong> is a list of values enclosed in square brackets ([]) and separated by commas.</li>
+<li>Here are some examples:<pre><code>// This array contains six numbers
+let fibonacci = [1, 2, 3, 5, 8, 11];
+
+// This array contains three strings
+let fruits = [
+    'Apple',
+    'Banana',
+    'Orange'
+];
+
+// This array contains mixed types
+let items = ['Apple', 3, true];
+</code></pre>
+</li>
+<li>An array's values can be accessed by <strong>index</strong>, starting at zero:<pre><code>fruits[0]; // 'Apple'
+fruits[1]; // 'Banana'
+fruits[2]; // 'Orange'
+fruits[3]; // undefined
+</code></pre>
+</li>
+<li>Arrays come with many useful properties and methods. Here are a few:<pre><code>// This property returns the number of items in the array
+fruits.length; // 3
+
+// This method returns true if the array includes the argument
+fruits.includes('Banana'); // true
+
+// This method returns the first index where the argument occurs in the array
+// or -1 if it doesn't
+fruits.indexOf('Orange'); // 2
+fruits.indexOf('Grape');  // -1
+
+// This method joins the items into a string
+fruits.join('|'); // 'Apple|Banana|Orange'
+</code></pre>
+</li>
+<li>Some methods <strong>mutate</strong> the array, changing its contents in place:<pre><code>// This method removes the last item from the array and returns it
+fruits.pop(); // 'Orange'
+fruits;       // ['Apple', 'Banana']
+
+// This method adds an item to the end of the array and returns its length
+fruits.push('Orange'); // 3
+fruits;                // ['Apple', 'Banana', 'Orange']
+
+// This method removes the first item from the array and returns it
+fruits.shift(); // 'Apple'
+fruits;         // ['Banana', 'Orange']
+
+// This method adds an item to the beginning of the array and returns its
+// length
+fruits.unshift('Apple'); // 3
+fruits;                  // ['Apple', 'Banana', 'Orange']
+
+// This method reverses the array and returns it
+fruits.reverse(); // ['Orange', 'Banana', 'Apple'];
+fruits;           // ['Orange', 'Banana', 'Apple'];
+
+// This method sorts the array and returns it
+fruits.sort(); // ['Apple', 'Banana', 'Orange']
+fruits;        // ['Apple', 'Banana', 'Orange']
+</code></pre>
+</li>
+<li>Some methods return a new array, without changing the original:<pre><code>// This method returns a new array containing the items from the original and
+// its arguments
+fruits.concat(['Lemon', 'Lime']); // ['Apple', 'Banana', 'Orange', 'Lemon', 'Lime']
+fruits;                           // ['Apple', 'Banana', 'Orange']
+
+// This method returns a new array containing the reversed items from the
+// original
+fruits.toReversed(); // ['Orange', 'Banana', 'Apple'];
+fruits;              // ['Apple', 'Banana', 'Orange'];
+
+// This method returns a new array containing the sorted items from the original
+fruits.toSorted(); // ['Apple', 'Banana', 'Orange']
+fruits;            // ['Apple', 'Banana', 'Orange']
+</code></pre>
+</li>
+<li>Some methods require a function argument, which is called once for each item with the item as its argument:<pre><code>function isEven(number) {
+    return number % 2 == 0;
+}
+
+// This method returns `true` if the function argument returns `true` for
+// every item
+fibonacci.every(isEven); // false
+
+// This method returns `true` if the function argument returns `true` for any
+// item
+fibonacci.some(isEven); // true
+
+// This method returns the first item where the function argument returns
+// `true`
+fibonacci.find(isEven); // 2
+
+// This method returns the index of the last item where the function argument
+// returns `true`
+fibonacci.findLastIndex(isEven); // 4
+
+// This method returns a new array containing the items where the function
+// argument returns `true`
+fibonacci.filter(isEven); // [2, 8]
+
+// This method returns a new array containing values returned by the function
+// argument
+fibonacci.map(item =&gt; item * 2);
+// [2, 4, 6, 10, 16, 22];
+
+// This method doesn't return anything, it just calls the function argument
+// for each item
+fibonacci.forEach(item =&gt; console.log(item));
+</code></pre>
+</li>
 </ul>
 <h3>Objects</h3>
 <ul>
-<li>An <strong>Object</strong> is like an Array, except its values are named and are called <strong>properties</strong>.</li>
-<li>Here's an example:<pre><code>const dog = {
+<li>An <strong>object</strong> is like an array, except its values are named and are called its <strong>properties</strong>.</li>
+<li>Here's an example:<pre><code>let dog = {
     greeting: 'Arf!',
     legs: 4,
     isMammal: true,
@@ -335,12 +570,73 @@ In this example, an unnamed function is assigned to the variable <code>sayHello<
 };
 </code></pre>
 </li>
-<li>An Object's properties are accessed like this: <code>dog.legs</code> or like this:  <code>dog['legs']</code></li>
+<li>An object's properties can be accessed using dot notation or bracket notation:<pre><code>// Dot notation
+dog.greeting; // 'Arf!'
+dog.sayHello(); // undefined
+
+// Bracket notation
+dog['greeting']; // 'Arf!'
+dog['sayHello'](); // undefined
+</code></pre>
+</li>
 </ul>
-<h3>The debugging console</h3>
+<h3>Control structures</h3>
 <ul>
-<li><code>console</code> is a special Object variable provided by the engine.</li>
-<li>One of its properties is <code>log</code>, which is a function that prints messages to the debugging console.</li>
+<li>Use an <code>if...else</code> statement to run some code only if a condition is <code>true</code>:<pre><code>if (x &gt; 0) {
+    console.log('x is positive');
+}
+</code></pre>
+Add an <code>else</code> clause to run some code if a condition is <code>false</code>:<pre><code>if (x &gt; 0) {
+    console.log('x is positive');
+} else {
+    console.log('x is not positive');
+}
+</code></pre>
+Additional conditions can be tested with <code>else if</code> clauses:<pre><code>if (x &gt; 0) {
+    console.log('x is positive');
+} else if (x &lt; 0) {
+    console.log('x is negative');
+} else {
+    console.log('x is zero');
+}
+</code></pre>
+</li>
+<li>Use a <code>for</code> statement to run some code a limited number of times:<pre><code>for (let i = 0; i &lt; 5; i++) {
+    console.log(i);
+}
+</code></pre>
+</li>
+<li>Use a <code>for...of</code> statement to run some code for each item in an array:<pre><code>for (const item of items) {
+    console.log(item);
+}
+</code></pre>
+</li>
+<li>Use a <code>while</code> statement to run some code until a condition is <code>false</code>:<pre><code>while (x &gt; 0) {
+    console.log(`x is positive`);
+    x--;
+}
+</code></pre>
+</li>
+<li>A <code>do...while</code> statement is similar to a <code>while</code> statement, except the code will always run at least once:<pre><code>do {
+    console.log(`x is positive`);
+    x--;
+} while (x &gt; 0);
+</code></pre>
+</li>
+</ul>
+<h3>Adding scripts to a web page</h3>
+<ul>
+<li>Like styles, scripts can be <strong>inline</strong> or <strong>external</strong> to the web page.</li>
+<li>Unlike styles, both inline and external scripts are added with the <code>script</code> tag.</li>
+<li>Also unlike styles, the <code>script</code> tag can be added to the <code>head</code> or <code>body</code> of a web page, though right before the closing <code>body</code> tag is ideal for accessibility and performance reasons.</li>
+<li>Here's an example of an inline script:<pre><code>&lt;script&gt;
+    console.log('Hello, World!');
+&lt;/script&gt;
+</code></pre>
+</li>
+<li>Here's an example of an external script:<pre><code>&lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+In order for this example to work, the <code>script.js</code> file must be located in the same directory as the HTML file that links to it.</li>
 </ul>
 
 
