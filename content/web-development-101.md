@@ -3,16 +3,17 @@ title: Web Development 101
 ---
 
 * Websites consist of one or more web pages.
-* Web pages consist of HTML, CSS, and JavaScript.
+* Web pages consist of __HTML__, __CSS__, and __JavaScript__.
 
 ## HTML
 
 * All web pages begin with an HTML file, i.e. a plain text file ending in `.html`.
 * HTML files can be edited in any plain text editor, like Notepad on Windows or TextEdit on Mac, or in an IDE, like IntelliJ or VS Code.
+* HTML stands for HyperText Markup Language and is often referred to simply as __markup__.
 * When you open an HTML file in your web browser, the browser parses (reads) its contents and renders (draws) it on the screen.
 * The browser's __address bar__ displays the URL of the file, which is the location where the file is stored.
-* If the file is stored on your hard drive, the URL will begin with `file:///`.
-* If the file is stored on another computer, the URL will most likely begin with `http://` or `https://`.
+    * If the file is stored on your hard drive, the URL will begin with `file:///`.
+    * If the file is stored on another computer, the URL will most likely begin with `http://` or `https://`.
 * HTML consists of __directives__, __comments__, and __nodes__.
 
 ### Directives
@@ -24,8 +25,16 @@ title: Web Development 101
 
 ### Comments
 
-* A __comment__ looks like this: `<!-- This is a comment -->`
-* Comments aren't rendered either. Developers can leave comments for others or for themselves to serve as notes or reminders or whatever.
+* A __comment__ is a note left by a developer for others or for themselves and is ignored by the browser.
+* Here's an example of a single-line comment: `<!-- This is a comment -->`
+* Here's an example of a multi-line comment:
+  ```
+  <!--
+  The greatest danger facing us is ourselves, and irrational
+  fear of the unknown. There is no such thing as the unknown. Only
+  things temporarily hidden, temporarily not understood.
+  -->
+  ```
 
 ### Nodes and elements
 
@@ -100,7 +109,21 @@ title: Web Development 101
 * CSS is used to modify the style (appearance) of elements on the page.
 * A CSS file, i.e. a plain text file ending in `.css`, is often called a __stylesheet__.
 * Like HTML files, stylesheets can be edited in any plain text editor or in an IDE.
-* CSS consists primarily of __rules__ and __selectors__.
+* CSS stands for Cascading Style Sheets, which refers to the order in which styles are applied to elements and is outside the scope of this brief intro.
+* CSS consists of __comments__, __rules__, __selectors__, and __media queries__.
+
+### Comments
+
+* Like in HTML, __comments__ in CSS are intended for developers and are ignored by the browser.
+* Here's an example of a single-line comment: `/* This is a comment */`
+* Here's an example of a multi-line comment:
+  ```
+  /*
+  The greatest danger facing us is ourselves, and irrational
+  fear of the unknown. There is no such thing as the unknown. Only
+  things temporarily hidden, temporarily not understood.
+  */
+  ```
 
 ### Rules
 
@@ -139,11 +162,51 @@ title: Web Development 101
     * The first `div` element that is a child of the `body` element: `body > div:first-child`
     * All elements with a `class` attribute of `product`: `.product`
     * The element with an `id` attribute of `products`: `#products`
-* See [CSS selectors and combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators) for documentation and examples.
+* See [CSS selectors and combinators](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators) for more info.
+
+#### Pseudo-classes
+
+* When added to a selector, a __pseudo-class__ selects elements based on their state. Here are some examples:
+    * The `a` element that is under the mouse pointer: `a:hover`
+        * Keep in mind this doesn't work on devices without a mouse, including most phones and tablets.
+    * The `a` element that is selected by clicking, tapping, or pressing the Tab key (until another element is selected): `a:focus`
+    * The `a` element that is activated by clicking or tapping (until the mouse button or the user's finger is released): `a:active`
+* See [Pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) for more info.
+
+### Media queries
+
+* A __media query__ allows us to apply styles only on certain device types or only when certain device features are present.
+* In this example, the rules are only applied when the page is printed (a device type):
+  ```
+  @media print {
+      body {
+          background-color: white;
+          color: black;
+      }
+  }
+  ```
+* In this example, all `span` elements that are children of a `header` element would be displayed vertically (stacked) on screens smaller than 800 pixels wide (a device feature):
+  ```
+  @media (max-width: 800px) {
+      header > span {
+          display: block;
+      }
+  }
+  ```
+* In this example, all `div` elements that are children of a `footer` element would be displayed horizontally (side-by-side) on screens larger than 800 pixels wide (a device feature):
+  ```
+  @media (min-width: 800px) {
+      footer > div {
+          display: inline;
+      }
+  }
+  ```
+* See [Using media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries) for more info
 
 ### Adding styles to a web page
 
-* The __style attribute__ can be used to modify the style of a single element, like so: `<div style="color: red;">Warning!</div>`
+* The `style` attribute can be used to modify the style of a single element, like so: `<div style="color: red;">Warning!</div>`
+    * Excessive use of the `style` attribute can make your HTML difficult to read and modify. For this reason, it's better to use a stylesheet.
 * Stylesheets must be added to the `head` element and can be __inline__ or __external__.
 * An __inline stylesheet__ is added with the `style` element:
   ```
@@ -173,14 +236,15 @@ title: Web Development 101
 * JavaScript was originally used to add behavior to web pages, like animating elements or loading additional data. Today, JavaScript is used as the main programming language in many other applications.
 * A JavaScript file is a plain text file ending in `.js`.
 * Like HTML and CSS files, JavaScript files can be edited in any plain text editor or in an IDE.
+* JavaScript has nothing to do with the Java programming language, country, or beverage.
+* JavaScript is an implementation of the ECMAScript standard. Sometimes these terms are used interchangeably, though they are technically distinct.
 * JavaScript files are executed by a JavaScript engine, which runs in a web browser or a server runtime like Node.js.
 
 ### Comments
 
-* A __comment__ looks like this: `// This is a comment`
-* A comment can appear at the beginning or the end of a line.
-* Everything after the two forward slashes is ignored by the engine.
-* Long comments that span multiple lines look like this:
+* Like in HTML and CSS, __comments__ in JavaScript are intended for developers and are ignored by the engine.
+* Here's an example of a single-line comment: `// This is a comment`
+* Here's an example of a multi-line comment:
   ```
   /*
   The greatest danger facing us is ourselves, and irrational
