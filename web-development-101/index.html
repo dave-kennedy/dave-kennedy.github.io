@@ -55,16 +55,20 @@
 
 <ul>
 <li>Websites consist of one or more web pages.</li>
-<li>Web pages consist of HTML, CSS, and JavaScript.</li>
+<li>Web pages consist of <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>.</li>
 </ul>
 <h2>HTML</h2>
 <ul>
 <li>All web pages begin with an HTML file, i.e. a plain text file ending in <code>.html</code>.</li>
 <li>HTML files can be edited in any plain text editor, like Notepad on Windows or TextEdit on Mac, or in an IDE, like IntelliJ or VS Code.</li>
+<li>HTML stands for HyperText Markup Language and is often referred to simply as <strong>markup</strong>.</li>
 <li>When you open an HTML file in your web browser, the browser parses (reads) its contents and renders (draws) it on the screen.</li>
-<li>The browser's <strong>address bar</strong> displays the URL of the file, which is the location where the file is stored.</li>
+<li>The browser's <strong>address bar</strong> displays the URL of the file, which is the location where the file is stored.
+<ul>
 <li>If the file is stored on your hard drive, the URL will begin with <code>file:///</code>.</li>
 <li>If the file is stored on another computer, the URL will most likely begin with <code>http://</code> or <code>https://</code>.</li>
+</ul>
+</li>
 <li>HTML consists of <strong>directives</strong>, <strong>comments</strong>, and <strong>nodes</strong>.</li>
 </ul>
 <h3>Directives</h3>
@@ -76,8 +80,15 @@
 </ul>
 <h3>Comments</h3>
 <ul>
-<li>A <strong>comment</strong> looks like this: <code>&lt;!-- This is a comment --&gt;</code></li>
-<li>Comments aren't rendered either. Developers can leave comments for others or for themselves to serve as notes or reminders or whatever.</li>
+<li>A <strong>comment</strong> is a note left by a developer for others or for themselves and is ignored by the browser.</li>
+<li>Here's an example of a single-line comment: <code>&lt;!-- This is a comment --&gt;</code></li>
+<li>Here's an example of a multi-line comment:<pre><code>&lt;!--
+The greatest danger facing us is ourselves, and irrational
+fear of the unknown. There is no such thing as the unknown. Only
+things temporarily hidden, temporarily not understood.
+--&gt;
+</code></pre>
+</li>
 </ul>
 <h3>Nodes and elements</h3>
 <ul>
@@ -167,7 +178,20 @@ In this example:
 <li>CSS is used to modify the style (appearance) of elements on the page.</li>
 <li>A CSS file, i.e. a plain text file ending in <code>.css</code>, is often called a <strong>stylesheet</strong>.</li>
 <li>Like HTML files, stylesheets can be edited in any plain text editor or in an IDE.</li>
-<li>CSS consists primarily of <strong>rules</strong> and <strong>selectors</strong>.</li>
+<li>CSS stands for Cascading Style Sheets, which refers to the order in which styles are applied to elements and is outside the scope of this brief intro.</li>
+<li>CSS consists of <strong>comments</strong>, <strong>rules</strong>, <strong>selectors</strong>, and <strong>media queries</strong>.</li>
+</ul>
+<h3>Comments</h3>
+<ul>
+<li>Like in HTML, <strong>comments</strong> in CSS are intended for developers and are ignored by the browser.</li>
+<li>Here's an example of a single-line comment: <code>/* This is a comment */</code></li>
+<li>Here's an example of a multi-line comment:<pre><code>/*
+The greatest danger facing us is ourselves, and irrational
+fear of the unknown. There is no such thing as the unknown. Only
+things temporarily hidden, temporarily not understood.
+*/
+</code></pre>
+</li>
 </ul>
 <h3>Rules</h3>
 <ul>
@@ -210,11 +234,57 @@ In this example, the selector would match all <code>a</code> elements, modifying
 <li>The element with an <code>id</code> attribute of <code>products</code>: <code>#products</code></li>
 </ul>
 </li>
-<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators">CSS selectors and combinators</a> for documentation and examples.</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators">CSS selectors and combinators</a> for more info.</li>
+</ul>
+<h4>Pseudo-classes</h4>
+<ul>
+<li>When added to a selector, a <strong>pseudo-class</strong> selects elements based on their state. Here are some examples:
+<ul>
+<li>The <code>a</code> element that is under the mouse pointer: <code>a:hover</code>
+<ul>
+<li>Keep in mind this doesn't work on devices without a mouse, including most phones and tablets.</li>
+</ul>
+</li>
+<li>The <code>a</code> element that is selected by clicking, tapping, or pressing the Tab key (until another element is selected): <code>a:focus</code></li>
+<li>The <code>a</code> element that is activated by clicking or tapping (until the mouse button or the user's finger is released): <code>a:active</code></li>
+</ul>
+</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> for more info.</li>
+</ul>
+<h3>Media queries</h3>
+<ul>
+<li>A <strong>media query</strong> allows us to apply styles only on certain device types or only when certain device features are present.</li>
+<li>In this example, the rules are only applied when the page is printed (a device type):<pre><code>@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+}
+</code></pre>
+</li>
+<li>In this example, all <code>span</code> elements that are children of a <code>header</code> element would be displayed vertically (stacked) on screens smaller than 800 pixels wide (a device feature):<pre><code>@media (max-width: 800px) {
+    header &gt; span {
+        display: block;
+    }
+}
+</code></pre>
+</li>
+<li>In this example, all <code>div</code> elements that are children of a <code>footer</code> element would be displayed horizontally (side-by-side) on screens larger than 800 pixels wide (a device feature):<pre><code>@media (min-width: 800px) {
+    footer &gt; div {
+        display: inline;
+    }
+}
+</code></pre>
+</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries">Using media queries</a> for more info</li>
 </ul>
 <h3>Adding styles to a web page</h3>
 <ul>
-<li>The <strong>style attribute</strong> can be used to modify the style of a single element, like so: <code>&lt;div style=&quot;color: red;&quot;&gt;Warning!&lt;/div&gt;</code></li>
+<li>The <code>style</code> attribute can be used to modify the style of a single element, like so: <code>&lt;div style=&quot;color: red;&quot;&gt;Warning!&lt;/div&gt;</code>
+<ul>
+<li>Excessive use of the <code>style</code> attribute can make your HTML difficult to read and modify. For this reason, it's better to use a stylesheet.</li>
+</ul>
+</li>
 <li>Stylesheets must be added to the <code>head</code> element and can be <strong>inline</strong> or <strong>external</strong>.</li>
 <li>An <strong>inline stylesheet</strong> is added with the <code>style</code> element:<pre><code>&lt;head&gt;
     &lt;meta charset=&quot;utf-8&quot; /&gt;
@@ -241,14 +311,15 @@ In order for this example to work, the <code>style.css</code> file must be locat
 <li>JavaScript was originally used to add behavior to web pages, like animating elements or loading additional data. Today, JavaScript is used as the main programming language in many other applications.</li>
 <li>A JavaScript file is a plain text file ending in <code>.js</code>.</li>
 <li>Like HTML and CSS files, JavaScript files can be edited in any plain text editor or in an IDE.</li>
+<li>JavaScript has nothing to do with the Java programming language, country, or beverage.</li>
+<li>JavaScript is an implementation of the ECMAScript standard. Sometimes these terms are used interchangeably, though they are technically distinct.</li>
 <li>JavaScript files are executed by a JavaScript engine, which runs in a web browser or a server runtime like Node.js.</li>
 </ul>
 <h3>Comments</h3>
 <ul>
-<li>A <strong>comment</strong> looks like this: <code>// This is a comment</code></li>
-<li>A comment can appear at the beginning or the end of a line.</li>
-<li>Everything after the two forward slashes is ignored by the engine.</li>
-<li>Long comments that span multiple lines look like this:<pre><code>/*
+<li>Like in HTML and CSS, <strong>comments</strong> in JavaScript are intended for developers and are ignored by the engine.</li>
+<li>Here's an example of a single-line comment: <code>// This is a comment</code></li>
+<li>Here's an example of a multi-line comment:<pre><code>/*
 The greatest danger facing us is ourselves, and irrational
 fear of the unknown. There is no such thing as the unknown. Only
 things temporarily hidden, temporarily not understood.
@@ -644,7 +715,7 @@ In order for this example to work, the <code>script.js</code> file must be locat
     </div>
 
     <footer>
-      &copy; 2023
+      &copy; 2024
     </footer>
   </body>
 </html>
