@@ -57,7 +57,7 @@ title: Web Development 101
   In this example:
     * The `div` element is the parent of the `p` element and an ancestor of the text node.
     * The `p` element is the parent of the text node and the only child of the `div` element.
-    * The text node is the only child of the `p` element and a descendant of the the `div` element.
+    * The text node is the only child of the `p` element and a descendant of the `div` element.
     * Notice each child node is indented one additional level from its parent. This isn't strictly required but makes it easier for developers to visualize the hierarchy of nodes. This hierarchy is sometimes called a `tree`, because it resembles a tree on its side.
 * __Void elements__ can't have children, so they don't have a closing tag.
 * Here's an example of a void element: `<br />`
@@ -256,9 +256,17 @@ title: Web Development 101
 ### Statements
 
 * A __statement__ is an instruction given to the engine.
+* There are several types of statements. Here are a few:
+    * A __block__ of code, e.g. `{...}`
+    * A __conditional__, e.g. `if (x > 0) {...}`
+    * A __loop__, e.g. `for (const item of items) {...}`
+    * A __function declaration__, e.g. `function add(a, b) {...}`
+    * A __function call__, e.g. `add(2, 3);`
+    * A __variable declaration__, e.g. `let x;`
+    * A __variable assignment__, e.g. `x = 2;`
 * A single statement can span multiple lines.
 * Multiple statements can be placed on a single line, but they must be separated by semi-colons.
-* While not strictly required, it's recommended to end every statement with a semi-colon in order to reduce bugs.
+* While not strictly required, it's recommended to end every function call, variable declaration, or variable assignment with a semi-colon in order to reduce bugs.
 
 ### Variables
 
@@ -278,13 +286,12 @@ title: Web Development 101
 * Instead of the `let` keyword, a variable can be declared with `const` or `var`.
 * `const` declares a __constant__ variable. Constants must be initialized and can't be reassigned.
 * `var` is an older syntax with complicated side-effects that can lead to bugs. It is best avoided.
-
-### Data types
-
-* Every value has a type: `Boolean`, `Number`, `String`, etc.
-* In JavaScript, a variable can be assigned a value of one type and subsequently reassigned a value of another type. This is called __dynamic typing__.
-* Also in JavaScript, an operation involving two dissimilar types will often succeed through __type coercion__. This is called __weak typing__.
-* If these big words are confusing, don't worry about it. I just feel like I need to mention it.
+* Many variables are defined by the engine, including:
+    * `Boolean`
+    * `Number`
+    * `String`
+  These are called __built-in objects__ or __global objects__ because they can be referenced from anywhere in your code.
+* Variables have different properties depending on the __type__ of value they contain.
 
 ### Booleans
 
@@ -326,7 +333,7 @@ title: Web Development 101
   answer--; // 43
   answer;   // 42
   ```
-* Modular arithetic also works as you would expect:
+* Modular arithmetic also works as you would expect:
   ```
   22 % 12; // 10
   ```
@@ -573,8 +580,7 @@ title: Web Development 101
 
   // This method returns a new array containing values returned by the function
   // argument
-  fibonacci.map(item => item * 2);
-  // [2, 4, 6, 10, 16, 22];
+  fibonacci.map(item => item * 2); // [2, 4, 6, 10, 16, 22];
 
   // This method doesn't return anything, it just calls the function argument
   // for each item
@@ -583,7 +589,7 @@ title: Web Development 101
 
 ### Objects
 
-* An __object__ is like an array, except its values are named and are called its __properties__.
+* An __object__ is like an array, except its values, or __properties__, are named and are enclosed in curly brackets ({}).
 * Here's an example:
   ```
   let dog = {
