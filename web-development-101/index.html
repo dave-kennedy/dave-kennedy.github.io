@@ -113,7 +113,7 @@ In this example:
 <ul>
 <li>The <code>div</code> element is the parent of the <code>p</code> element and an ancestor of the text node.</li>
 <li>The <code>p</code> element is the parent of the text node and the only child of the <code>div</code> element.</li>
-<li>The text node is the only child of the <code>p</code> element and a descendant of the the <code>div</code> element.</li>
+<li>The text node is the only child of the <code>p</code> element and a descendant of the <code>div</code> element.</li>
 <li>Notice each child node is indented one additional level from its parent. This isn't strictly required but makes it easier for developers to visualize the hierarchy of nodes. This hierarchy is sometimes called a <code>tree</code>, because it resembles a tree on its side.</li>
 </ul>
 </li>
@@ -330,9 +330,20 @@ things temporarily hidden, temporarily not understood.
 <h3>Statements</h3>
 <ul>
 <li>A <strong>statement</strong> is an instruction given to the engine.</li>
+<li>There are several types of statements. Here are a few:
+<ul>
+<li>A <strong>block</strong> of code, e.g. <code>{...}</code></li>
+<li>A <strong>conditional</strong>, e.g. <code>if (x &gt; 0) {...}</code></li>
+<li>A <strong>loop</strong>, e.g. <code>for (const item of items) {...}</code></li>
+<li>A <strong>function declaration</strong>, e.g. <code>function add(a, b) {...}</code></li>
+<li>A <strong>function call</strong>, e.g. <code>add(2, 3);</code></li>
+<li>A <strong>variable declaration</strong>, e.g. <code>let x;</code></li>
+<li>A <strong>variable assignment</strong>, e.g. <code>x = 2;</code></li>
+</ul>
+</li>
 <li>A single statement can span multiple lines.</li>
 <li>Multiple statements can be placed on a single line, but they must be separated by semi-colons.</li>
-<li>While not strictly required, it's recommended to end every statement with a semi-colon in order to reduce bugs.</li>
+<li>While not strictly required, it's recommended to end every function call, variable declaration, or variable assignment with a semi-colon in order to reduce bugs.</li>
 </ul>
 <h3>Variables</h3>
 <ul>
@@ -351,13 +362,15 @@ let y = 3;
 <li>Instead of the <code>let</code> keyword, a variable can be declared with <code>const</code> or <code>var</code>.</li>
 <li><code>const</code> declares a <strong>constant</strong> variable. Constants must be initialized and can't be reassigned.</li>
 <li><code>var</code> is an older syntax with complicated side-effects that can lead to bugs. It is best avoided.</li>
-</ul>
-<h3>Data types</h3>
+<li>Many variables are defined by the engine, including:
 <ul>
-<li>Every value has a type: <code>Boolean</code>, <code>Number</code>, <code>String</code>, etc.</li>
-<li>In JavaScript, a variable can be assigned a value of one type and subsequently reassigned a value of another type. This is called <strong>dynamic typing</strong>.</li>
-<li>Also in JavaScript, an operation involving two dissimilar types will often succeed through <strong>type coercion</strong>. This is called <strong>weak typing</strong>.</li>
-<li>If these big words are confusing, don't worry about it. I just feel like I need to mention it.</li>
+<li><code>Boolean</code></li>
+<li><code>Number</code></li>
+<li><code>String</code>
+These are called <strong>built-in objects</strong> or <strong>global objects</strong> because they can be referenced from anywhere in your code.</li>
+</ul>
+</li>
+<li>Variables have different properties depending on the <strong>type</strong> of value they contain.</li>
 </ul>
 <h3>Booleans</h3>
 <ul>
@@ -393,7 +406,7 @@ answer--; // 43
 answer;   // 42
 </code></pre>
 </li>
-<li>Modular arithetic also works as you would expect:<pre><code>22 % 12; // 10
+<li>Modular arithmetic also works as you would expect:<pre><code>22 % 12; // 10
 </code></pre>
 </li>
 </ul>
@@ -619,8 +632,7 @@ fibonacci.filter(isEven); // [2, 8]
 
 // This method returns a new array containing values returned by the function
 // argument
-fibonacci.map(item =&gt; item * 2);
-// [2, 4, 6, 10, 16, 22];
+fibonacci.map(item =&gt; item * 2); // [2, 4, 6, 10, 16, 22];
 
 // This method doesn't return anything, it just calls the function argument
 // for each item
@@ -630,7 +642,7 @@ fibonacci.forEach(item =&gt; console.log(item));
 </ul>
 <h3>Objects</h3>
 <ul>
-<li>An <strong>object</strong> is like an array, except its values are named and are called its <strong>properties</strong>.</li>
+<li>An <strong>object</strong> is like an array, except its values, or <strong>properties</strong>, are named and are enclosed in curly brackets ({}).</li>
 <li>Here's an example:<pre><code>let dog = {
     greeting: 'Arf!',
     legs: 4,
