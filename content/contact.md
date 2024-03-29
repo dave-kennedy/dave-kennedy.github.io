@@ -2,7 +2,7 @@
 title: Contact
 ---
 
-You can get a hold of me at 45ggm2 at masqt dot com.
+You can get a hold of me at contact at dkennedy dot io.
 
 You can also find me on [GitHub](https://github.com/dave-kennedy).
 
