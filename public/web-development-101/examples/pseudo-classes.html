@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Pseudo-classes</title>
+        <link href="examples.css" rel="stylesheet" />
+        <style>
+            .hover:hover {
+                background-color: red;
+            }
+
+            .active:active {
+                background-color: green;
+            }
+
+            .focus:focus {
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Pseudo-classes</h1>
+
+        <p>
+            We can use psuedo-classes to style an element based on its state.
+        </p>
+
+        <h2>:hover</h2>
+
+        <p>
+            This pseudo-class applies to an element when the user's mouse
+            cursor is moved over it. Don't depend on this state for important
+            functionality. Not all devices have a mouse, e.g. phones and screen
+            readers.
+        </p>
+
+        <div>
+            <a class="hover" href="#">Link</a>
+            <button class="hover">Button</button>
+            <input class="hover" value="Input" />
+        </div>
+
+        <h2>:active</h2>
+
+        <p>
+            This pseudo-class applies to an element when the user clicks or
+            taps on it. When the user lifts their finger off the mouse button
+            or touch screen, the element is no longer active.
+        </p>
+
+        <div>
+            <a class="active" href="#">Link</a>
+            <button class="active">Button</button>
+            <input class="active" value="Input" />
+        </div>
+
+        <h2>:focus</h2>
+
+        <p>
+            This pseudo-class applies to an element when the user clicks or
+            taps on it or uses the tab key to select it. The element retains
+            focus until the user clicks or taps elsewhere or hits the tab key
+            again.
+        </p>
+
+        <div>
+            <a class="focus" href="#">Link</a>
+            <button class="focus">Button</button>
+            <input class="focus" value="Input" />
+        </div>
+    </body>
+</html>
