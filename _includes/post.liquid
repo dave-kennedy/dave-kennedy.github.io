@@ -2,86 +2,52 @@
 layout: base.liquid
 ---
 
-<style>
-  article .meta, article .tags {
-    margin-bottom: 1em;
-    margin-top: 1em;
-  }
+<div class="post">
+  <div class="header">
+    {% if title %}
+      <h1 class="title">{{ title }}</h1>
+    {% endif %}
 
-  @media (min-width: 940px) {
-    article .title {
-      font-size: 3em; /* 60px */
-      margin-bottom: 2em;
-      margin-top: 2em;
-      text-align: center;
-    }
+    {% if description %}
+      <div class="description">{{ description }}</div>
+    {% endif %}
 
-    article .meta, article .tags {
-      text-align: center;
-    }
+    {% if date %}
+      <div class="date">{{ date | date: '%B %e, %Y' }}</div>
+    {% endif %}
 
-    .pagination {
-      display: flex;
-    }
+    {% assign tags = tags | filterTags %}
 
-    .pagination .previous {
-      flex-basis: 50%;
-      text-align: left;
-    }
-
-    .pagination .next {
-      flex-basis: 50%;
-      text-align: right;
-    }
-  }
-</style>
-
-<article>
-  {% if title %}
-    <h1 class="title">{{ title }}</h1>
-  {% endif %}
-
-  {% if author or date %}
-    <div class="meta">
-      Posted
-
-      {% if date %}
-        <span class="date">on {{ date | date: '%b %e %Y' }}</span>
-      {% endif %}
-
-      {% if author %}
-        <span class="author">by {{ author }}</span>
-      {% endif %}
-    </div>
-  {% endif %}
-
-  {% assign tags = tags | filterTags %}
-
-  {% if tags %}
-    <div class="tags">
-      {% for tag in tags %}
-        <a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a>
-      {% endfor %}
-    </div>
-  {% endif %}
+    {% if tags %}
+      <div class="tags">
+        {% for tag in tags %}
+          <a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
 
   {{ content }}
-</article>
+</div>
 
 {% assign previousPost = collections.posts | getPreviousCollectionItem %}
 {% assign nextPost = collections.posts | getNextCollectionItem %}
 
-<div class="pagination">
-  <div class="previous">
-    {% if previousPost %}
-      <a href="{{ previousPost.page.url }}">« {{ previousPost.data.title }}</a>
-    {% endif %}
-  </div>
+{% if previousPost or nextPost %}
+  <div class="pagination">
+    <div class="previous">
+      {% if previousPost %}
+        <div>« Previous</div>
+        <a href="{{ previousPost.page.url }}">{{ previousPost.data.title }}</a>
+      {% endif %}
+    </div>
 
-  <div class="next">
-    {% if nextPost %}
-      <a href="{{ nextPost.page.url }}">{{ nextPost.data.title }} »</a>
-    {% endif %}
+    <div class="next">
+      {% if nextPost %}
+        <div>Next »</div>
+        <a href="{{ nextPost.page.url }}">{{ nextPost.data.title }}</a>
+      {% endif %}
+    </div>
   </div>
-</div>
+{% endif %}
 

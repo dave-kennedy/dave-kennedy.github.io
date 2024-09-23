@@ -25,34 +25,32 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
   </head>
 
   <body>
-    <header>
-      <div class="title">{{ metadata.title }}</div>
-
-      <nav>
-        <div>
-          <a href="/">Blog</a>
-        </div>
-        <div>
-          <a href="/about/">About</a>
-        </div>
-        <div>
-          <a href="/contact/">Contact</a>
-        </div>
-      </nav>
-    </header>
-
     <div class="container">
-      {{ content }}
-    </div>
+      <header>
+        <img src="/img/header.png" />
 
-    <footer>
-      &copy; {{ 'now' | date: '%Y' }}
-    </footer>
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        {{ content }}
+      </main>
+
+      <footer>
+        &copy; {{ 'now' | date: '%Y' }}
+      </footer>
+    </div>
   </body>
 </html>
 

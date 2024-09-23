@@ -1,6 +1,6 @@
 ---
 eleventyComputed:
-    title: "Posts tagged with {{ tagPage.tag }}"
+    title: "#{{ tagPage.tag }}"
 layout: tags.liquid
 pagination:
     data: collections.postsByTag

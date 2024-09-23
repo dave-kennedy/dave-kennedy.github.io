@@ -1,125 +1,36 @@
-<style>
-  article {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    margin-bottom: 2em;
-  }
-
-  article .details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-  }
-
-  article .title {
-    font-size: 1.5em; /* 30px */
-    font-weight: bold;
-  }
-
-  @media (min-width: 940px) {
-    article {
-      flex-direction: row;
-      gap: 1em;
-    }
-
-    article .date {
-      text-align: right;
-    }
-
-    article .date span {
-      display: block;
-    }
-
-    article .date .day {
-      font-size: 2em; /* 40px */
-    }
-
-    article .details {
-      border-left: 4px solid var(--border-color);
-      padding-left: 1em;
-    }
-
-    .pagination {
-      display: flex;
-    }
-
-    .pagination .previous {
-      flex-basis: 25%;
-      order: 1;
-      text-align: left;
-    }
-
-    .pagination .current {
-      flex-basis: 50%;
-      order: 2;
-    }
-
-    .pagination .next {
-      flex-basis: 25%;
-      order: 3;
-      text-align: right;
-    }
-  }
-</style>
-
-{% for post in posts %}
-  <article>
-    {% if post.page.date %}
-      <div class="date">
-        <span class="month">{{ post.page.date | date: '%b' }}</span>
-        <span class="day">{{ post.page.date | date: '%e' }}</span>
-        <span class="year">{{ post.page.date | date: '%Y' }}</span>
-      </div>
-    {% endif %}
-
-    <div class="details">
+<div class="posts">
+  {% for post in posts %}
+    <div class="post">
       {% if post.page.url and post.data.title %}
         <div class="title">
           <a href="{{ post.page.url }}">{{ post.data.title }}</a>
         </div>
       {% endif %}
 
-      {% if post.data.author %}
-        <div class="author">{{ post.data.author }}</div>
-      {% endif %}
-
       {% if post.data.description %}
         <div class="description">{{ post.data.description }}</div>
       {% endif %}
+    </div>
+  {% endfor %}
+</div>
 
-      {% assign tags = post.data.tags | filterTags %}
-
-      {% if tags %}
-        <div class="tags">
-          {% for tag in tags %}
-            <a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a>
-          {% endfor %}
-        </div>
+{% if previousHref or nextHref %}
+  <div class="pagination">
+    <div class="previous">
+      {% if previousHref %}
+        <div>« Previous</div>
+        <a href="{{ previousHref }}">Page {{ pageNumber }}</a>
       {% endif %}
     </div>
-  </article>
-{% endfor %}
 
-<div class="pagination">
-  <div class="current">
-    Page {{ pageNumber | plus: 1 }} of {{ totalPages }}
-  </div>
+    <div class="current">Page {{ pageNumber | plus: 1 }} of {{ totalPages }}</div>
 
-  <div class="previous">
-    {% if previousHref %}
-      <a href="{{ previousHref }}">
-        « Page {{ pageNumber }}
-      </a>
-    {% endif %}
+    <div class="next">
+      {% if nextHref %}
+        <div>Next »</div>
+        <a href="{{ nextHref }}">Page {{ pageNumber | plus: 2 }}</a>
+      {% endif %}
+    </div>
   </div>
-
-  <div class="next">
-    {% if nextHref %}
-      <a href="{{ nextHref }}">
-        Page {{ pageNumber | plus: 2 }} »
-      </a>
-    {% endif %}
-  </div>
-</div>
+{% endif %}
 
