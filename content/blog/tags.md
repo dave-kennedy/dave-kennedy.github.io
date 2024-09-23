@@ -6,6 +6,6 @@ pagination:
     data: collections.postsByTag
     size: 1
     alias: tagPage
-permalink: "{{ tagPage.currentHref }}/"
+permalink: "{{ tagPage.currentHref }}"
 ---
 
