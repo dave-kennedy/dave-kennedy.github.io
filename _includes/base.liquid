@@ -3,8 +3,16 @@
   <head>
     <meta charset="utf-8" />
 
+    {% if title %}
+      <title>{{ title }} | {{ metadata.title }}</title>
+    {% else %}
+      <title>{{ metadata.title }}</title>
+    {% endif %}
+
     {% if author %}
       <meta name="author" content="{{ author | escape }}" />
+    {% else %}
+      <meta name="author" content="{{ metadata.author | escape }}" />
     {% endif %}
 
     {% if description %}
@@ -19,17 +27,11 @@
 
     <link href="/css/normalize.css" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
-
-    {% if title %}
-      <title>{{ title }} | {{ metadata.siteTitle }}</title>
-    {% else %}
-      <title>{{ metadata.siteTitle }}</title>
-    {% endif %}
   </head>
 
   <body>
     <header>
-      <div class="title">{{ metadata.siteTitle }}</div>
+      <div class="title">{{ metadata.title }}</div>
 
       {% render '_nav' %}
     </header>
