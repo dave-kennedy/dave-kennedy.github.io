@@ -1,0 +1,32 @@
+---
+layout: base.liquid
+title: Page Moved
+redirect: /
+---
+
+<h1>{{ title }}</h1>
+
+<p>
+  You should be redirected in <a id="countdown"></a> seconds.
+</p>
+
+<p>
+  Otherwise, go <a href="{{ redirect }}">here</a>.
+</p>
+
+<script>
+  const countdown = document.getElementById('countdown');
+  let seconds = 3;
+  countdown.innerHTML = seconds;
+
+  setInterval(() => {
+    if (seconds != 0) {
+      seconds--;
+      countdown.innerHTML = seconds;
+      return;
+    }
+
+    document.location.replace('{{ redirect }}');
+  }, 1000);
+</script>
+
