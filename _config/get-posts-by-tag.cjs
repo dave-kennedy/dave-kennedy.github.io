@@ -34,10 +34,10 @@ function getUniqueTags(collections) {
 
 function getCurrentHref(pageNumber, tagSlug) {
   if (pageNumber == 0) {
-    return `/blog/tags/${tagSlug}/`;
+    return `/tags/${tagSlug}/`;
   }
 
-  return `/blog/tags/${tagSlug}/page-${pageNumber + 1}/`;
+  return `/tags/${tagSlug}/page-${pageNumber + 1}/`;
 }
 
 function getNextHref(pageNumber, totalPages, tagSlug) {
@@ -45,7 +45,7 @@ function getNextHref(pageNumber, totalPages, tagSlug) {
     return null;
   }
 
-  return `/blog/tags/${tagSlug}/page-${pageNumber + 2}/`;
+  return `/tags/${tagSlug}/page-${pageNumber + 2}/`;
 }
 
 function getPreviousHref(pageNumber, tagSlug) {
@@ -54,10 +54,10 @@ function getPreviousHref(pageNumber, tagSlug) {
   }
 
   if (pageNumber == 1) {
-    return `/blog/tags/${tagSlug}/`;
+    return `/tags/${tagSlug}/`;
   }
 
-  return `/blog/tags/${tagSlug}/page-${pageNumber}/`;
+  return `/tags/${tagSlug}/page-${pageNumber}/`;
 }
 
 module.exports = getPostsByTag;

@@ -60,7 +60,7 @@ layout: base.liquid
   {% if tags %}
     <div class="tags">
       {% for tag in tags %}
-        <a href="/blog/tags/{{ tag | slugify }}/">#{{ tag }}</a>
+        <a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a>
       {% endfor %}
     </div>
   {% endif %}

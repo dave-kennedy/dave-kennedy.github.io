@@ -1,11 +1,24 @@
 ---
 eleventyComputed:
-    title: "Posts tagged with {{ tagPage.tag }}"
-layout: tags.liquid
+    redirect: "/tags/{{ tag }}/"
+layout: redirect.liquid
 pagination:
-    data: collections.postsByTag
+    data: tags
     size: 1
-    alias: tagPage
-permalink: "{{ tagPage.currentHref }}"
+    alias: tag
+permalink: "/blog/tags/{{ tag }}/"
+tags:
+    - computering
+    - networking
+    - nix
+    - open-wrt
+    - programming
+    - python
+    - sed
+    - til
+    - tmux
+    - ubuntu
+    - unit-testing
+    - vim
 ---
 
