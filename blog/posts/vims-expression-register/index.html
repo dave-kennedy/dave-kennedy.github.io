@@ -4,195 +4,72 @@
     <meta charset="utf-8" />
 
     
-
-    
-      <meta name="description" content="Wrangling one of the beloved editor&#39;s most cryptic features." />
+      <title>Page Moved | dkennedy.io</title>
     
 
     
-      <meta name="keywords" content="Computering, Nix, TIL, Vim" />
+      <meta name="author" content="David Kennedy" />
+    
+
     
 
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
-
-    
-      <title>Vim's Expression Register | David Kennedy</title>
-    
   </head>
 
   <body>
-    <header>
-      <div class="title">David Kennedy</div>
-
-      <nav>
-  <div>
-    <a href="/">Home</a>
-  </div>
-  <div>
-    <a href="/blog">Blog</a>
-  </div>
-  <div>
-    <a href="/portfolio">Portfolio</a>
-  </div>
-  <div>
-    <a href="/resume">Resume</a>
-  </div>
-  <div>
-    <a href="/privacy">Privacy</a>
-  </div>
-  <div>
-    <a href="/contact">Contact</a>
-  </div>
-</nav>
-
-
-    </header>
-
     <div class="container">
-      
-<style>
-  article .meta, article .tags {
-    margin-bottom: 1em;
-    margin-top: 1em;
-  }
+      <header>
+        <img src="/img/header.png" />
 
-  @media (min-width: 940px) {
-    article .title {
-      font-size: 3em; /* 60px */
-      margin-bottom: 2em;
-      margin-top: 2em;
-      text-align: center;
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>Page Moved</h1>
+
+<p>
+  You should be redirected in <a id="countdown"></a> seconds.
+</p>
+
+<p>
+  Otherwise, go <a href="/posts/vims-expression-register/">here</a>.
+</p>
+
+<script>
+  const countdown = document.getElementById('countdown');
+  let seconds = 3;
+  countdown.innerHTML = seconds;
+
+  setInterval(() => {
+    if (seconds != 0) {
+      seconds--;
+      countdown.innerHTML = seconds;
+      return;
     }
 
-    article .meta, article .tags {
-      text-align: center;
-    }
+    document.location.replace('/posts/vims-expression-register/');
+  }, 1000);
+</script>
 
-    .pagination {
-      display: flex;
-    }
 
-    .pagination .previous {
-      flex-basis: 50%;
-      text-align: left;
-    }
+      </main>
 
-    .pagination .next {
-      flex-basis: 50%;
-      text-align: right;
-    }
-  }
-</style>
-
-<article>
-  
-    <h1 class="title">Vim's Expression Register</h1>
-  
-
-  
-    <div class="meta">
-      Posted
-
-      
-        <span class="date">on Apr 28 2023</span>
-      
-
-      
+      <footer>
+        &copy; 2024
+      </footer>
     </div>
-  
-
-  
-
-  
-    <div class="tags">
-      
-        <a href="/blog/tags/computering">#Computering</a>
-      
-        <a href="/blog/tags/nix">#Nix</a>
-      
-        <a href="/blog/tags/til">#TIL</a>
-      
-        <a href="/blog/tags/vim">#Vim</a>
-      
-    </div>
-  
-
-  <p>Say you'd like to insert the current date and time into the document you're editing. Obviously, you could do it by hand. But what if you need to do it a lot? And what if you need it to be ISO format? That's kind of tedious and error prone. Instead, you can enter the following command:</p>
-<pre><code>:put = strftime('%FT%T%z')
-</code></pre>
-<p>This syntax is misleading. It looks like we're assigning the result of a function call to a variable named <code>put</code>. Actually, we're calling the <code>:put</code> command with two arguments: the name of a register and an expression. Normally, <code>:put x</code> would insert the contents of register <code>x</code> on a new line after the cursor. <code>:put =</code> is an exception in that it allows a second argument: an expression to be evaluated before it's inserted. After running this command, the expression register will contain the expression, not the result. You can see this for yourself with <code>:reg =</code>, which displays:</p>
-<pre><code>Type Name Content
-  c  &quot;=   strftime('%FT%T%z')
-Press ENTER or type command to continue
-</code></pre>
-<p>A nice side-effect of this is you can re-evaluate the expression and insert the new result with <code>:put =</code>, leaving out the second argument. You're already thinking of ways to exploit this, aren't you?</p>
-<p>Anyways, I can never remember this command. I'd much rather create a user-defined function with a blatantly obvious name:</p>
-<pre><code>function! InsertDate()
-    put = strftime('%FT%T%z')
-endfunction
-</code></pre>
-<p>I can call this function with <code>:call InsertDate()</code>, but I prefer to make it even easier with a user-defined command:</p>
-<pre><code>command! InsertDate call InsertDate()
-</code></pre>
-<p>This way, I can just enter <code>:InsertDate</code>.</p>
-<p>Now, say you'd like to insert the date and time on the <em>current</em> line after the cursor instead of on a <em>new</em> line. The <code>:put</code> command only works &quot;linewise&quot;, meaning it can only insert text on a new line, and there's no alternative command that works like <code>:put</code> that is &quot;charwise.&quot; You can use the normal mapping <code>&quot;xp</code> to insert the contents of register <code>x</code> on the current line after the cursor, but <code>&quot;=p</code> doesn't insert anything. Instead, it prompts you to enter an expression. So you type <code>&quot;=strftime('%FT%T%z')</code> and hit the Enter key and -- what happened? Turns out this is just another way to set the contents of the expression register. To insert the result of the expression, use the normal mapping <code>p</code> to insert the contents of the unnamed register, which contains the result of the expression until you use it, at which point its contents are replaced by whatever was there before. If you want to insert the result of the expression again, you have to type <code>&quot;=</code>, followed by the Enter key, followed by <code>p</code>. This crazy behavior is undocumented as far as I can tell.</p>
-<p>Whatever. This is why we created a function, so we don't have to jump through all these inane hoops every time we want to insert the date and time:</p>
-<pre><code>function! InsertDate()
-    normal &quot;=strftime('%FT%T%z')^Mp
-endfunction
-</code></pre>
-<p>This technically works but it contains a literal carriage return character. The <code>^M</code> is a single character, not caret followed by M, which you can enter in insert mode with <code>Ctrl-V</code> followed by the Enter key. Control characters don't always play nice with other programs -- I had to use a caret followed by M to display it correctly in the browser. You can replace it with the string <code>&lt;CR&gt;</code>, which vim interprets as the Enter key. But the <code>:normal</code> command doesn't recognize special characters like <code>&lt;CR&gt;</code> or <code>&lt;Esc&gt;</code>, so we have to wrap the whole line in the <code>:execute</code> command:</p>
-<pre><code>function! InsertDate()
-    execute &quot;normal \&quot;=strftime('%FT%T%z')\&lt;CR&gt;p&quot;
-endfunction
-</code></pre>
-<p>Make sure to escape the double quote in the middle of the command <em>and</em> the <code>&lt;CR&gt;</code>. Clear as mud, right?</p>
-<p>I started translating this to Lua, hoping it would simplify things. While it's arguably easier to understand, it's also quite verbose:</p>
-<pre><code>function insert_date()
-  local pos = vim.api.nvim_win_get_cursor(0)[2]
-  local line = vim.api.nvim_get_current_line()
-  local new_line = line:sub(0, pos) .. os.date('%FT%T%z') .. line:sub(pos + 1)
-  vim.api.nvim_set_current_line(new_line)
-end
-</code></pre>
-<p>What I really want is something like this:</p>
-<pre><code>function insert_date()
-    vim.buffer.insert(os.date('%FT%T%z'))
-end
-</code></pre>
-<p>I love the idea of an editor that's easy to program and customize, but it often requires a lot more effort than most users are willing to muster. When I'm writing and I need to insert the current date and time, I don't want to think about escape sequences, ex-commands, normal mode, special registers, etc. Whatever efficiency I gained from this exercise is eclipsed by the time I spent poring over documentation and help forums (not to mention writing this article). It might be worth the effort if I could apply what I learned here elsewhere, but I know I'm in for another learning curve the next time I'm tempted to extend my favorite editor.</p>
-<p>Vim is so full of idiosyncrasies like this, I could turn this post into a series. Maybe I will. Then again, maybe I'm done with vim.</p>
-
-</article>
-
-
-
-
-<div class="pagination">
-  <div class="previous">
-    
-      <a href="/blog/posts/openwrt-wifi-schedule/">« OpenWrt Wi-Fi Schedule</a>
-    
-  </div>
-
-  <div class="next">
-    
-      <a href="/blog/posts/remove-extra-fonts-and-languages-on-ubuntu/">Remove Extra Fonts and Languages on Ubuntu »</a>
-    
-  </div>
-</div>
-
-
-    </div>
-
-    <footer>
-      &copy; 2024
-    </footer>
   </body>
 </html>
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    
+      <title>Page Not Found | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="David Kennedy" />
+    
+
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <img src="/img/header.png" />
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>Page Not Found</h1>
+
+<p>
+  You should be redirected in <a id="countdown"></a> seconds.
+</p>
+
+<p>
+  Otherwise, go <a href="/">here</a>.
+</p>
+
+<script>
+  const countdown = document.getElementById('countdown');
+  let seconds = 3;
+  countdown.innerHTML = seconds;
+
+  setInterval(() => {
+    if (seconds != 0) {
+      seconds--;
+      countdown.innerHTML = seconds;
+      return;
+    }
+
+    document.location.replace('/');
+  }, 1000);
+</script>
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
+  </body>
+</html>
+

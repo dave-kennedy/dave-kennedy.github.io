@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
 
     
+      <title>Blog | dkennedy.io</title>
+    
 
+    
+      <meta name="author" content="David Kennedy" />
     
 
     
@@ -13,143 +17,127 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
-
-    
-      <title>David Kennedy</title>
-    
   </head>
 
   <body>
-    <header>
-      <div class="title">David Kennedy</div>
-
-      <nav>
-  <div>
-    <a href="/">Home</a>
-  </div>
-  <div>
-    <a href="/blog">Blog</a>
-  </div>
-  <div>
-    <a href="/portfolio">Portfolio</a>
-  </div>
-  <div>
-    <a href="/resume">Resume</a>
-  </div>
-  <div>
-    <a href="/privacy">Privacy</a>
-  </div>
-  <div>
-    <a href="/contact">Contact</a>
-  </div>
-</nav>
-
-
-    </header>
-
     <div class="container">
+      <header>
+        <img src="/img/header.png" />
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>Blog</h1>
+
+<div class="posts">
+  
+    <div class="post">
       
-<style>
-  .caret::after {
-    animation: cursor-blink 1s steps(2) infinite;
-    background: #fff;
-    content: '';
-    display: inline-block;
-    height: 1em;
-    vertical-align: top;
-    width: 0.1em;
-  }
+        <div class="title">
+          <a href="/posts/remove-extra-fonts-and-languages-on-ubuntu/">Remove Extra Fonts and Languages on Ubuntu</a>
+        </div>
+      
 
-  @keyframes cursor-blink {
-    0% {
-      opacity: 0;
-    }
-  }
-
-  .container {
-    display: none;
-  }
-
-  @media (min-width: 940px) {
-    html, body {
-      height: 100%;
-      width: 100%;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      align-items: center;
-      flex-basis: 95%;
-      justify-content: center;
-    }
-
-    header .title {
-      flex-basis: 5em; /* 300px */
-      font-size: 3em; /* 60px */
-      text-align: right;
-    }
-
-    header nav {
-      border-left: 4px solid var(--border-color);
-      flex-basis: 12em; /* 240px */
-      flex-direction: column;
-      padding-left: 1em;
-    }
-
-    footer {
-      flex-basis: 5%;
-    }
-  }
-</style>
-
-<script>
-  (async () => {
-    async function replaceText(selector, replacement) {
-      const element = document.querySelector(selector);
-      element.classList.add('caret');
-      element.innerHTML = '';
-      await sleep(1000);
-
-      for (let i = 0; i < replacement.length; i++) {
-        element.innerHTML += replacement[i];
-        await sleep(100);
-      }
-
-      await sleep(1000);
-      element.classList.remove('caret');
-    }
-
-    async function sleep(time) {
-      await new Promise(r => setTimeout(r, time));
-    }
-
-    await sleep(3000);
-    await replaceText('nav div:nth-child(1) a', 'You Are Here');
-    await sleep(1000);
-    await replaceText('nav div:nth-child(2) a', 'Idea Escape Hatch');
-    await sleep(1000);
-    await replaceText('nav div:nth-child(3) a', 'Trophy Case');
-    await sleep(1000);
-    await replaceText('nav div:nth-child(4) a', 'Character Sheet');
-    await sleep(1000);
-    await replaceText('nav div:nth-child(5) a', 'Own Your Data');
-    await sleep(1000);
-    await replaceText('nav div:nth-child(6) a', 'Electronic Telepathy');
-  })();
-</script>
-
-
+      
+        <div class="description">Make the font picker browsable by uninstalling unwanted packages.</div>
+      
     </div>
+  
+    <div class="post">
+      
+        <div class="title">
+          <a href="/posts/vims-expression-register/">Vim's Expression Register</a>
+        </div>
+      
 
-    <footer>
-      &copy; 2024
-    </footer>
+      
+        <div class="description">Wrangling one of the beloved editor's most cryptic features.</div>
+      
+    </div>
+  
+    <div class="post">
+      
+        <div class="title">
+          <a href="/posts/openwrt-wifi-schedule/">OpenWrt Wi-Fi Schedule</a>
+        </div>
+      
+
+      
+        <div class="description">Automatically toggle wi-fi to certain devices at specified times.</div>
+      
+    </div>
+  
+    <div class="post">
+      
+        <div class="title">
+          <a href="/posts/seamless-pane-window-switching-between-tmux-and-vim/">Seamless Pane-Window Switching Between Tmux and Vim</a>
+        </div>
+      
+
+      
+        <div class="description">Improve your workflow by saving a few keystrokes.</div>
+      
+    </div>
+  
+    <div class="post">
+      
+        <div class="title">
+          <a href="/posts/better-vim-style-key-bindings-in-tmux/">Better Vim-Style Key Bindings in Tmux</a>
+        </div>
+      
+
+      
+        <div class="description">Make tmux's "vi-style" key bindings behave more like vim.</div>
+      
+    </div>
+  
+    <div class="post">
+      
+        <div class="title">
+          <a href="/posts/special-replacements-in-sed/">Special Replacements in Sed</a>
+        </div>
+      
+
+      
+        <div class="description">Watch out for the ampersand in your sed commands.</div>
+      
+    </div>
+  
+    <div class="post">
+      
+        <div class="title">
+          <a href="/posts/best-practices-for-python-unit-testing/">Best Practices for Python Unit Testing</a>
+        </div>
+      
+
+      
+        <div class="description">A few simple tips to make unit testing Python code easier.</div>
+      
+    </div>
+  
+</div>
+
+
+
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
   </body>
 </html>
 

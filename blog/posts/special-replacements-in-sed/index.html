@@ -4,167 +4,72 @@
     <meta charset="utf-8" />
 
     
-
-    
-      <meta name="description" content="Watch out for the ampersand in your sed commands." />
+      <title>Page Moved | dkennedy.io</title>
     
 
     
-      <meta name="keywords" content="Computering, Nix, Sed, TIL" />
+      <meta name="author" content="David Kennedy" />
+    
+
     
 
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
-
-    
-      <title>Special Replacements in Sed | David Kennedy</title>
-    
   </head>
 
   <body>
-    <header>
-      <div class="title">David Kennedy</div>
-
-      <nav>
-  <div>
-    <a href="/">Home</a>
-  </div>
-  <div>
-    <a href="/blog">Blog</a>
-  </div>
-  <div>
-    <a href="/portfolio">Portfolio</a>
-  </div>
-  <div>
-    <a href="/resume">Resume</a>
-  </div>
-  <div>
-    <a href="/privacy">Privacy</a>
-  </div>
-  <div>
-    <a href="/contact">Contact</a>
-  </div>
-</nav>
-
-
-    </header>
-
     <div class="container">
-      
-<style>
-  article .meta, article .tags {
-    margin-bottom: 1em;
-    margin-top: 1em;
-  }
+      <header>
+        <img src="/img/header.png" />
 
-  @media (min-width: 940px) {
-    article .title {
-      font-size: 3em; /* 60px */
-      margin-bottom: 2em;
-      margin-top: 2em;
-      text-align: center;
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>Page Moved</h1>
+
+<p>
+  You should be redirected in <a id="countdown"></a> seconds.
+</p>
+
+<p>
+  Otherwise, go <a href="/posts/special-replacements-in-sed/">here</a>.
+</p>
+
+<script>
+  const countdown = document.getElementById('countdown');
+  let seconds = 3;
+  countdown.innerHTML = seconds;
+
+  setInterval(() => {
+    if (seconds != 0) {
+      seconds--;
+      countdown.innerHTML = seconds;
+      return;
     }
 
-    article .meta, article .tags {
-      text-align: center;
-    }
+    document.location.replace('/posts/special-replacements-in-sed/');
+  }, 1000);
+</script>
 
-    .pagination {
-      display: flex;
-    }
 
-    .pagination .previous {
-      flex-basis: 50%;
-      text-align: left;
-    }
+      </main>
 
-    .pagination .next {
-      flex-basis: 50%;
-      text-align: right;
-    }
-  }
-</style>
-
-<article>
-  
-    <h1 class="title">Special Replacements in Sed</h1>
-  
-
-  
-    <div class="meta">
-      Posted
-
-      
-        <span class="date">on Jul 14 2022</span>
-      
-
-      
+      <footer>
+        &copy; 2024
+      </footer>
     </div>
-  
-
-  
-
-  
-    <div class="tags">
-      
-        <a href="/blog/tags/computering">#Computering</a>
-      
-        <a href="/blog/tags/nix">#Nix</a>
-      
-        <a href="/blog/tags/sed">#Sed</a>
-      
-        <a href="/blog/tags/til">#TIL</a>
-      
-    </div>
-  
-
-  <p>I'm exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but I find it much easier to export the data to JSON and use Python. I used GSON to export the data, but the resulting files were full of stuff like this:</p>
-<pre><code>&quot;expression&quot;: &quot;\u0026sum\u0026 ( ~input~ ) \u003e 0&quot;
-</code></pre>
-<p>I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing <code>&lt;Ctrl-V&gt;u0026</code> into vim inserted an ampersand. Then I turned to sed to fix up the files:</p>
-<pre><code>$ sed -i 's/\u0026/&amp;/g' data.json
-</code></pre>
-<p>Which didn't work. Turns out an ampersand means something special to sed:</p>
-<blockquote>
-<p>The replacement may contain the special character &amp; to refer to that portion of the pattern space which matched, and the special escapes \1 through \9 to refer to the corresponding matching sub-expressions in the regexp.</p>
-</blockquote>
-<p>I knew <code>\1</code> through <code>\9</code> referred to capturing groups but the <code>&amp;</code> thing surprised me.</p>
-<p>The solution is simply to escape the ampersand. However, because <code>\u</code> also means something special (uppercase, I guess), it also has to be escaped:</p>
-<pre><code>$ sed -i 's/\\u0026/\&amp;/g' data.json
-</code></pre>
-<p>Turns out awk treats <code>&amp;</code> in replacements the same way. Go figure.</p>
-<p>Thanks goes once again to <a href="https://unix.stackexchange.com/a/296732">Gilles</a>, whose infinite wisdom has helped me on countless occasions.</p>
-<p>The sed manual is available <a href="https://www.gnu.org/software/sed/manual/sed.html">here</a> or with <code>info sed</code>. <code>man sed</code> is lacking in comparison.</p>
-
-</article>
-
-
-
-
-<div class="pagination">
-  <div class="previous">
-    
-      <a href="/blog/posts/best-practices-for-python-unit-testing/">« Best Practices for Python Unit Testing</a>
-    
-  </div>
-
-  <div class="next">
-    
-      <a href="/blog/posts/better-vim-style-key-bindings-in-tmux/">Better Vim-Style Key Bindings in Tmux »</a>
-    
-  </div>
-</div>
-
-
-    </div>
-
-    <footer>
-      &copy; 2024
-    </footer>
   </body>
 </html>
 

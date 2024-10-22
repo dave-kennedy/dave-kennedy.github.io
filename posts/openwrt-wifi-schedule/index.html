@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    
+      <title>OpenWrt Wi-Fi Schedule | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="David Kennedy" />
+    
+
+    
+      <meta name="description" content="Automatically toggle wi-fi to certain devices at specified times." />
+    
+
+    
+      <meta name="keywords" content="Computering, Networking, OpenWrt" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <img src="/img/header.png" />
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<div class="post">
+  <div class="header">
+    
+      <h1 class="title">OpenWrt Wi-Fi Schedule</h1>
+    
+
+    
+      <div class="description">Automatically toggle wi-fi to certain devices at specified times.</div>
+    
+
+    
+      <div class="date">March  7, 2023</div>
+    
+
+    
+
+    
+      <div class="tags">
+        
+          <a href="/tags/computering/">#Computering</a>
+        
+          <a href="/tags/networking/">#Networking</a>
+        
+          <a href="/tags/openwrt/">#OpenWrt</a>
+        
+      </div>
+    
+  </div>
+
+  <p>If I let them, my kids will stay up all night watching YouTube or TikTok or whatever. We have a no-devices-in-room policy, but disabling the wi-fi gives me a little more peace of mind.</p>
+<p>Of course, I don't want to disable the wi-fi to <em>all</em> the devices in the house at bedtime. So I wrote this script:</p>
+<pre><code>#!/usr/bin/env sh
+
+if [ -z &quot;$1&quot; ]; then
+    logger -st 'wifi-schedule' 'Missing argument'
+    exit 1
+fi
+
+if [ &quot;$1&quot; != 'up' -a &quot;$1&quot; != 'down' ]; then
+    logger -st 'wifi-schedule' &quot;Invalid argument: $1&quot;
+    exit 1
+fi
+
+logger -st 'wifi-schedule' &quot;Toggling wifi schedule $1&quot;
+
+add_mac() {
+    if ! echo &quot;$1&quot; | grep -Eiq '^([a-f0-9]{2}:){5}[a-f0-9]{2}$'; then
+        logger -st 'wifi-schedule' &quot;Invalid MAC address: $1&quot;
+        return 1
+    fi
+
+    logger -st 'wifi-schedule' &quot;Adding MAC address: $1&quot;
+    uci add_list wireless.@wifi-iface[0].maclist=&quot;$1&quot;
+    uci add_list wireless.@wifi-iface[1].maclist=&quot;$1&quot;
+}
+
+# Remove all MAC addresses
+sed -i '/list maclist/d' /etc/config/wireless
+
+# Add unscheduled MAC addresses
+add_mac 'a1:b2:c3:d4:e5:f6' # Laptop
+add_mac 'aa:bb:cc:dd:ee:ff' # Phone
+
+# Add scheduled MAC addresses if argument is &quot;up&quot;
+if [ &quot;$1&quot; = 'up' ]; then
+    add_mac '11:22:33:44:55:66' # Kids tablet
+    add_mac '1a:2b:3c:4d:5e:6f' # Nintendo Switch
+fi
+
+uci commit wireless
+wifi reload
+</code></pre>
+<p>Replace the MAC addresses and save the script at <code>/root/wifi-schedule.sh</code>. Then add this to <code>/etc/crontabs/root</code>:</p>
+<pre><code>00 06 * * * /root/wifi-schedule.sh up
+00 22 * * * /root/wifi-schedule.sh down
+</code></pre>
+<p>Adjust the on/off time as desired. Your kids will hate it.</p>
+<p>Just remember to cancel their data plan.</p>
+
+</div>
+
+
+
+
+
+  <div class="pagination">
+    <div class="previous">
+      
+        <div>« Previous</div>
+        <a href="/posts/seamless-pane-window-switching-between-tmux-and-vim/">Seamless Pane-Window Switching Between Tmux and Vim</a>
+      
+    </div>
+
+    <div class="next">
+      
+        <div>Next »</div>
+        <a href="/posts/vims-expression-register/">Vim's Expression Register</a>
+      
+    </div>
+  </div>
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    
+      <title>Best Practices for Python Unit Testing | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="David Kennedy" />
+    
+
+    
+      <meta name="description" content="A few simple tips to make unit testing Python code easier." />
+    
+
+    
+      <meta name="keywords" content="Programming, Python, Unit Testing" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <img src="/img/header.png" />
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<div class="post">
+  <div class="header">
+    
+      <h1 class="title">Best Practices for Python Unit Testing</h1>
+    
+
+    
+      <div class="description">A few simple tips to make unit testing Python code easier.</div>
+    
+
+    
+      <div class="date">May 23, 2022</div>
+    
+
+    
+
+    
+      <div class="tags">
+        
+          <a href="/tags/programming/">#Programming</a>
+        
+          <a href="/tags/python/">#Python</a>
+        
+          <a href="/tags/unit-testing/">#Unit Testing</a>
+        
+      </div>
+    
+  </div>
+
+  <p>First of all, let's distinguish unit testing from integration testing:</p>
+<ul>
+<li>A unit test verifies a unit of code in isolation.</li>
+<li>An integration test verifies several units of code in conjunction.</li>
+</ul>
+<p>Crucially, unit tests should not make network requests, modify database tables, or alter files on disk unless there's an obvious reason for doing so. Unit tests use mocked or stubbed dependencies, optionally verifying that they are called correctly, and make assertions on the results of a single function or module. Integration tests, on the other hand, use concrete dependencies and make assertions on the results of a larger system.</p>
+<p>You might disagree on the finer points, but this distinction works well for me.</p>
+<p>I won't go over unit testing basics, like how to run pytest or how to use the <code>@patch</code> decorator, assuming you're familiar already.</p>
+<h2>Avoid module-level globals</h2>
+<p>Imagine we have a class defined in validator.py:</p>
+<pre><code>import os
+
+import fastjsonschema
+import requests
+
+schema_url = os.environ['SCHEMA_URL']
+
+class Validator:
+    def __init__(self):
+        schema = requests.get(schema_url).json()
+        self.validator = fastjsonschema.compile(schema)
+
+    def validate(self, event: dict) -&gt; dict:
+        return self.validator(event)
+</code></pre>
+<p>And we have a module named my_lambda.py that uses the class:</p>
+<pre><code>from validator import Validator
+
+validator = Validator()
+
+def handle_event(event: dict, context: object) -&gt; dict:
+    validator.validate(event)
+    return {'body': 'Goodbye!', 'status': 200}
+</code></pre>
+<p>And we want to test the module:</p>
+<pre><code>from unittest.mock import Mock, patch
+
+from my_lambda import handle_event
+
+@patch('my_lambda.Validator', autospec=True)
+def test_handle_event(mock_validator: Mock):
+    result = handle_event({'message': 'Hello!'}, None)
+    assert result == {'body': 'Goodbye!', 'status': 200}
+</code></pre>
+<p>We're patching the <code>Validator</code> class and not the <code>validator</code> property because the former will allow us to prevent the network request when <code>Validator()</code> is called, whereas the latter would only allow us to act afterwards.</p>
+<p>As it's written, this test will fail during collection when my_lambda.py is imported, before the patch is even applied:</p>
+<pre><code>test_my_lambda.py:3: in &lt;module&gt;
+    from my_lambda import handle_event
+my_lambda.py:1: in &lt;module&gt;
+    from validator import Validator
+validator.py:6: in &lt;module&gt;
+    schema_url = os.environ['SCHEMA_URL']
+/usr/local/Cellar/python@3.9/3.9.12/Frameworks/Python.framework/Versions/3.9/lib/python3.9/os.py:679: in __getitem__
+    raise KeyError(key) from None
+E   KeyError: 'SCHEMA_URL'
+</code></pre>
+<p>We could set <code>SCHEMA_URL</code> in our .env file, but that's an extra step that would be required for every developer to run the test. Instead, let's try setting it right before the import:</p>
+<pre><code>import os
+
+from unittest.mock import Mock, patch
+
+os.environ['SCHEMA_URL'] = 'foo'
+
+from my_lambda import handle_event
+</code></pre>
+<p>This will also fail during collection:</p>
+<pre><code>test_my_lambda.py:7: in &lt;module&gt;
+    from my_lambda import handle_event
+my_lambda.py:3: in &lt;module&gt;
+    validator = Validator()
+validator.py:10: in __init__
+    schema = requests.get(schema_url).json()
+...
+E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Perhaps you meant http://foo?
+</code></pre>
+<p>Even though we're patching the <code>Validator</code> class, it's still trying to make a network request because <code>Validator()</code> is called when my_lambda.py is imported, before the patch is even applied. If I sound like a broken record, it's because this can be confusing:</p>
+<blockquote>
+<p>Module-level globals are assigned when the module is imported, which makes them difficult to patch.</p>
+</blockquote>
+<p>The correct way to fix this problem is to eliminate the global from my_lambda.py:</p>
+<pre><code>from validator import Validator
+
+def handle_event(event: dict, context: object):
+    validator = Validator()
+    validator.validate(event)
+</code></pre>
+<p>Now the test passes, but it's kind of ugly. Let's remove another global, this time from validator.py:</p>
+<pre><code>import os
+
+import fastjsonschema
+import requests
+
+class Validator:
+    def __init__(self):
+        schema_url = os.environ['SCHEMA_URL']
+        schema = requests.get(schema_url).json()
+        self.validator = fastjsonschema.compile(schema)
+
+    def validate(self, event: dict) -&gt; dict:
+        return self.validator(event)
+</code></pre>
+<p>This allows us to simplify the test, restoring it to its original form:</p>
+<pre><code>from unittest.mock import Mock, patch
+
+from my_lambda import handle_event
+
+@patch('my_lambda.Validator', autospec=True)
+def test_handle_event(mock_validator: Mock):
+    result = handle_event({'message': 'Hello!'}, None)
+    assert result == {'body': 'Goodbye!', 'status': 200}
+</code></pre>
+<h3>Globals aren't always bad</h3>
+<p>If you must use a global for some reason, set it to <code>None</code> initially:</p>
+<pre><code>from typing import Optional
+
+from validator import Validator
+
+validator: Optional[Validator] = None
+
+def handle_event(event: dict, context: object):
+    global validator
+
+    if not validator:
+        validator = Validator()
+
+    validator.validate(event)
+</code></pre>
+<p>The key is to prevent any expensive computation or network requests when the module is imported to facilitate patching.</p>
+<h2>Use dependency injection</h2>
+<p>Next, let's test the class:</p>
+<pre><code>from validator import Validator
+
+def test_validator_init():
+    result = Validator()
+    assert result.validator is not None
+</code></pre>
+<p>This test will fail unless <code>SCHEMA_URL</code> is defined in the environment. As previously mentioned, we could add it to our .env file, or we could set it directly like we did before with <code>os.environ['SCHEMA_URL'] = 'foo'</code>. It's better to use the <code>@patch.dict</code> decorator because it will restore the original value after the test exits:</p>
+<pre><code>import os
+
+from unittest.mock import patch
+
+from validator import Validator
+
+@patch.dict(os.environ, {'SCHEMA_URL': 'foo'})
+def test_validator_init():
+    result = Validator()
+    assert result.validator is not None
+</code></pre>
+<p>Either way, this test will fail because it's trying to make a network request to an invalid URL:</p>
+<pre><code>validator.py:9: in __init__
+    schema = requests.get(schema_url).json()
+...
+E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Perhaps you meant http://foo?
+</code></pre>
+<p>Again, we want to prevent the network request. This is where dependency injection, also known as inversion of control, comes in handy. Let's refactor validator.py to accept a few arguments:</p>
+<pre><code>import os
+
+from typing import Callable, Optional
+
+import fastjsonschema
+import requests
+
+class Validator:
+    def __init__(
+        self,
+        validator: Optional[Callable[[dict], dict]] = None,
+        schema: Optional[dict] = None,
+        schema_url: Optional[str] = None,
+    ):
+        if validator:
+            self.validator = validator
+            return
+
+        if schema:
+            self.validator = fastjsonschema.compile(schema)
+            return
+
+        if not schema_url:
+            schema_url = os.environ['SCHEMA_URL']
+
+        schema = requests.get(schema_url).json()
+        self.validator = fastjsonschema.compile(schema)
+
+    def validate(self, event: dict) -&gt; dict:
+        return self.validator(event)
+</code></pre>
+<p>It's worth a moment to understand what's happening here when <code>Validator()</code> is called:</p>
+<ol>
+<li>If called with a <code>validator</code> argument, that argument is assigned to <code>self.validator</code>. Any other arguments are ignored.</li>
+<li>If called with a <code>schema</code> argument, that argument is used to create <code>self.validator</code>.</li>
+<li>If called with a <code>schema_url</code> argument, the schema is requested from the URL, the response is parsed and used to create <code>self.validator</code>.</li>
+<li>If called without any arguments, the schema is requested from the URL specified in the environment.</li>
+</ol>
+<p>This allows us to easily prevent the network request when running the unit test:</p>
+<pre><code>import os
+
+from unittest.mock import Mock, patch
+
+from validator import Validator
+
+def test_validator_init_with_validator():
+    mock_validator = Mock()
+
+    result = Validator(validator=mock_validator)
+    assert result.validator == mock_validator
+</code></pre>
+<p>The downside is we need to cover the additional complexity in the constructor. Fortunately, it can be accomplished with some straightforward patching:</p>
+<pre><code>@patch('fastjsonschema.compile', autospec=True)
+def test_validator_init_with_schema(mock_compile):
+    mock_validator = Mock()
+    mock_compile.return_value = mock_validator
+
+    result = Validator(schema={'type': 'string'})
+    assert result.validator == mock_validator
+
+@patch('fastjsonschema.compile', autospec=True)
+@patch('requests.get', autospec=True)
+def test_validator_init_with_schema_url(mock_get, mock_compile):
+    mock_schema = Mock()
+    mock_get.return_value.json.return_value = mock_schema
+
+    mock_validator = Mock()
+    mock_compile.return_value = mock_validator
+
+    result = Validator(schema_url='foo')
+    assert result.validator == mock_validator
+
+    mock_get.assert_called_once_with('foo')
+
+@patch('fastjsonschema.compile', autospec=True)
+@patch('requests.get', autospec=True)
+@patch.dict(os.environ, {'SCHEMA_URL': 'bar'})
+def test_validator_init_with_no_args(mock_get, mock_compile):
+    mock_schema = Mock()
+    mock_get.return_value.json.return_value = mock_schema
+
+    mock_validator = Mock()
+    mock_compile.return_value = mock_validator
+
+    result = Validator()
+    assert result.validator == mock_validator
+
+    mock_get.assert_called_once_with('bar')
+
+def test_validator_validate():
+    mock_validator = Mock()
+    mock_validator.return_value = 42
+
+    validator = Validator(mock_validator)
+
+    result = validator.validate({})
+    assert result == 42
+</code></pre>
+<p>This last unit test is dirt simple because we don't really care how fastjsonschema is implemented. It has its own unit tests.</p>
+<hr>
+<p>This article was cross-posted on <a href="https://insights.dice.com/2022/05/23/python-unit-testing-best-practices-to-follow/">Dice.com</a>.</p>
+
+</div>
+
+
+
+
+
+  <div class="pagination">
+    <div class="previous">
+      
+    </div>
+
+    <div class="next">
+      
+        <div>Next »</div>
+        <a href="/posts/special-replacements-in-sed/">Special Replacements in Sed</a>
+      
+    </div>
+  </div>
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    
+      <title>Special Replacements in Sed | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="David Kennedy" />
+    
+
+    
+      <meta name="description" content="Watch out for the ampersand in your sed commands." />
+    
+
+    
+      <meta name="keywords" content="Computering, Nix, Sed, TIL" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+    <link href="/css/base.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <img src="/img/header.png" />
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<div class="post">
+  <div class="header">
+    
+      <h1 class="title">Special Replacements in Sed</h1>
+    
+
+    
+      <div class="description">Watch out for the ampersand in your sed commands.</div>
+    
+
+    
+      <div class="date">July 14, 2022</div>
+    
+
+    
+
+    
+      <div class="tags">
+        
+          <a href="/tags/computering/">#Computering</a>
+        
+          <a href="/tags/nix/">#Nix</a>
+        
+          <a href="/tags/sed/">#Sed</a>
+        
+          <a href="/tags/til/">#TIL</a>
+        
+      </div>
+    
+  </div>
+
+  <p>I'm exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but I find it much easier to export the data to JSON and use Python. I used GSON to export the data, but the resulting files were full of stuff like this:</p>
+<pre><code>&quot;expression&quot;: &quot;\u0026sum\u0026 ( ~input~ ) \u003e 0&quot;
+</code></pre>
+<p>I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing <code>&lt;Ctrl-V&gt;u0026</code> into vim inserted an ampersand. Then I turned to sed to fix up the files:</p>
+<pre><code>$ sed -i 's/\u0026/&amp;/g' data.json
+</code></pre>
+<p>Which didn't work. Turns out an ampersand means something special to sed:</p>
+<blockquote>
+<p>The replacement may contain the special character &amp; to refer to that portion of the pattern space which matched, and the special escapes \1 through \9 to refer to the corresponding matching sub-expressions in the regexp.</p>
+</blockquote>
+<p>I knew <code>\1</code> through <code>\9</code> referred to capturing groups but the <code>&amp;</code> thing surprised me.</p>
+<p>The solution is simply to escape the ampersand. However, because <code>\u</code> also means something special (uppercase, I guess), it also has to be escaped:</p>
+<pre><code>$ sed -i 's/\\u0026/\&amp;/g' data.json
+</code></pre>
+<p>Turns out awk treats <code>&amp;</code> in replacements the same way. Go figure.</p>
+<p>Thanks goes once again to <a href="https://unix.stackexchange.com/a/296732">Gilles</a>, whose infinite wisdom has helped me on countless occasions.</p>
+<p>The sed manual is available <a href="https://www.gnu.org/software/sed/manual/sed.html">here</a> or with <code>info sed</code>. <code>man sed</code> is lacking in comparison.</p>
+
+</div>
+
+
+
+
+
+  <div class="pagination">
+    <div class="previous">
+      
+        <div>« Previous</div>
+        <a href="/posts/best-practices-for-python-unit-testing/">Best Practices for Python Unit Testing</a>
+      
+    </div>
+
+    <div class="next">
+      
+        <div>Next »</div>
+        <a href="/posts/better-vim-style-key-bindings-in-tmux/">Better Vim-Style Key Bindings in Tmux</a>
+      
+    </div>
+  </div>
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
+  </body>
+</html>
+

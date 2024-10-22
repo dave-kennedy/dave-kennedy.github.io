@@ -4,182 +4,74 @@
     <meta charset="utf-8" />
 
     
+      <title>Page Moved | dkennedy.io</title>
+    
 
+    
+      <meta name="author" content="David Kennedy" />
     
 
     
 
+    
+      <meta name="keywords" content="computering, networking, nix, open-wrt, programming, python, sed, til, tmux, ubuntu, unit-testing, vim" />
     
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="/css/normalize.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
-
-    
-      <title>Posts tagged with Unit Testing | David Kennedy</title>
-    
   </head>
 
   <body>
-    <header>
-      <div class="title">David Kennedy</div>
-
-      <nav>
-  <div>
-    <a href="/">Home</a>
-  </div>
-  <div>
-    <a href="/blog">Blog</a>
-  </div>
-  <div>
-    <a href="/portfolio">Portfolio</a>
-  </div>
-  <div>
-    <a href="/resume">Resume</a>
-  </div>
-  <div>
-    <a href="/privacy">Privacy</a>
-  </div>
-  <div>
-    <a href="/contact">Contact</a>
-  </div>
-</nav>
-
-
-    </header>
-
     <div class="container">
-      
-<h1>Posts tagged with Unit Testing</h1>
+      <header>
+        <img src="/img/header.png" />
 
-<style>
-  article {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    margin-bottom: 2em;
-  }
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+        </nav>
+      </header>
 
-  article .details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-  }
+      <main>
+        
+<h1>Page Moved</h1>
 
-  article .title {
-    font-size: 1.5em; /* 30px */
-    font-weight: bold;
-  }
+<p>
+  You should be redirected in <a id="countdown"></a> seconds.
+</p>
 
-  @media (min-width: 940px) {
-    article {
-      flex-direction: row;
-      gap: 1em;
+<p>
+  Otherwise, go <a href="/tags/unit-testing/">here</a>.
+</p>
+
+<script>
+  const countdown = document.getElementById('countdown');
+  let seconds = 3;
+  countdown.innerHTML = seconds;
+
+  setInterval(() => {
+    if (seconds != 0) {
+      seconds--;
+      countdown.innerHTML = seconds;
+      return;
     }
 
-    article .date {
-      text-align: right;
-    }
-
-    article .date span {
-      display: block;
-    }
-
-    article .date .day {
-      font-size: 2em; /* 40px */
-    }
-
-    article .details {
-      border-left: 4px solid var(--border-color);
-      padding-left: 1em;
-    }
-
-    .pagination {
-      display: flex;
-    }
-
-    .pagination .previous {
-      flex-basis: 25%;
-      order: 1;
-      text-align: left;
-    }
-
-    .pagination .current {
-      flex-basis: 50%;
-      order: 2;
-    }
-
-    .pagination .next {
-      flex-basis: 25%;
-      order: 3;
-      text-align: right;
-    }
-  }
-</style>
+    document.location.replace('/tags/unit-testing/');
+  }, 1000);
+</script>
 
 
-  <article>
-    
-      <div class="date">
-        <span class="month">May</span>
-        <span class="day">23</span>
-        <span class="year">2022</span>
-      </div>
-    
+      </main>
 
-    <div class="details">
-      
-        <div class="title">
-          <a href="/blog/posts/best-practices-for-python-unit-testing/">Best Practices for Python Unit Testing</a>
-        </div>
-      
-
-      
-
-      
-        <div class="description">A few simple tips to make unit testing Python code easier.</div>
-      
-
-      
-
-      
-        <div class="tags">
-          
-            <a href="/blog/tags/programming">#Programming</a>
-          
-            <a href="/blog/tags/python">#Python</a>
-          
-            <a href="/blog/tags/unit-testing">#Unit Testing</a>
-          
-        </div>
-      
+      <footer>
+        &copy; 2024
+      </footer>
     </div>
-  </article>
-
-
-<div class="pagination">
-  <div class="current">
-    Page 1 of 1
-  </div>
-
-  <div class="previous">
-    
-  </div>
-
-  <div class="next">
-    
-  </div>
-</div>
-
-
-
-
-    </div>
-
-    <footer>
-      &copy; 2024
-    </footer>
   </body>
 </html>
 
