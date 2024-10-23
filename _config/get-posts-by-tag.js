@@ -1,14 +1,14 @@
-const { chunk } = require('@11ty/lodash-custom');
-const slugify = require('@sindresorhus/slugify');
+import lodash from '@11ty/lodash-custom';
+import slugify from '@sindresorhus/slugify';
 
-function getPostsByTag(collections) {
+export default function getPostsByTag(collections) {
   return getUniqueTags(collections)
     .filter(tag => tag != 'posts')
     .flatMap(tag => {
       const tagSlug = slugify(tag);
       const taggedPosts = collections.getFilteredByTag(tag).reverse();
       const pageSize = 10;
-      const pages = chunk(taggedPosts, pageSize);
+      const pages = lodash.chunk(taggedPosts, pageSize);
       const totalPages = pages.length;
 
       return pages.map((posts, pageNumber) => {
@@ -59,6 +59,4 @@ function getPreviousHref(pageNumber, tagSlug) {
 
   return `/tags/${tagSlug}/page-${pageNumber}/`;
 }
-
-module.exports = getPostsByTag;
 
