@@ -16,7 +16,7 @@ layout: base.liquid
       <div class="date">{{ date | date: '%B %e, %Y' }}</div>
     {% endif %}
 
-    {% assign tags = tags | filterTags %}
+    {% assign tags = tags | except: 'posts' %}
 
     {% if tags %}
       <div class="tags">

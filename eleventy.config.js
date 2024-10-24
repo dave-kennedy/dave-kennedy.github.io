@@ -9,8 +9,8 @@ export default function (eleventy) {
   // Copy all image files, keep the same directory structure
   eleventy.addPassthroughCopy('content/**/*.{gif,jpeg,jpg,png,svg,webp}');
 
-  eleventy.addFilter('filterTags', tags => {
-    return tags.filter(tag => tag != 'posts');
+  eleventy.addFilter('except', (items, ...excludes) => {
+    return (items || []).filter(item => excludes.indexOf(item) === -1);
   });
 
   eleventy.addCollection('postsByTag', getPostsByTag);

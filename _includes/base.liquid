@@ -20,7 +20,7 @@
     {% endif %}
 
     {% if tags %}
-      <meta name="keywords" content="{{ tags | filterTags | join: ', ' }}" />
+      <meta name="keywords" content="{{ tags | except: 'posts' | join: ', ' }}" />
     {% endif %}
 
     <meta name="generator" content="{{ eleventy.generator }}" />
