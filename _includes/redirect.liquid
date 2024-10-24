@@ -14,7 +14,7 @@ redirect: /
   Otherwise, go <a href="{{ redirect }}">here</a>.
 </p>
 
-<script>
+{% js %}
   const countdown = document.getElementById('countdown');
   let seconds = 3;
   countdown.innerHTML = seconds;
@@ -28,5 +28,5 @@ redirect: /
 
     document.location.replace('{{ redirect }}');
   }, 1000);
-</script>
+{% endjs %}
 

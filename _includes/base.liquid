@@ -30,6 +30,10 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
     <link href="/css/base.css" rel="stylesheet" />
+
+    <style>
+      {% getBundle 'css' %}
+    </style>
   </head>
 
   <body>
@@ -52,6 +56,10 @@
         &copy; {{ 'now' | date: '%Y' }}
       </footer>
     </div>
+
+    <script>
+      {% getBundle 'js' %}
+    </script>
   </body>
 </html>
 
