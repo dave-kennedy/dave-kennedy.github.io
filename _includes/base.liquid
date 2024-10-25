@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ metadata.language }}">
   <head>
     <meta charset="utf-8" />
 
@@ -17,15 +17,18 @@
 
     {% if description %}
       <meta name="description" content="{{ description | escape }}" />
+    {% else %}
+      <meta name="description" content="{{ metadata.description | escape }}" />
     {% endif %}
 
     {% if tags %}
-      <meta name="keywords" content="{{ tags | except: 'posts' | join: ', ' }}" />
+      <meta name="keywords" content="{{ tags | except: 'posts' | join: ', ' | escape }}" />
     {% endif %}
 
     <meta name="generator" content="{{ eleventy.generator }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <link href="/feed/atom.xml" rel="alternate" title="{{ metadata.title }}" type="application/atom+xml" />
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
@@ -46,6 +49,7 @@
           <a href="/">Blog</a>
           <a href="/about/">About</a>
           <a href="/contact/">Contact</a>
+          <a href="/feed/atom.xml">Feed</a>
         </nav>
       </header>
 
