@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/feed/pretty-atom-feed-v3.xsl" type="text/xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
+  <title>dkennedy.io</title>
+  <subtitle>A virtual escape hatch for the stuff in my head.</subtitle>
+  <link href="https://dkennedy.io/feed/atom.xml" rel="self" />
+  <link href="https://dkennedy.io/" />
+  <updated>2023-06-15T15:43:40Z</updated>
+  <id>https://dkennedy.io/</id>
+  <author>
+    <name>Dave Kennedy</name>
+  </author>
+  <entry>
+    <title>Remove Extra Fonts and Languages on Ubuntu</title>
+    <link href="https://dkennedy.io/posts/remove-extra-fonts-and-languages-on-ubuntu/" />
+    <updated>2023-06-15T15:43:40Z</updated>
+    <id>https://dkennedy.io/posts/remove-extra-fonts-and-languages-on-ubuntu/</id>
+    <content type="html">&lt;p&gt;I don&#39;t know about you, but I only speak, read and write fluently in my native language: English. So when I go hunting for a font I don&#39;t want to see this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dkennedy.io/posts/remove-extra-fonts-and-languages-on-ubuntu/fonts-app.png&quot; alt=&quot;The GNOME Fonts app&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Or this:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dkennedy.io/posts/remove-extra-fonts-and-languages-on-ubuntu/font-picker.png&quot; alt=&quot;The GNOME font picker&quot;&gt;&lt;/p&gt;
+&lt;p&gt;According to the &lt;a href=&quot;https://notofonts.github.io/noto-docs/&quot;&gt;documentation&lt;/a&gt;, Noto provides &amp;quot;high-quality fonts for writing in all modern and ancient languages.&amp;quot; So unless you&#39;re Tolkien you probably don&#39;t need it. And according to its &lt;a href=&quot;https://code.launchpad.net/ubuntu/focal/+package/fonts-noto-core&quot;&gt;package description&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The name &amp;quot;Noto&amp;quot; is short for &amp;quot;No Tofu&amp;quot;... Tofu (豆腐) is Japanese jargon for unicode replacement character &amp;quot;�&amp;quot; (U+FFFD)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Even after uninstalling it from my system, those Japanese characters appear to render correctly in the browser and in the terminal:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dkennedy.io/posts/remove-extra-fonts-and-languages-on-ubuntu/terminal.png&quot; alt=&quot;Aptitude displaying the noto-fonts-core package&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Now the Fonts app and font picker are more usable on my system.&lt;/p&gt;
+&lt;p&gt;I also removed a ton of extra language packages that were added to my system during its initial setup. Modify as desired if you speak the Queen&#39;s English or something else:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;hljs-meta&quot;&gt;#!/usr/bin/env bash&lt;/span&gt;
+
+aptitude purge --purge-unused &#92;
+    fonts-arphic-ukai &#92;
+    fonts-arphic-uming &#92;
+    fonts-noto-cjk &#92;
+    fonts-noto-cjk-extra &#92;
+    fonts-noto-core &#92;
+    fonts-noto-ui-core &#92;
+    gnome-user-docs-de &#92;
+    gnome-user-docs-es &#92;
+    gnome-user-docs-fr &#92;
+    gnome-user-docs-it &#92;
+    gnome-user-docs-ja &#92;
+    gnome-user-docs-pt &#92;
+    gnome-user-docs-ru &#92;
+    gnome-user-docs-zh-hans &#92;
+    hunspell-ar &#92;
+    hunspell-de-at-frami &#92;
+    hunspell-de-ch-frami &#92;
+    hunspell-de-de-frami &#92;
+    hunspell-en-au &#92;
+    hunspell-en-ca &#92;
+    hunspell-en-gb &#92;
+    hunspell-en-za &#92;
+    hunspell-es &#92;
+    hunspell-fr &#92;
+    hunspell-fr-classical &#92;
+    hunspell-it &#92;
+    hunspell-pt-br &#92;
+    hunspell-pt-pt &#92;
+    hunspell-ru &#92;
+    hyphen-de &#92;
+    hyphen-en-ca &#92;
+    hyphen-en-gb &#92;
+    hyphen-es &#92;
+    hyphen-fr &#92;
+    hyphen-it &#92;
+    hyphen-pt-br &#92;
+    hyphen-pt-pt &#92;
+    hyphen-ru &#92;
+    ibus-chewing &#92;
+    ibus-libpinyin &#92;
+    ibus-mozc &#92;
+    ibus-table-cangjie3 &#92;
+    ibus-table-cangjie5 &#92;
+    ibus-table-quick-classic &#92;
+    ibus-table-wubi &#92;
+    language-pack-ar &#92;
+    language-pack-ar-base &#92;
+    language-pack-de &#92;
+    language-pack-de-base &#92;
+    language-pack-es &#92;
+    language-pack-es-base &#92;
+    language-pack-fr &#92;
+    language-pack-fr-base &#92;
+    language-pack-gnome-ar &#92;
+    language-pack-gnome-ar-base &#92;
+    language-pack-gnome-de &#92;
+    language-pack-gnome-de-base &#92;
+    language-pack-gnome-es &#92;
+    language-pack-gnome-es-base &#92;
+    language-pack-gnome-fr &#92;
+    language-pack-gnome-fr-base &#92;
+    language-pack-gnome-it &#92;
+    language-pack-gnome-it-base &#92;
+    language-pack-gnome-ja &#92;
+    language-pack-gnome-ja-base &#92;
+    language-pack-gnome-pt &#92;
+    language-pack-gnome-pt-base &#92;
+    language-pack-gnome-ru &#92;
+    language-pack-gnome-ru-base &#92;
+    language-pack-gnome-zh-hans &#92;
+    language-pack-gnome-zh-hans-base &#92;
+    language-pack-gnome-zh-hant &#92;
+    language-pack-gnome-zh-hant-base &#92;
+    language-pack-it &#92;
+    language-pack-it-base &#92;
+    language-pack-ja &#92;
+    language-pack-ja-base &#92;
+    language-pack-pt &#92;
+    language-pack-pt-base &#92;
+    language-pack-ru &#92;
+    language-pack-ru-base &#92;
+    language-pack-zh-hans &#92;
+    language-pack-zh-hans-base &#92;
+    language-pack-zh-hant &#92;
+    language-pack-zh-hant-base &#92;
+    libchewing3 &#92;
+    libchewing3-data &#92;
+    libmarisa0 &#92;
+    libopencc-data &#92;
+    libopencc1.1 &#92;
+    libpinyin-data &#92;
+    libpinyin13 &#92;
+    libreoffice-help-de &#92;
+    libreoffice-help-en-gb &#92;
+    libreoffice-help-es &#92;
+    libreoffice-help-fr &#92;
+    libreoffice-help-it &#92;
+    libreoffice-help-ja &#92;
+    libreoffice-help-pt &#92;
+    libreoffice-help-pt-br &#92;
+    libreoffice-help-ru &#92;
+    libreoffice-help-zh-cn &#92;
+    libreoffice-help-zh-tw &#92;
+    libreoffice-l10n-ar &#92;
+    libreoffice-l10n-de &#92;
+    libreoffice-l10n-en-gb &#92;
+    libreoffice-l10n-en-za &#92;
+    libreoffice-l10n-es &#92;
+    libreoffice-l10n-fr &#92;
+    libreoffice-l10n-it &#92;
+    libreoffice-l10n-ja &#92;
+    libreoffice-l10n-pt &#92;
+    libreoffice-l10n-pt-br &#92;
+    libreoffice-l10n-ru &#92;
+    libreoffice-l10n-zh-cn &#92;
+    libreoffice-l10n-zh-tw &#92;
+    mozc-utils-gui &#92;
+    mythes-ar &#92;
+    mythes-de &#92;
+    mythes-de-ch &#92;
+    mythes-en-au &#92;
+    mythes-es &#92;
+    mythes-fr &#92;
+    mythes-it &#92;
+    mythes-pt-pt &#92;
+    mythes-ru &#92;
+    wbrazilian &#92;
+    wbritish &#92;
+    wfrench &#92;
+    witalian &#92;
+    wngerman &#92;
+    wogerman &#92;
+    wportuguese &#92;
+    wspanish &#92;
+    wswiss
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note the following packages were not included in the script above:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;hunspell-en-us&lt;/li&gt;
+&lt;li&gt;hyphen-en-us&lt;/li&gt;
+&lt;li&gt;language-pack-en&lt;/li&gt;
+&lt;li&gt;language-pack-gnome-en&lt;/li&gt;
+&lt;li&gt;libreoffice-help-en-us&lt;/li&gt;
+&lt;li&gt;mythes-en-us&lt;/li&gt;
+&lt;li&gt;wamerican&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also note I&#39;m running Pop!_OS, which might include different packages than Ubuntu.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Vim&#39;s Expression Register</title>
+    <link href="https://dkennedy.io/posts/vims-expression-register/" />
+    <updated>2023-04-28T00:54:40Z</updated>
+    <id>https://dkennedy.io/posts/vims-expression-register/</id>
+    <content type="html">&lt;p&gt;Say you&#39;d like to insert the current date and time into the document you&#39;re editing. Obviously, you could do it by hand. But what if you need to do it a lot? And what if you need it to be ISO format? That&#39;s kind of tedious and error prone. Instead, you can enter the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;:&lt;span class=&quot;hljs-keyword&quot;&gt;put&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;strftime&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;%FT%T%z&amp;#x27;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This syntax is misleading. It looks like we&#39;re assigning the result of a function call to a variable named &lt;code&gt;put&lt;/code&gt;. Actually, we&#39;re calling the &lt;code&gt;:put&lt;/code&gt; command with two arguments: the name of a register and an expression. Normally, &lt;code&gt;:put x&lt;/code&gt; would insert the contents of register &lt;code&gt;x&lt;/code&gt; on a new line after the cursor. &lt;code&gt;:put =&lt;/code&gt; is an exception in that it allows a second argument: an expression to be evaluated before it&#39;s inserted. After running this command, the expression register will contain the expression, not the result. You can see this for yourself with &lt;code&gt;:reg =&lt;/code&gt;, which displays:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Type Name Content
+  c  &amp;quot;=   strftime(&#39;%FT%T%z&#39;)
+Press ENTER or type command to continue
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;A nice side-effect of this is you can re-evaluate the expression and insert the new result with &lt;code&gt;:put =&lt;/code&gt;, leaving out the second argument. You&#39;re already thinking of ways to exploit this, aren&#39;t you?&lt;/p&gt;
+&lt;p&gt;Anyways, I can never remember this command. I&#39;d much rather create a user-defined function with a blatantly obvious name:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function!&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;InsertDate&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;put&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;strftime&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;%FT%T%z&amp;#x27;&lt;/span&gt;)
+&lt;span class=&quot;hljs-keyword&quot;&gt;endfunction&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I can call this function with &lt;code&gt;:call InsertDate()&lt;/code&gt;, but I prefer to make it even easier with a user-defined command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;command! InsertDate &lt;span class=&quot;hljs-keyword&quot;&gt;call&lt;/span&gt; InsertDate()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This way, I can just enter &lt;code&gt;:InsertDate&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Now, say you&#39;d like to insert the date and time on the &lt;em&gt;current&lt;/em&gt; line after the cursor instead of on a &lt;em&gt;new&lt;/em&gt; line. The &lt;code&gt;:put&lt;/code&gt; command only works &amp;quot;linewise&amp;quot;, meaning it can only insert text on a new line, and there&#39;s no alternative command that works like &lt;code&gt;:put&lt;/code&gt; that is &amp;quot;charwise.&amp;quot; You can use the normal mapping &lt;code&gt;&amp;quot;xp&lt;/code&gt; to insert the contents of register &lt;code&gt;x&lt;/code&gt; on the current line after the cursor, but &lt;code&gt;&amp;quot;=p&lt;/code&gt; doesn&#39;t insert anything. Instead, it prompts you to enter an expression. So you type &lt;code&gt;&amp;quot;=strftime(&#39;%FT%T%z&#39;)&lt;/code&gt; and hit the Enter key and -- what happened? Turns out this is just another way to set the contents of the expression register. To insert the result of the expression, use the normal mapping &lt;code&gt;p&lt;/code&gt; to insert the contents of the unnamed register, which contains the result of the expression until you use it, at which point its contents are replaced by whatever was there before. If you want to insert the result of the expression again, you have to type &lt;code&gt;&amp;quot;=&lt;/code&gt;, followed by the Enter key, followed by &lt;code&gt;p&lt;/code&gt;. This crazy behavior is undocumented as far as I can tell.&lt;/p&gt;
+&lt;p&gt;Whatever. This is why we created a function, so we don&#39;t have to jump through all these inane hoops every time we want to insert the date and time:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function!&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;InsertDate&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;normal&lt;/span&gt; &lt;span class=&quot;hljs-comment&quot;&gt;&amp;quot;=strftime(&amp;#x27;%FT%T%z&amp;#x27;)^Mp&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;endfunction&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This technically works but it contains a literal carriage return character. The &lt;code&gt;^M&lt;/code&gt; is a single character, not caret followed by M, which you can enter in insert mode with &lt;code&gt;Ctrl-V&lt;/code&gt; followed by the Enter key. Control characters don&#39;t always play nice with other programs -- I had to use a caret followed by M to display it correctly in the browser. You can replace it with the string &lt;code&gt;&amp;lt;CR&amp;gt;&lt;/code&gt;, which vim interprets as the Enter key. But the &lt;code&gt;:normal&lt;/code&gt; command doesn&#39;t recognize special characters like &lt;code&gt;&amp;lt;CR&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;lt;Esc&amp;gt;&lt;/code&gt;, so we have to wrap the whole line in the &lt;code&gt;:execute&lt;/code&gt; command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function!&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;InsertDate&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;execute&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;normal &#92;&amp;quot;=strftime(&amp;#x27;%FT%T%z&amp;#x27;)&#92;&amp;lt;CR&amp;gt;p&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;endfunction&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Make sure to escape the double quote in the middle of the command &lt;em&gt;and&lt;/em&gt; the &lt;code&gt;&amp;lt;CR&amp;gt;&lt;/code&gt;. Clear as mud, right?&lt;/p&gt;
+&lt;p&gt;I started translating this to Lua, hoping it would simplify things. While it&#39;s arguably easier to understand, it&#39;s also quite verbose:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-lua&quot;&gt;&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;insert_date&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-keyword&quot;&gt;local&lt;/span&gt; pos = vim.api.nvim_win_get_cursor(&lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;)[&lt;span class=&quot;hljs-number&quot;&gt;2&lt;/span&gt;]
+  &lt;span class=&quot;hljs-keyword&quot;&gt;local&lt;/span&gt; line = vim.api.nvim_get_current_line()
+  &lt;span class=&quot;hljs-keyword&quot;&gt;local&lt;/span&gt; new_line = line:&lt;span class=&quot;hljs-built_in&quot;&gt;sub&lt;/span&gt;(&lt;span class=&quot;hljs-number&quot;&gt;0&lt;/span&gt;, pos) .. &lt;span class=&quot;hljs-built_in&quot;&gt;os&lt;/span&gt;.&lt;span class=&quot;hljs-built_in&quot;&gt;date&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;%FT%T%z&amp;#x27;&lt;/span&gt;) .. line:&lt;span class=&quot;hljs-built_in&quot;&gt;sub&lt;/span&gt;(pos + &lt;span class=&quot;hljs-number&quot;&gt;1&lt;/span&gt;)
+  vim.api.nvim_set_current_line(new_line)
+&lt;span class=&quot;hljs-keyword&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;What I really want is something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-lua&quot;&gt;&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;insert_date&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;
+    vim.buffer.&lt;span class=&quot;hljs-built_in&quot;&gt;insert&lt;/span&gt;(&lt;span class=&quot;hljs-built_in&quot;&gt;os&lt;/span&gt;.&lt;span class=&quot;hljs-built_in&quot;&gt;date&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;%FT%T%z&amp;#x27;&lt;/span&gt;))
+&lt;span class=&quot;hljs-keyword&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I love the idea of an editor that&#39;s easy to program and customize, but it often requires a lot more effort than most users are willing to muster. When I&#39;m writing and I need to insert the current date and time, I don&#39;t want to think about escape sequences, ex-commands, normal mode, special registers, etc. Whatever efficiency I gained from this exercise is eclipsed by the time I spent poring over documentation and help forums (not to mention writing this article). It might be worth the effort if I could apply what I learned here elsewhere, but I know I&#39;m in for another learning curve the next time I&#39;m tempted to extend my favorite editor.&lt;/p&gt;
+&lt;p&gt;Vim is so full of idiosyncrasies like this, I could turn this post into a series. Maybe I will. Then again, maybe I&#39;m done with vim.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>OpenWrt Wi-Fi Schedule</title>
+    <link href="https://dkennedy.io/posts/openwrt-wifi-schedule/" />
+    <updated>2023-03-07T02:58:05Z</updated>
+    <id>https://dkennedy.io/posts/openwrt-wifi-schedule/</id>
+    <content type="html">&lt;p&gt;If I let them, my kids will stay up all night watching YouTube or TikTok or whatever. We have a no-devices-in-room policy, but disabling the wi-fi gives me a little more peace of mind.&lt;/p&gt;
+&lt;p&gt;Of course, I don&#39;t want to disable the wi-fi to &lt;em&gt;all&lt;/em&gt; the devices in the house at bedtime. So I wrote this script:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-sh&quot;&gt;&lt;span class=&quot;hljs-meta&quot;&gt;#!/usr/bin/env sh&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; [ -z &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt; ]; &lt;span class=&quot;hljs-keyword&quot;&gt;then&lt;/span&gt;
+    logger -st &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;wifi-schedule&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Missing argument&amp;#x27;&lt;/span&gt;
+    &lt;span class=&quot;hljs-built_in&quot;&gt;exit&lt;/span&gt; 1
+&lt;span class=&quot;hljs-keyword&quot;&gt;fi&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; [ &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt; != &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;up&amp;#x27;&lt;/span&gt; -a &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt; != &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;down&amp;#x27;&lt;/span&gt; ]; &lt;span class=&quot;hljs-keyword&quot;&gt;then&lt;/span&gt;
+    logger -st &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;wifi-schedule&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Invalid argument: &lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;hljs-built_in&quot;&gt;exit&lt;/span&gt; 1
+&lt;span class=&quot;hljs-keyword&quot;&gt;fi&lt;/span&gt;
+
+logger -st &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;wifi-schedule&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Toggling wifi schedule &lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;hljs-function&quot;&gt;&lt;span class=&quot;hljs-title&quot;&gt;add_mac&lt;/span&gt;&lt;/span&gt;() {
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; ! &lt;span class=&quot;hljs-built_in&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt; | grep -Eiq &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;^([a-f0-9]{2}:){5}[a-f0-9]{2}$&amp;#x27;&lt;/span&gt;; &lt;span class=&quot;hljs-keyword&quot;&gt;then&lt;/span&gt;
+        logger -st &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;wifi-schedule&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Invalid MAC address: &lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;hljs-built_in&quot;&gt;return&lt;/span&gt; 1
+    &lt;span class=&quot;hljs-keyword&quot;&gt;fi&lt;/span&gt;
+
+    logger -st &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;wifi-schedule&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;Adding MAC address: &lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt;
+    uci add_list wireless.@wifi-iface[0].maclist=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt;
+    uci add_list wireless.@wifi-iface[1].maclist=&lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt;
+}
+
+&lt;span class=&quot;hljs-comment&quot;&gt;# Remove all MAC addresses&lt;/span&gt;
+sed -i &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;/list maclist/d&amp;#x27;&lt;/span&gt; /etc/config/wireless
+
+&lt;span class=&quot;hljs-comment&quot;&gt;# Add unscheduled MAC addresses&lt;/span&gt;
+add_mac &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;a1:b2:c3:d4:e5:f6&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-comment&quot;&gt;# Laptop&lt;/span&gt;
+add_mac &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;aa:bb:cc:dd:ee:ff&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-comment&quot;&gt;# Phone&lt;/span&gt;
+
+&lt;span class=&quot;hljs-comment&quot;&gt;# Add scheduled MAC addresses if argument is &amp;quot;up&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; [ &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&lt;span class=&quot;hljs-variable&quot;&gt;$1&lt;/span&gt;&amp;quot;&lt;/span&gt; = &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;up&amp;#x27;&lt;/span&gt; ]; &lt;span class=&quot;hljs-keyword&quot;&gt;then&lt;/span&gt;
+    add_mac &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;11:22:33:44:55:66&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-comment&quot;&gt;# Kids tablet&lt;/span&gt;
+    add_mac &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;1a:2b:3c:4d:5e:6f&amp;#x27;&lt;/span&gt; &lt;span class=&quot;hljs-comment&quot;&gt;# Nintendo Switch&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;fi&lt;/span&gt;
+
+uci commit wireless
+wifi reload
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Replace the MAC addresses and save the script at &lt;code&gt;/root/wifi-schedule.sh&lt;/code&gt;. Then add this to &lt;code&gt;/etc/crontabs/root&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-cron&quot;&gt;00 06 * * * /root/wifi-schedule.sh up
+00 22 * * * /root/wifi-schedule.sh down
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Adjust the on/off time as desired. Your kids will hate it.&lt;/p&gt;
+&lt;p&gt;Just remember to cancel their data plan.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Seamless Pane-Window Switching Between Tmux and Vim</title>
+    <link href="https://dkennedy.io/posts/seamless-pane-window-switching-between-tmux-and-vim/" />
+    <updated>2022-07-20T15:48:51Z</updated>
+    <id>https://dkennedy.io/posts/seamless-pane-window-switching-between-tmux-and-vim/</id>
+    <content type="html">&lt;p&gt;I can&#39;t be arsed with an extra keystroke when switching between windows in vim, so I&#39;ve had this in my vimrc for years:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;hljs-comment&quot;&gt;&amp;quot; Move the cursor to the next window left/down/up/right&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nnoremap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-H&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-W&amp;gt;&lt;/span&gt;&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-H&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nnoremap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-J&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-W&amp;gt;&lt;/span&gt;&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-J&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nnoremap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-K&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-W&amp;gt;&lt;/span&gt;&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-K&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nnoremap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-L&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-W&amp;gt;&lt;/span&gt;&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-L&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And because the arrow keys are a stretch, I have this in my tmux.conf:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-tmux&quot;&gt;# Select the next pane left/down/up/right
+bind h selectp -L
+bind j selectp -D
+bind k selectp -U
+bind l selectp -R
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With this configuration, jumping out of vim into another tmux pane only requires one extra keystroke: the tmux prefix. Fortunately, &lt;a href=&quot;https://github.com/christoomey/vim-tmux-navigator&quot;&gt;Vim Tmux Navigator&lt;/a&gt; solves that problem. But it&#39;s a bit complicated and messy. Turns out all it requires is a tiny vimscript and a few relatively simple tmux bindings.&lt;/p&gt;
+&lt;p&gt;Here&#39;s the vimscript:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-vim&quot;&gt;&lt;span class=&quot;hljs-comment&quot;&gt;&amp;quot; Only load this plugin if running inside tmux&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;empty&lt;/span&gt;($TMUX)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;finish&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;endif&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;function!&lt;/span&gt; &lt;span class=&quot;hljs-title&quot;&gt;NextWindow&lt;/span&gt;&lt;span class=&quot;hljs-params&quot;&gt;(direction)&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;hljs-variable&quot;&gt;l:win_num&lt;/span&gt; = &lt;span class=&quot;hljs-built_in&quot;&gt;winnr&lt;/span&gt;()
+    &lt;span class=&quot;hljs-keyword&quot;&gt;execute&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;wincmd&amp;quot;&lt;/span&gt; &lt;span class=&quot;hljs-variable&quot;&gt;a:direction&lt;/span&gt;
+
+    &lt;span class=&quot;hljs-comment&quot;&gt;&amp;quot; If the window number changed, then the command succeeded. Otherwise,&lt;/span&gt;
+    &lt;span class=&quot;hljs-comment&quot;&gt;&amp;quot; we&amp;#x27;re at an edge window and we&amp;#x27;ll let tmux handle it.&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;hljs-variable&quot;&gt;l:win_num&lt;/span&gt; != &lt;span class=&quot;hljs-built_in&quot;&gt;winnr&lt;/span&gt;()
+        &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt;
+    &lt;span class=&quot;hljs-keyword&quot;&gt;endif&lt;/span&gt;
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;hljs-variable&quot;&gt;l:tmux_direction&lt;/span&gt; = &lt;span class=&quot;hljs-keyword&quot;&gt;tr&lt;/span&gt;(&lt;span class=&quot;hljs-variable&quot;&gt;a:direction&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;hjkl&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;LDUR&amp;#x27;&lt;/span&gt;)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;call&lt;/span&gt; &lt;span class=&quot;hljs-built_in&quot;&gt;system&lt;/span&gt;(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;tmux select-pane -&amp;#x27;&lt;/span&gt; . &lt;span class=&quot;hljs-variable&quot;&gt;l:tmux_direction&lt;/span&gt;)
+&lt;span class=&quot;hljs-keyword&quot;&gt;endfunction&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;nmap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;silent&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-H&amp;gt;&lt;/span&gt; :&lt;span class=&quot;hljs-keyword&quot;&gt;call&lt;/span&gt; NextWindow(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;h&amp;#x27;&lt;/span&gt;)&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nmap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;silent&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-J&amp;gt;&lt;/span&gt; :&lt;span class=&quot;hljs-keyword&quot;&gt;call&lt;/span&gt; NextWindow(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;j&amp;#x27;&lt;/span&gt;)&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nmap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;silent&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-K&amp;gt;&lt;/span&gt; :&lt;span class=&quot;hljs-keyword&quot;&gt;call&lt;/span&gt; NextWindow(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;k&amp;#x27;&lt;/span&gt;)&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;nmap&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;silent&amp;gt;&lt;/span&gt; &lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;C-L&amp;gt;&lt;/span&gt; :&lt;span class=&quot;hljs-keyword&quot;&gt;call&lt;/span&gt; NextWindow(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;l&amp;#x27;&lt;/span&gt;)&lt;span class=&quot;hljs-symbol&quot;&gt;&amp;lt;CR&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The tmux bindings are a little tricky. At first, I tried this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-tmux&quot;&gt;bind -n C-h if -F &amp;quot;#{==:#{pane_current_command},nvim}&amp;quot; &amp;quot;send C-h&amp;quot; &amp;quot;selectp -L&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;That funky nested format is required for comparing strings in tmux commands. Other than that, it&#39;s pretty straightforward. The problem is this doesn&#39;t work if vim is used as a pager, is reading from stdin, or was started from a script. In those cases, &lt;code&gt;pane_current_command&lt;/code&gt; might be bash, less, man, or whatever command was entered at the command line. Instead, we have to get a list of processes belonging to the terminal attached to the pane:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-tmux&quot;&gt;# If nvim is running in the foreground of the current pane, let it handle these
+# keys. Otherwise, select the next pane left/down/up/right.
+is_nvim=&amp;quot;[ $(ps -o comm -t #{pane_tty} | tail -1) = nvim ]&amp;quot;
+
+bind -n C-h if &amp;quot;$is_nvim&amp;quot; &amp;quot;send C-h&amp;quot; &amp;quot;selectp -L&amp;quot;
+bind -n C-j if &amp;quot;$is_nvim&amp;quot; &amp;quot;send C-j&amp;quot; &amp;quot;selectp -D&amp;quot;
+bind -n C-k if &amp;quot;$is_nvim&amp;quot; &amp;quot;send C-k&amp;quot; &amp;quot;selectp -U&amp;quot;
+bind -n C-l if &amp;quot;$is_nvim&amp;quot; &amp;quot;send C-l&amp;quot; &amp;quot;selectp -R&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Obviously, if you don&#39;t use nvim, just change the bindings accordingly.&lt;/p&gt;
+&lt;p&gt;Finally, if you use emacs-style shortcuts in your shell, you might prefer to use the alt key instead of the control key to keep the default behavior of &lt;code&gt;Ctrl-H&lt;/code&gt; (backspace) and &lt;code&gt;Ctrl-K&lt;/code&gt; (delete from cursor to end of line). In that case, just replace &lt;code&gt;C-&lt;/code&gt; with &lt;code&gt;M-&lt;/code&gt; in the vim mappings and the tmux bindings. Also, make sure to use lowercase &lt;code&gt;-h&lt;/code&gt;, &lt;code&gt;-j&lt;/code&gt;, etc. in the vim mappings due to how vim/xterm handles the alt key.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Better Vim-Style Key Bindings in Tmux</title>
+    <link href="https://dkennedy.io/posts/better-vim-style-key-bindings-in-tmux/" />
+    <updated>2022-07-15T02:36:34Z</updated>
+    <id>https://dkennedy.io/posts/better-vim-style-key-bindings-in-tmux/</id>
+    <content type="html">&lt;p&gt;I was confused by tmux&#39;s &amp;quot;vi-style&amp;quot; key bindings in copy mode, which don&#39;t behave at all like I expected: &lt;code&gt;Space&lt;/code&gt; starts the selection (like &lt;code&gt;v&lt;/code&gt; in vim), &lt;code&gt;Enter&lt;/code&gt; copies and clears the selection (like &lt;code&gt;y&lt;/code&gt;), while &lt;code&gt;Ctrl-V&lt;/code&gt; toggles block selection mode but doesn&#39;t start the selection.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dkennedy.io/posts/better-vim-style-key-bindings-in-tmux/overload.gif&quot; alt=&quot;overload.gif&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Fortunately, tmux supports braces and conditionals in key bindings. This confused me too because there are two constructs: the &lt;code&gt;%if&lt;/code&gt; keyword and the &lt;code&gt;if-shell&lt;/code&gt; command.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;%if&lt;/code&gt; conditions are only evaluated once when the config is loaded. This binding doesn&#39;t work because &lt;code&gt;#{selection_present}&lt;/code&gt; evaluates to &lt;code&gt;0&lt;/code&gt; when tmux starts:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-tmux&quot;&gt;bind-key -T copy-mode C-v {
+    %if &amp;quot;#{selection_present}&amp;quot;
+    display-message yes
+    %else
+    display-message no
+    %endif
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On the other hand, the &lt;code&gt;if-shell&lt;/code&gt; command in this binding will be called every time &lt;code&gt;Ctrl-V&lt;/code&gt; is pressed:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-tmux&quot;&gt;bind-key -T copy-mode C-v {
+    if-shell -F &amp;quot;#{selection_present}&amp;quot; {
+        display-message yes
+    } {
+        display-message no
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;-F&lt;/code&gt; flag tells tmux to evaluate the condition without calling an external shell command, as the name implies. Otherwise it would try to run &lt;code&gt;0&lt;/code&gt; or &lt;code&gt;1&lt;/code&gt; in the shell and fail.&lt;/p&gt;
+&lt;p&gt;In addition, &lt;code&gt;if-shell&lt;/code&gt; commands can be nested, so we can mimic vim&#39;s behavior with the following config:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-tmux&quot;&gt;set-option -g mode-keys vi
+
+bind-key -T copy-mode-vi v {
+    if-shell -F &amp;quot;#{selection_present}&amp;quot; {
+        if-shell -F &amp;quot;#{rectangle_toggle}&amp;quot; {
+            send-keys -X rectangle-off
+        } {
+            send-keys -X clear-selection
+        }
+    } {
+        send-keys -X begin-selection
+    }
+}
+
+bind-key -T copy-mode-vi C-v {
+    if-shell -F &amp;quot;#{selection_present}&amp;quot; {
+        if-shell -F &amp;quot;#{rectangle_toggle}&amp;quot; {
+            send-keys -X clear-selection
+        } {
+            send-keys -X rectangle-on
+        }
+    } {
+        send-keys -X begin-selection
+        send-keys -X rectangle-on
+    }
+}
+
+bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Special Replacements in Sed</title>
+    <link href="https://dkennedy.io/posts/special-replacements-in-sed/" />
+    <updated>2022-07-14T22:15:58Z</updated>
+    <id>https://dkennedy.io/posts/special-replacements-in-sed/</id>
+    <content type="html">&lt;p&gt;I&#39;m exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but I find it much easier to export the data to JSON and use Python. I used GSON to export the data, but the resulting files were full of stuff like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;&lt;span class=&quot;hljs-attr&quot;&gt;&amp;quot;expression&amp;quot;&lt;/span&gt;&lt;span class=&quot;hljs-punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;hljs-string&quot;&gt;&amp;quot;&#92;u0026sum&#92;u0026 ( ~input~ ) &#92;u003e 0&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I recognized those as unicode escape sequences but didn&#39;t know which characters they represented off the top of my head. Typing &lt;code&gt;&amp;lt;Ctrl-V&amp;gt;u0026&lt;/code&gt; into vim inserted an ampersand. Then I turned to sed to fix up the files:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;hljs-meta prompt_&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;language-bash&quot;&gt;sed -i &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;s/&#92;u0026/&amp;amp;/g&amp;#x27;&lt;/span&gt; data.json&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which didn&#39;t work. Turns out an ampersand means something special to sed:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The replacement may contain the special character &amp;amp; to refer to that portion of the pattern space which matched, and the special escapes &#92;1 through &#92;9 to refer to the corresponding matching sub-expressions in the regexp.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I knew &lt;code&gt;&#92;1&lt;/code&gt; through &lt;code&gt;&#92;9&lt;/code&gt; referred to capturing groups but the &lt;code&gt;&amp;amp;&lt;/code&gt; thing surprised me.&lt;/p&gt;
+&lt;p&gt;The solution is simply to escape the ampersand. However, because &lt;code&gt;&#92;u&lt;/code&gt; also means something special (uppercase, I guess), it also has to be escaped:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;&lt;span class=&quot;hljs-meta prompt_&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;language-bash&quot;&gt;sed -i &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;s/&#92;&#92;u0026/&#92;&amp;amp;/g&amp;#x27;&lt;/span&gt; data.json&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Turns out awk treats &lt;code&gt;&amp;amp;&lt;/code&gt; in replacements the same way. Go figure.&lt;/p&gt;
+&lt;p&gt;Thanks goes once again to &lt;a href=&quot;https://unix.stackexchange.com/a/296732&quot;&gt;Gilles&lt;/a&gt;, whose infinite wisdom has helped me on countless occasions.&lt;/p&gt;
+&lt;p&gt;The sed manual is available &lt;a href=&quot;https://www.gnu.org/software/sed/manual/sed.html&quot;&gt;here&lt;/a&gt; or with &lt;code&gt;info sed&lt;/code&gt;. &lt;code&gt;man sed&lt;/code&gt; is lacking in comparison.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Best Practices for Python Unit Testing</title>
+    <link href="https://dkennedy.io/posts/best-practices-for-python-unit-testing/" />
+    <updated>2022-05-23T15:25:27Z</updated>
+    <id>https://dkennedy.io/posts/best-practices-for-python-unit-testing/</id>
+    <content type="html">&lt;p&gt;First of all, let&#39;s distinguish unit testing from integration testing:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A unit test verifies a unit of code in isolation.&lt;/li&gt;
+&lt;li&gt;An integration test verifies several units of code in conjunction.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Crucially, unit tests should not make network requests, modify database tables, or alter files on disk unless there&#39;s an obvious reason for doing so. Unit tests use mocked or stubbed dependencies, optionally verifying that they are called correctly, and make assertions on the results of a single function or module. Integration tests, on the other hand, use concrete dependencies and make assertions on the results of a larger system.&lt;/p&gt;
+&lt;p&gt;You might disagree on the finer points, but this distinction works well for me.&lt;/p&gt;
+&lt;p&gt;I won&#39;t go over unit testing basics, like how to run pytest or how to use the &lt;code&gt;@patch&lt;/code&gt; decorator, assuming you&#39;re familiar already.&lt;/p&gt;
+&lt;h2&gt;Avoid module-level globals&lt;/h2&gt;
+&lt;p&gt;Imagine we have a class defined in validator.py:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; fastjsonschema
+&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; requests
+
+schema_url = os.environ[&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;SCHEMA_URL&amp;#x27;&lt;/span&gt;]
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;hljs-title class_&quot;&gt;Validator&lt;/span&gt;:
+    &lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;__init__&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;self&lt;/span&gt;):
+        schema = requests.get(schema_url).json()
+        &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator = fastjsonschema.&lt;span class=&quot;hljs-built_in&quot;&gt;compile&lt;/span&gt;(schema)
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;validate&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;self, event: &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;&lt;/span&gt;) -&amp;gt; &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;:
+        &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator(event)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we have a module named my_lambda.py that uses the class:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
+
+validator = Validator()
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;handle_event&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;event: &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;, context: &lt;span class=&quot;hljs-built_in&quot;&gt;object&lt;/span&gt;&lt;/span&gt;) -&amp;gt; &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;:
+    validator.validate(event)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; {&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;body&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Goodbye!&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;status&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;200&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And we want to test the module:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; unittest.mock &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Mock, patch
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; my_lambda &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; handle_event
+
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;my_lambda.Validator&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_handle_event&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;mock_validator: Mock&lt;/span&gt;):
+    result = handle_event({&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;message&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Hello!&amp;#x27;&lt;/span&gt;}, &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result == {&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;body&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Goodbye!&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;status&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;200&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We&#39;re patching the &lt;code&gt;Validator&lt;/code&gt; class and not the &lt;code&gt;validator&lt;/code&gt; property because the former will allow us to prevent the network request when &lt;code&gt;Validator()&lt;/code&gt; is called, whereas the latter would only allow us to act afterwards.&lt;/p&gt;
+&lt;p&gt;As it&#39;s written, this test will fail during collection when my_lambda.py is imported, before the patch is even applied:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;test_my_lambda.py:3: in &amp;lt;module&amp;gt;
+    from my_lambda import handle_event
+my_lambda.py:1: in &amp;lt;module&amp;gt;
+    from validator import Validator
+validator.py:6: in &amp;lt;module&amp;gt;
+    schema_url = os.environ[&#39;SCHEMA_URL&#39;]
+/usr/local/Cellar/python@3.9/3.9.12/Frameworks/Python.framework/Versions/3.9/lib/python3.9/os.py:679: in __getitem__
+    raise KeyError(key) from None
+E   KeyError: &#39;SCHEMA_URL&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We could set &lt;code&gt;SCHEMA_URL&lt;/code&gt; in our .env file, but that&#39;s an extra step that would be required for every developer to run the test. Instead, let&#39;s try setting it right before the import:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; unittest.mock &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Mock, patch
+
+os.environ[&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;SCHEMA_URL&amp;#x27;&lt;/span&gt;] = &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;foo&amp;#x27;&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; my_lambda &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; handle_event
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This will also fail during collection:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;test_my_lambda.py:7: in &amp;lt;module&amp;gt;
+    from my_lambda import handle_event
+my_lambda.py:3: in &amp;lt;module&amp;gt;
+    validator = Validator()
+validator.py:10: in __init__
+    schema = requests.get(schema_url).json()
+...
+E   requests.exceptions.MissingSchema: Invalid URL &#39;foo&#39;: No scheme supplied. Perhaps you meant http://foo?
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Even though we&#39;re patching the &lt;code&gt;Validator&lt;/code&gt; class, it&#39;s still trying to make a network request because &lt;code&gt;Validator()&lt;/code&gt; is called when my_lambda.py is imported, before the patch is even applied. If I sound like a broken record, it&#39;s because this can be confusing:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Module-level globals are assigned when the module is imported, which makes them difficult to patch.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The correct way to fix this problem is to eliminate the global from my_lambda.py:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;handle_event&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;event: &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;, context: &lt;span class=&quot;hljs-built_in&quot;&gt;object&lt;/span&gt;&lt;/span&gt;):
+    validator = Validator()
+    validator.validate(event)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now the test passes, but it&#39;s kind of ugly. Let&#39;s remove another global, this time from validator.py:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; fastjsonschema
+&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; requests
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;hljs-title class_&quot;&gt;Validator&lt;/span&gt;:
+    &lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;__init__&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;self&lt;/span&gt;):
+        schema_url = os.environ[&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;SCHEMA_URL&amp;#x27;&lt;/span&gt;]
+        schema = requests.get(schema_url).json()
+        &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator = fastjsonschema.&lt;span class=&quot;hljs-built_in&quot;&gt;compile&lt;/span&gt;(schema)
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;validate&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;self, event: &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;&lt;/span&gt;) -&amp;gt; &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;:
+        &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator(event)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This allows us to simplify the test, restoring it to its original form:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; unittest.mock &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Mock, patch
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; my_lambda &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; handle_event
+
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;my_lambda.Validator&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_handle_event&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;mock_validator: Mock&lt;/span&gt;):
+    result = handle_event({&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;message&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Hello!&amp;#x27;&lt;/span&gt;}, &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result == {&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;body&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Goodbye!&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;status&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;200&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Globals aren&#39;t always bad&lt;/h3&gt;
+&lt;p&gt;If you must use a global for some reason, set it to &lt;code&gt;None&lt;/code&gt; initially:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; typing &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
+
+validator: &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;[Validator] = &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;handle_event&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;event: &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;, context: &lt;span class=&quot;hljs-built_in&quot;&gt;object&lt;/span&gt;&lt;/span&gt;):
+    &lt;span class=&quot;hljs-keyword&quot;&gt;global&lt;/span&gt; validator
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;not&lt;/span&gt; validator:
+        validator = Validator()
+
+    validator.validate(event)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The key is to prevent any expensive computation or network requests when the module is imported to facilitate patching.&lt;/p&gt;
+&lt;h2&gt;Use dependency injection&lt;/h2&gt;
+&lt;p&gt;Next, let&#39;s test the class:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_init&lt;/span&gt;():
+    result = Validator()
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result.validator &lt;span class=&quot;hljs-keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This test will fail unless &lt;code&gt;SCHEMA_URL&lt;/code&gt; is defined in the environment. As previously mentioned, we could add it to our .env file, or we could set it directly like we did before with &lt;code&gt;os.environ[&#39;SCHEMA_URL&#39;] = &#39;foo&#39;&lt;/code&gt;. It&#39;s better to use the &lt;code&gt;@patch.dict&lt;/code&gt; decorator because it will restore the original value after the test exits:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; unittest.mock &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; patch
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
+
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch.dict(&lt;span class=&quot;hljs-params&quot;&gt;os.environ, {&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;SCHEMA_URL&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;foo&amp;#x27;&lt;/span&gt;}&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_init&lt;/span&gt;():
+    result = Validator()
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result.validator &lt;span class=&quot;hljs-keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Either way, this test will fail because it&#39;s trying to make a network request to an invalid URL:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;validator.py:9: in __init__
+    schema = requests.get(schema_url).json()
+...
+E   requests.exceptions.MissingSchema: Invalid URL &#39;foo&#39;: No scheme supplied. Perhaps you meant http://foo?
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Again, we want to prevent the network request. This is where dependency injection, also known as inversion of control, comes in handy. Let&#39;s refactor validator.py to accept a few arguments:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; typing &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;hljs-type&quot;&gt;Callable&lt;/span&gt;, &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; fastjsonschema
+&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; requests
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;hljs-title class_&quot;&gt;Validator&lt;/span&gt;:
+    &lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;__init__&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;
+        self,
+        validator: &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;hljs-type&quot;&gt;Callable&lt;/span&gt;[[&lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;], &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;]] = &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;,
+        schema: &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;] = &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;,
+        schema_url: &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;[&lt;span class=&quot;hljs-built_in&quot;&gt;str&lt;/span&gt;] = &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;,
+    &lt;/span&gt;):
+        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; validator:
+            &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator = validator
+            &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt;
+
+        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; schema:
+            &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator = fastjsonschema.&lt;span class=&quot;hljs-built_in&quot;&gt;compile&lt;/span&gt;(schema)
+            &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt;
+
+        &lt;span class=&quot;hljs-keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;hljs-keyword&quot;&gt;not&lt;/span&gt; schema_url:
+            schema_url = os.environ[&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;SCHEMA_URL&amp;#x27;&lt;/span&gt;]
+
+        schema = requests.get(schema_url).json()
+        &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator = fastjsonschema.&lt;span class=&quot;hljs-built_in&quot;&gt;compile&lt;/span&gt;(schema)
+
+    &lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;validate&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;self, event: &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;&lt;/span&gt;) -&amp;gt; &lt;span class=&quot;hljs-built_in&quot;&gt;dict&lt;/span&gt;:
+        &lt;span class=&quot;hljs-keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;hljs-variable language_&quot;&gt;self&lt;/span&gt;.validator(event)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It&#39;s worth a moment to understand what&#39;s happening here when &lt;code&gt;Validator()&lt;/code&gt; is called:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;If called with a &lt;code&gt;validator&lt;/code&gt; argument, that argument is assigned to &lt;code&gt;self.validator&lt;/code&gt;. Any other arguments are ignored.&lt;/li&gt;
+&lt;li&gt;If called with a &lt;code&gt;schema&lt;/code&gt; argument, that argument is used to create &lt;code&gt;self.validator&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If called with a &lt;code&gt;schema_url&lt;/code&gt; argument, the schema is requested from the URL, the response is parsed and used to create &lt;code&gt;self.validator&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;If called without any arguments, the schema is requested from the URL specified in the environment.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This allows us to easily prevent the network request when running the unit test:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; unittest.mock &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Mock, patch
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_init_with_validator&lt;/span&gt;():
+    mock_validator = Mock()
+
+    result = Validator(validator=mock_validator)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result.validator == mock_validator
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The downside is we need to cover the additional complexity in the constructor. Fortunately, it can be accomplished with some straightforward patching:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;fastjsonschema.compile&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_init_with_schema&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;mock_compile&lt;/span&gt;):
+    mock_validator = Mock()
+    mock_compile.return_value = mock_validator
+
+    result = Validator(schema={&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;type&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;string&amp;#x27;&lt;/span&gt;})
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result.validator == mock_validator
+
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;fastjsonschema.compile&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;requests.get&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_init_with_schema_url&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;mock_get, mock_compile&lt;/span&gt;):
+    mock_schema = Mock()
+    mock_get.return_value.json.return_value = mock_schema
+
+    mock_validator = Mock()
+    mock_compile.return_value = mock_validator
+
+    result = Validator(schema_url=&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;foo&amp;#x27;&lt;/span&gt;)
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result.validator == mock_validator
+
+    mock_get.assert_called_once_with(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;foo&amp;#x27;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;fastjsonschema.compile&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch(&lt;span class=&quot;hljs-params&quot;&gt;&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;requests.get&amp;#x27;&lt;/span&gt;, autospec=&lt;span class=&quot;hljs-literal&quot;&gt;True&lt;/span&gt;&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-meta&quot;&gt;@patch.dict(&lt;span class=&quot;hljs-params&quot;&gt;os.environ, {&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;SCHEMA_URL&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;bar&amp;#x27;&lt;/span&gt;}&lt;/span&gt;)&lt;/span&gt;
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_init_with_no_args&lt;/span&gt;(&lt;span class=&quot;hljs-params&quot;&gt;mock_get, mock_compile&lt;/span&gt;):
+    mock_schema = Mock()
+    mock_get.return_value.json.return_value = mock_schema
+
+    mock_validator = Mock()
+    mock_compile.return_value = mock_validator
+
+    result = Validator()
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result.validator == mock_validator
+
+    mock_get.assert_called_once_with(&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;bar&amp;#x27;&lt;/span&gt;)
+
+&lt;span class=&quot;hljs-keyword&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;hljs-title function_&quot;&gt;test_validator_validate&lt;/span&gt;():
+    mock_validator = Mock()
+    mock_validator.return_value = &lt;span class=&quot;hljs-number&quot;&gt;42&lt;/span&gt;
+
+    validator = Validator(mock_validator)
+
+    result = validator.validate({})
+    &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result == &lt;span class=&quot;hljs-number&quot;&gt;42&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This last unit test is dirt simple because we don&#39;t really care how fastjsonschema is implemented. It has its own unit tests.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;This article was cross-posted on &lt;a href=&quot;https://insights.dice.com/2022/05/23/python-unit-testing-best-practices-to-follow/&quot;&gt;Dice.com&lt;/a&gt;.&lt;/p&gt;
+</content>
+  </entry>
+</feed>
