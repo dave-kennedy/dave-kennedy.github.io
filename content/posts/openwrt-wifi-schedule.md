@@ -12,7 +12,7 @@ If I let them, my kids will stay up all night watching YouTube or TikTok or what
 
 Of course, I don't want to disable the wi-fi to *all* the devices in the house at bedtime. So I wrote this script:
 
-```
+```sh
 #!/usr/bin/env sh
 
 if [ -z "$1" ]; then
@@ -57,7 +57,7 @@ wifi reload
 
 Replace the MAC addresses and save the script at `/root/wifi-schedule.sh`. Then add this to `/etc/crontabs/root`:
 
-```
+```cron
 00 06 * * * /root/wifi-schedule.sh up
 00 22 * * * /root/wifi-schedule.sh down
 ```

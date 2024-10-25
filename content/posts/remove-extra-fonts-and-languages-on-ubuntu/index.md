@@ -28,7 +28,7 @@ Now the Fonts app and font picker are more usable on my system.
 
 I also removed a ton of extra language packages that were added to my system during its initial setup. Modify as desired if you speak the Queen's English or something else:
 
-```
+```bash
 #!/usr/bin/env bash
 
 aptitude purge --purge-unused \

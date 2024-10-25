@@ -11,7 +11,7 @@ tags:
 
 Say you'd like to insert the current date and time into the document you're editing. Obviously, you could do it by hand. But what if you need to do it a lot? And what if you need it to be ISO format? That's kind of tedious and error prone. Instead, you can enter the following command:
 
-```
+```vim
 :put = strftime('%FT%T%z')
 ```
 
@@ -27,7 +27,7 @@ A nice side-effect of this is you can re-evaluate the expression and insert the 
 
 Anyways, I can never remember this command. I'd much rather create a user-defined function with a blatantly obvious name:
 
-```
+```vim
 function! InsertDate()
     put = strftime('%FT%T%z')
 endfunction
@@ -35,7 +35,7 @@ endfunction
 
 I can call this function with `:call InsertDate()`, but I prefer to make it even easier with a user-defined command:
 
-```
+```vim
 command! InsertDate call InsertDate()
 ```
 
@@ -45,7 +45,7 @@ Now, say you'd like to insert the date and time on the *current* line after the 
 
 Whatever. This is why we created a function, so we don't have to jump through all these inane hoops every time we want to insert the date and time:
 
-```
+```vim
 function! InsertDate()
     normal "=strftime('%FT%T%z')^Mp
 endfunction
@@ -53,7 +53,7 @@ endfunction
 
 This technically works but it contains a literal carriage return character. The `^M` is a single character, not caret followed by M, which you can enter in insert mode with `Ctrl-V` followed by the Enter key. Control characters don't always play nice with other programs -- I had to use a caret followed by M to display it correctly in the browser. You can replace it with the string `<CR>`, which vim interprets as the Enter key. But the `:normal` command doesn't recognize special characters like `<CR>` or `<Esc>`, so we have to wrap the whole line in the `:execute` command:
 
-```
+```vim
 function! InsertDate()
     execute "normal \"=strftime('%FT%T%z')\<CR>p"
 endfunction
@@ -63,7 +63,7 @@ Make sure to escape the double quote in the middle of the command *and* the `<CR
 
 I started translating this to Lua, hoping it would simplify things. While it's arguably easier to understand, it's also quite verbose:
 
-```
+```lua
 function insert_date()
   local pos = vim.api.nvim_win_get_cursor(0)[2]
   local line = vim.api.nvim_get_current_line()
@@ -74,7 +74,7 @@ end
 
 What I really want is something like this:
 
-```
+```lua
 function insert_date()
     vim.buffer.insert(os.date('%FT%T%z'))
 end

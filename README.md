@@ -16,6 +16,5 @@ Based on [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
     * [Image](https://www.11ty.dev/docs/plugins/image/)
     * [Inclusive Language](https://www.11ty.dev/docs/plugins/inclusive-language/)
     * [RSS](https://www.11ty.dev/docs/plugins/rss/)
-    * [Syntax Highlighting](https://www.11ty.dev/docs/plugins/syntaxhighlight/)
 * Better organization/navigation for web development notes
 * Add Bash/Nix/Vim/etc. notes

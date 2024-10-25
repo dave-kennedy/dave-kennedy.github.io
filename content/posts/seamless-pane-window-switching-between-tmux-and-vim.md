@@ -12,7 +12,7 @@ tags:
 
 I can't be arsed with an extra keystroke when switching between windows in vim, so I've had this in my vimrc for years:
 
-```
+```vim
 " Move the cursor to the next window left/down/up/right
 nnoremap <C-H> <C-W><C-H>
 nnoremap <C-J> <C-W><C-J>
@@ -22,7 +22,7 @@ nnoremap <C-L> <C-W><C-L>
 
 And because the arrow keys are a stretch, I have this in my tmux.conf:
 
-```
+```tmux
 # Select the next pane left/down/up/right
 bind h selectp -L
 bind j selectp -D
@@ -34,7 +34,7 @@ With this configuration, jumping out of vim into another tmux pane only requires
 
 Here's the vimscript:
 
-```
+```vim
 " Only load this plugin if running inside tmux
 if empty($TMUX)
     finish
@@ -62,13 +62,13 @@ nmap <silent> <C-L> :call NextWindow('l')<CR>
 
 The tmux bindings are a little tricky. At first, I tried this:
 
-```
+```tmux
 bind -n C-h if -F "#{==:#{pane_current_command},nvim}" "send C-h" "selectp -L"
 ```
 
 That funky nested format is required for comparing strings in tmux commands. Other than that, it's pretty straightforward. The problem is this doesn't work if vim is used as a pager, is reading from stdin, or was started from a script. In those cases, `pane_current_command` might be bash, less, man, or whatever command was entered at the command line. Instead, we have to get a list of processes belonging to the terminal attached to the pane:
 
-```
+```tmux
 # If nvim is running in the foreground of the current pane, let it handle these
 # keys. Otherwise, select the next pane left/down/up/right.
 is_nvim="[ $(ps -o comm -t #{pane_tty} | tail -1) = nvim ]"

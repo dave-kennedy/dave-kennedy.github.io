@@ -68,7 +68,7 @@ Inline `code`
 
 Block code "fences":
 
-```
+```c
 // https://en.wikipedia.org/wiki/C_(programming_language)#Arrays
 int func(int N, int M)
 {

@@ -23,7 +23,7 @@ I won't go over unit testing basics, like how to run pytest or how to use the `@
 
 Imagine we have a class defined in validator.py:
 
-```
+```py
 import os
 
 import fastjsonschema
@@ -42,7 +42,7 @@ class Validator:
 
 And we have a module named my_lambda.py that uses the class:
 
-```
+```py
 from validator import Validator
 
 validator = Validator()
@@ -54,7 +54,7 @@ def handle_event(event: dict, context: object) -> dict:
 
 And we want to test the module:
 
-```
+```py
 from unittest.mock import Mock, patch
 
 from my_lambda import handle_event
@@ -83,7 +83,7 @@ E   KeyError: 'SCHEMA_URL'
 
 We could set `SCHEMA_URL` in our .env file, but that's an extra step that would be required for every developer to run the test. Instead, let's try setting it right before the import:
 
-```
+```py
 import os
 
 from unittest.mock import Mock, patch
@@ -112,7 +112,7 @@ Even though we're patching the `Validator` class, it's still trying to make a ne
 
 The correct way to fix this problem is to eliminate the global from my_lambda.py:
 
-```
+```py
 from validator import Validator
 
 def handle_event(event: dict, context: object):
@@ -122,7 +122,7 @@ def handle_event(event: dict, context: object):
 
 Now the test passes, but it's kind of ugly. Let's remove another global, this time from validator.py:
 
-```
+```py
 import os
 
 import fastjsonschema
@@ -140,7 +140,7 @@ class Validator:
 
 This allows us to simplify the test, restoring it to its original form:
 
-```
+```py
 from unittest.mock import Mock, patch
 
 from my_lambda import handle_event
@@ -155,7 +155,7 @@ def test_handle_event(mock_validator: Mock):
 
 If you must use a global for some reason, set it to `None` initially:
 
-```
+```py
 from typing import Optional
 
 from validator import Validator
@@ -177,7 +177,7 @@ The key is to prevent any expensive computation or network requests when the mod
 
 Next, let's test the class:
 
-```
+```py
 from validator import Validator
 
 def test_validator_init():
@@ -187,7 +187,7 @@ def test_validator_init():
 
 This test will fail unless `SCHEMA_URL` is defined in the environment. As previously mentioned, we could add it to our .env file, or we could set it directly like we did before with `os.environ['SCHEMA_URL'] = 'foo'`. It's better to use the `@patch.dict` decorator because it will restore the original value after the test exits:
 
-```
+```py
 import os
 
 from unittest.mock import patch
@@ -211,7 +211,7 @@ E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Pe
 
 Again, we want to prevent the network request. This is where dependency injection, also known as inversion of control, comes in handy. Let's refactor validator.py to accept a few arguments:
 
-```
+```py
 import os
 
 from typing import Callable, Optional
@@ -253,7 +253,7 @@ It's worth a moment to understand what's happening here when `Validator()` is ca
 
 This allows us to easily prevent the network request when running the unit test:
 
-```
+```py
 import os
 
 from unittest.mock import Mock, patch
@@ -269,7 +269,7 @@ def test_validator_init_with_validator():
 
 The downside is we need to cover the additional complexity in the constructor. Fortunately, it can be accomplished with some straightforward patching:
 
-```
+```py
 @patch('fastjsonschema.compile', autospec=True)
 def test_validator_init_with_schema(mock_compile):
     mock_validator = Mock()

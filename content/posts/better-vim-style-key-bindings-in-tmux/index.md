@@ -18,7 +18,7 @@ Fortunately, tmux supports braces and conditionals in key bindings. This confuse
 
 `%if` conditions are only evaluated once when the config is loaded. This binding doesn't work because `#{selection_present}` evaluates to `0` when tmux starts:
 
-```
+```tmux
 bind-key -T copy-mode C-v {
     %if "#{selection_present}"
     display-message yes
@@ -30,7 +30,7 @@ bind-key -T copy-mode C-v {
 
 On the other hand, the `if-shell` command in this binding will be called every time `Ctrl-V` is pressed:
 
-```
+```tmux
 bind-key -T copy-mode C-v {
     if-shell -F "#{selection_present}" {
         display-message yes
@@ -44,7 +44,7 @@ The `-F` flag tells tmux to evaluate the condition without calling an external s
 
 In addition, `if-shell` commands can be nested, so we can mimic vim's behavior with the following config:
 
-```
+```tmux
 set-option -g mode-keys vi
 
 bind-key -T copy-mode-vi v {

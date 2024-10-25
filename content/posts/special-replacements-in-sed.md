@@ -11,13 +11,13 @@ tags:
 
 I'm exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but I find it much easier to export the data to JSON and use Python. I used GSON to export the data, but the resulting files were full of stuff like this:
 
-```
+```json
 "expression": "\u0026sum\u0026 ( ~input~ ) \u003e 0"
 ```
 
 I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing `<Ctrl-V>u0026` into vim inserted an ampersand. Then I turned to sed to fix up the files:
 
-```
+```shell
 $ sed -i 's/\u0026/&/g' data.json
 ```
 
@@ -29,7 +29,7 @@ I knew `\1` through `\9` referred to capturing groups but the `&` thing surprise
 
 The solution is simply to escape the ampersand. However, because `\u` also means something special (uppercase, I guess), it also has to be escaped:
 
-```
+```shell
 $ sed -i 's/\\u0026/\&/g' data.json
 ```
 
