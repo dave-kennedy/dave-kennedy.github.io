@@ -26,6 +26,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -78,10 +79,10 @@
   </div>
 
   <p>I'm exploring a bunch of data in Java. The debugger in IntelliJ is powerful, but I find it much easier to export the data to JSON and use Python. I used GSON to export the data, but the resulting files were full of stuff like this:</p>
-<pre><code>&quot;expression&quot;: &quot;\u0026sum\u0026 ( ~input~ ) \u003e 0&quot;
+<pre><code class="language-json"><span class="hljs-attr">&quot;expression&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\u0026sum\u0026 ( ~input~ ) \u003e 0&quot;</span>
 </code></pre>
 <p>I recognized those as unicode escape sequences but didn't know which characters they represented off the top of my head. Typing <code>&lt;Ctrl-V&gt;u0026</code> into vim inserted an ampersand. Then I turned to sed to fix up the files:</p>
-<pre><code>$ sed -i 's/\u0026/&amp;/g' data.json
+<pre><code class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">sed -i <span class="hljs-string">&#x27;s/\u0026/&amp;/g&#x27;</span> data.json</span>
 </code></pre>
 <p>Which didn't work. Turns out an ampersand means something special to sed:</p>
 <blockquote>
@@ -89,7 +90,7 @@
 </blockquote>
 <p>I knew <code>\1</code> through <code>\9</code> referred to capturing groups but the <code>&amp;</code> thing surprised me.</p>
 <p>The solution is simply to escape the ampersand. However, because <code>\u</code> also means something special (uppercase, I guess), it also has to be escaped:</p>
-<pre><code>$ sed -i 's/\\u0026/\&amp;/g' data.json
+<pre><code class="language-shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">sed -i <span class="hljs-string">&#x27;s/\\u0026/\&amp;/g&#x27;</span> data.json</span>
 </code></pre>
 <p>Turns out awk treats <code>&amp;</code> in replacements the same way. Go figure.</p>
 <p>Thanks goes once again to <a href="https://unix.stackexchange.com/a/296732">Gilles</a>, whose infinite wisdom has helped me on countless occasions.</p>

@@ -26,6 +26,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -87,7 +88,7 @@
 <p><img src="terminal.png" alt="Aptitude displaying the noto-fonts-core package"></p>
 <p>Now the Fonts app and font picker are more usable on my system.</p>
 <p>I also removed a ton of extra language packages that were added to my system during its initial setup. Modify as desired if you speak the Queen's English or something else:</p>
-<pre><code>#!/usr/bin/env bash
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
 
 aptitude purge --purge-unused \
     fonts-arphic-ukai \

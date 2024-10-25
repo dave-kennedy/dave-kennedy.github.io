@@ -26,6 +26,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -85,39 +86,39 @@
 <p>I won't go over unit testing basics, like how to run pytest or how to use the <code>@patch</code> decorator, assuming you're familiar already.</p>
 <h2>Avoid module-level globals</h2>
 <p>Imagine we have a class defined in validator.py:</p>
-<pre><code>import os
+<pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
-import fastjsonschema
-import requests
+<span class="hljs-keyword">import</span> fastjsonschema
+<span class="hljs-keyword">import</span> requests
 
-schema_url = os.environ['SCHEMA_URL']
+schema_url = os.environ[<span class="hljs-string">&#x27;SCHEMA_URL&#x27;</span>]
 
-class Validator:
-    def __init__(self):
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Validator</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
         schema = requests.get(schema_url).json()
-        self.validator = fastjsonschema.compile(schema)
+        <span class="hljs-variable language_">self</span>.validator = fastjsonschema.<span class="hljs-built_in">compile</span>(schema)
 
-    def validate(self, event: dict) -&gt; dict:
-        return self.validator(event)
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">validate</span>(<span class="hljs-params">self, event: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.validator(event)
 </code></pre>
 <p>And we have a module named my_lambda.py that uses the class:</p>
-<pre><code>from validator import Validator
+<pre><code class="language-py"><span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
 validator = Validator()
 
-def handle_event(event: dict, context: object) -&gt; dict:
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_event</span>(<span class="hljs-params">event: <span class="hljs-built_in">dict</span>, context: <span class="hljs-built_in">object</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
     validator.validate(event)
-    return {'body': 'Goodbye!', 'status': 200}
+    <span class="hljs-keyword">return</span> {<span class="hljs-string">&#x27;body&#x27;</span>: <span class="hljs-string">&#x27;Goodbye!&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>: <span class="hljs-number">200</span>}
 </code></pre>
 <p>And we want to test the module:</p>
-<pre><code>from unittest.mock import Mock, patch
+<pre><code class="language-py"><span class="hljs-keyword">from</span> unittest.mock <span class="hljs-keyword">import</span> Mock, patch
 
-from my_lambda import handle_event
+<span class="hljs-keyword">from</span> my_lambda <span class="hljs-keyword">import</span> handle_event
 
-@patch('my_lambda.Validator', autospec=True)
-def test_handle_event(mock_validator: Mock):
-    result = handle_event({'message': 'Hello!'}, None)
-    assert result == {'body': 'Goodbye!', 'status': 200}
+<span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;my_lambda.Validator&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_handle_event</span>(<span class="hljs-params">mock_validator: Mock</span>):
+    result = handle_event({<span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;Hello!&#x27;</span>}, <span class="hljs-literal">None</span>)
+    <span class="hljs-keyword">assert</span> result == {<span class="hljs-string">&#x27;body&#x27;</span>: <span class="hljs-string">&#x27;Goodbye!&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>: <span class="hljs-number">200</span>}
 </code></pre>
 <p>We're patching the <code>Validator</code> class and not the <code>validator</code> property because the former will allow us to prevent the network request when <code>Validator()</code> is called, whereas the latter would only allow us to act afterwards.</p>
 <p>As it's written, this test will fail during collection when my_lambda.py is imported, before the patch is even applied:</p>
@@ -132,13 +133,13 @@ validator.py:6: in &lt;module&gt;
 E   KeyError: 'SCHEMA_URL'
 </code></pre>
 <p>We could set <code>SCHEMA_URL</code> in our .env file, but that's an extra step that would be required for every developer to run the test. Instead, let's try setting it right before the import:</p>
-<pre><code>import os
+<pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
-from unittest.mock import Mock, patch
+<span class="hljs-keyword">from</span> unittest.mock <span class="hljs-keyword">import</span> Mock, patch
 
-os.environ['SCHEMA_URL'] = 'foo'
+os.environ[<span class="hljs-string">&#x27;SCHEMA_URL&#x27;</span>] = <span class="hljs-string">&#x27;foo&#x27;</span>
 
-from my_lambda import handle_event
+<span class="hljs-keyword">from</span> my_lambda <span class="hljs-keyword">import</span> handle_event
 </code></pre>
 <p>This will also fail during collection:</p>
 <pre><code>test_my_lambda.py:7: in &lt;module&gt;
@@ -155,49 +156,49 @@ E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Pe
 <p>Module-level globals are assigned when the module is imported, which makes them difficult to patch.</p>
 </blockquote>
 <p>The correct way to fix this problem is to eliminate the global from my_lambda.py:</p>
-<pre><code>from validator import Validator
+<pre><code class="language-py"><span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
-def handle_event(event: dict, context: object):
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_event</span>(<span class="hljs-params">event: <span class="hljs-built_in">dict</span>, context: <span class="hljs-built_in">object</span></span>):
     validator = Validator()
     validator.validate(event)
 </code></pre>
 <p>Now the test passes, but it's kind of ugly. Let's remove another global, this time from validator.py:</p>
-<pre><code>import os
+<pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
-import fastjsonschema
-import requests
+<span class="hljs-keyword">import</span> fastjsonschema
+<span class="hljs-keyword">import</span> requests
 
-class Validator:
-    def __init__(self):
-        schema_url = os.environ['SCHEMA_URL']
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Validator</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        schema_url = os.environ[<span class="hljs-string">&#x27;SCHEMA_URL&#x27;</span>]
         schema = requests.get(schema_url).json()
-        self.validator = fastjsonschema.compile(schema)
+        <span class="hljs-variable language_">self</span>.validator = fastjsonschema.<span class="hljs-built_in">compile</span>(schema)
 
-    def validate(self, event: dict) -&gt; dict:
-        return self.validator(event)
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">validate</span>(<span class="hljs-params">self, event: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.validator(event)
 </code></pre>
 <p>This allows us to simplify the test, restoring it to its original form:</p>
-<pre><code>from unittest.mock import Mock, patch
+<pre><code class="language-py"><span class="hljs-keyword">from</span> unittest.mock <span class="hljs-keyword">import</span> Mock, patch
 
-from my_lambda import handle_event
+<span class="hljs-keyword">from</span> my_lambda <span class="hljs-keyword">import</span> handle_event
 
-@patch('my_lambda.Validator', autospec=True)
-def test_handle_event(mock_validator: Mock):
-    result = handle_event({'message': 'Hello!'}, None)
-    assert result == {'body': 'Goodbye!', 'status': 200}
+<span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;my_lambda.Validator&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_handle_event</span>(<span class="hljs-params">mock_validator: Mock</span>):
+    result = handle_event({<span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;Hello!&#x27;</span>}, <span class="hljs-literal">None</span>)
+    <span class="hljs-keyword">assert</span> result == {<span class="hljs-string">&#x27;body&#x27;</span>: <span class="hljs-string">&#x27;Goodbye!&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>: <span class="hljs-number">200</span>}
 </code></pre>
 <h3>Globals aren't always bad</h3>
 <p>If you must use a global for some reason, set it to <code>None</code> initially:</p>
-<pre><code>from typing import Optional
+<pre><code class="language-py"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Optional</span>
 
-from validator import Validator
+<span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
-validator: Optional[Validator] = None
+validator: <span class="hljs-type">Optional</span>[Validator] = <span class="hljs-literal">None</span>
 
-def handle_event(event: dict, context: object):
-    global validator
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">handle_event</span>(<span class="hljs-params">event: <span class="hljs-built_in">dict</span>, context: <span class="hljs-built_in">object</span></span>):
+    <span class="hljs-keyword">global</span> validator
 
-    if not validator:
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> validator:
         validator = Validator()
 
     validator.validate(event)
@@ -205,23 +206,23 @@ def handle_event(event: dict, context: object):
 <p>The key is to prevent any expensive computation or network requests when the module is imported to facilitate patching.</p>
 <h2>Use dependency injection</h2>
 <p>Next, let's test the class:</p>
-<pre><code>from validator import Validator
+<pre><code class="language-py"><span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
-def test_validator_init():
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_init</span>():
     result = Validator()
-    assert result.validator is not None
+    <span class="hljs-keyword">assert</span> result.validator <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>
 </code></pre>
 <p>This test will fail unless <code>SCHEMA_URL</code> is defined in the environment. As previously mentioned, we could add it to our .env file, or we could set it directly like we did before with <code>os.environ['SCHEMA_URL'] = 'foo'</code>. It's better to use the <code>@patch.dict</code> decorator because it will restore the original value after the test exits:</p>
-<pre><code>import os
+<pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
-from unittest.mock import patch
+<span class="hljs-keyword">from</span> unittest.mock <span class="hljs-keyword">import</span> patch
 
-from validator import Validator
+<span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
-@patch.dict(os.environ, {'SCHEMA_URL': 'foo'})
-def test_validator_init():
+<span class="hljs-meta">@patch.dict(<span class="hljs-params">os.environ, {<span class="hljs-string">&#x27;SCHEMA_URL&#x27;</span>: <span class="hljs-string">&#x27;foo&#x27;</span>}</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_init</span>():
     result = Validator()
-    assert result.validator is not None
+    <span class="hljs-keyword">assert</span> result.validator <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>
 </code></pre>
 <p>Either way, this test will fail because it's trying to make a network request to an invalid URL:</p>
 <pre><code>validator.py:9: in __init__
@@ -230,36 +231,36 @@ def test_validator_init():
 E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Perhaps you meant http://foo?
 </code></pre>
 <p>Again, we want to prevent the network request. This is where dependency injection, also known as inversion of control, comes in handy. Let's refactor validator.py to accept a few arguments:</p>
-<pre><code>import os
+<pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
-from typing import Callable, Optional
+<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Callable</span>, <span class="hljs-type">Optional</span>
 
-import fastjsonschema
-import requests
+<span class="hljs-keyword">import</span> fastjsonschema
+<span class="hljs-keyword">import</span> requests
 
-class Validator:
-    def __init__(
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Validator</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">
         self,
-        validator: Optional[Callable[[dict], dict]] = None,
-        schema: Optional[dict] = None,
-        schema_url: Optional[str] = None,
-    ):
-        if validator:
-            self.validator = validator
-            return
+        validator: <span class="hljs-type">Optional</span>[<span class="hljs-type">Callable</span>[[<span class="hljs-built_in">dict</span>], <span class="hljs-built_in">dict</span>]] = <span class="hljs-literal">None</span>,
+        schema: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">dict</span>] = <span class="hljs-literal">None</span>,
+        schema_url: <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>] = <span class="hljs-literal">None</span>,
+    </span>):
+        <span class="hljs-keyword">if</span> validator:
+            <span class="hljs-variable language_">self</span>.validator = validator
+            <span class="hljs-keyword">return</span>
 
-        if schema:
-            self.validator = fastjsonschema.compile(schema)
-            return
+        <span class="hljs-keyword">if</span> schema:
+            <span class="hljs-variable language_">self</span>.validator = fastjsonschema.<span class="hljs-built_in">compile</span>(schema)
+            <span class="hljs-keyword">return</span>
 
-        if not schema_url:
-            schema_url = os.environ['SCHEMA_URL']
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> schema_url:
+            schema_url = os.environ[<span class="hljs-string">&#x27;SCHEMA_URL&#x27;</span>]
 
         schema = requests.get(schema_url).json()
-        self.validator = fastjsonschema.compile(schema)
+        <span class="hljs-variable language_">self</span>.validator = fastjsonschema.<span class="hljs-built_in">compile</span>(schema)
 
-    def validate(self, event: dict) -&gt; dict:
-        return self.validator(event)
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">validate</span>(<span class="hljs-params">self, event: <span class="hljs-built_in">dict</span></span>) -&gt; <span class="hljs-built_in">dict</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.validator(event)
 </code></pre>
 <p>It's worth a moment to understand what's happening here when <code>Validator()</code> is called:</p>
 <ol>
@@ -269,45 +270,45 @@ class Validator:
 <li>If called without any arguments, the schema is requested from the URL specified in the environment.</li>
 </ol>
 <p>This allows us to easily prevent the network request when running the unit test:</p>
-<pre><code>import os
+<pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
-from unittest.mock import Mock, patch
+<span class="hljs-keyword">from</span> unittest.mock <span class="hljs-keyword">import</span> Mock, patch
 
-from validator import Validator
+<span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
-def test_validator_init_with_validator():
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_init_with_validator</span>():
     mock_validator = Mock()
 
     result = Validator(validator=mock_validator)
-    assert result.validator == mock_validator
+    <span class="hljs-keyword">assert</span> result.validator == mock_validator
 </code></pre>
 <p>The downside is we need to cover the additional complexity in the constructor. Fortunately, it can be accomplished with some straightforward patching:</p>
-<pre><code>@patch('fastjsonschema.compile', autospec=True)
-def test_validator_init_with_schema(mock_compile):
+<pre><code class="language-py"><span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;fastjsonschema.compile&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_init_with_schema</span>(<span class="hljs-params">mock_compile</span>):
     mock_validator = Mock()
     mock_compile.return_value = mock_validator
 
-    result = Validator(schema={'type': 'string'})
-    assert result.validator == mock_validator
+    result = Validator(schema={<span class="hljs-string">&#x27;type&#x27;</span>: <span class="hljs-string">&#x27;string&#x27;</span>})
+    <span class="hljs-keyword">assert</span> result.validator == mock_validator
 
-@patch('fastjsonschema.compile', autospec=True)
-@patch('requests.get', autospec=True)
-def test_validator_init_with_schema_url(mock_get, mock_compile):
+<span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;fastjsonschema.compile&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;requests.get&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_init_with_schema_url</span>(<span class="hljs-params">mock_get, mock_compile</span>):
     mock_schema = Mock()
     mock_get.return_value.json.return_value = mock_schema
 
     mock_validator = Mock()
     mock_compile.return_value = mock_validator
 
-    result = Validator(schema_url='foo')
-    assert result.validator == mock_validator
+    result = Validator(schema_url=<span class="hljs-string">&#x27;foo&#x27;</span>)
+    <span class="hljs-keyword">assert</span> result.validator == mock_validator
 
-    mock_get.assert_called_once_with('foo')
+    mock_get.assert_called_once_with(<span class="hljs-string">&#x27;foo&#x27;</span>)
 
-@patch('fastjsonschema.compile', autospec=True)
-@patch('requests.get', autospec=True)
-@patch.dict(os.environ, {'SCHEMA_URL': 'bar'})
-def test_validator_init_with_no_args(mock_get, mock_compile):
+<span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;fastjsonschema.compile&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-meta">@patch(<span class="hljs-params"><span class="hljs-string">&#x27;requests.get&#x27;</span>, autospec=<span class="hljs-literal">True</span></span>)</span>
+<span class="hljs-meta">@patch.dict(<span class="hljs-params">os.environ, {<span class="hljs-string">&#x27;SCHEMA_URL&#x27;</span>: <span class="hljs-string">&#x27;bar&#x27;</span>}</span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_init_with_no_args</span>(<span class="hljs-params">mock_get, mock_compile</span>):
     mock_schema = Mock()
     mock_get.return_value.json.return_value = mock_schema
 
@@ -315,18 +316,18 @@ def test_validator_init_with_no_args(mock_get, mock_compile):
     mock_compile.return_value = mock_validator
 
     result = Validator()
-    assert result.validator == mock_validator
+    <span class="hljs-keyword">assert</span> result.validator == mock_validator
 
-    mock_get.assert_called_once_with('bar')
+    mock_get.assert_called_once_with(<span class="hljs-string">&#x27;bar&#x27;</span>)
 
-def test_validator_validate():
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_validator_validate</span>():
     mock_validator = Mock()
-    mock_validator.return_value = 42
+    mock_validator.return_value = <span class="hljs-number">42</span>
 
     validator = Validator(mock_validator)
 
     result = validator.validate({})
-    assert result == 42
+    <span class="hljs-keyword">assert</span> result == <span class="hljs-number">42</span>
 </code></pre>
 <p>This last unit test is dirt simple because we don't really care how fastjsonschema is implemented. It has its own unit tests.</p>
 <hr>

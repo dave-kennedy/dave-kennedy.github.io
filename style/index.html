@@ -22,6 +22,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -117,18 +118,18 @@
 <h2>Code</h2>
 <p>Inline <code>code</code></p>
 <p>Block code &quot;fences&quot;:</p>
-<pre><code>// https://en.wikipedia.org/wiki/C_(programming_language)#Arrays
-int func(int N, int M)
+<pre><code class="language-c"><span class="hljs-comment">// https://en.wikipedia.org/wiki/C_(programming_language)#Arrays</span>
+<span class="hljs-type">int</span> <span class="hljs-title function_">func</span><span class="hljs-params">(<span class="hljs-type">int</span> N, <span class="hljs-type">int</span> M)</span>
 {
-  float (*p)[N][M] = malloc(sizeof *p);
-  if (!p)
-    return -1;
-  for (int i = 0; i &lt; N; i++)
-    for (int j = 0; j &lt; M; j++)
+  <span class="hljs-type">float</span> (*p)[N][M] = <span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span> *p);
+  <span class="hljs-keyword">if</span> (!p)
+    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; M; j++)
       (*p)[i][j] = i + j;
   print_array(N, M, p);
-  free(p);
-  return 1;
+  <span class="hljs-built_in">free</span>(p);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
 }
 </code></pre>
 <h2>Tables</h2>

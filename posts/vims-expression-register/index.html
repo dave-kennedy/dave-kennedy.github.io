@@ -26,6 +26,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -78,7 +79,7 @@
   </div>
 
   <p>Say you'd like to insert the current date and time into the document you're editing. Obviously, you could do it by hand. But what if you need to do it a lot? And what if you need it to be ISO format? That's kind of tedious and error prone. Instead, you can enter the following command:</p>
-<pre><code>:put = strftime('%FT%T%z')
+<pre><code class="language-vim">:<span class="hljs-keyword">put</span> = <span class="hljs-built_in">strftime</span>(<span class="hljs-string">&#x27;%FT%T%z&#x27;</span>)
 </code></pre>
 <p>This syntax is misleading. It looks like we're assigning the result of a function call to a variable named <code>put</code>. Actually, we're calling the <code>:put</code> command with two arguments: the name of a register and an expression. Normally, <code>:put x</code> would insert the contents of register <code>x</code> on a new line after the cursor. <code>:put =</code> is an exception in that it allows a second argument: an expression to be evaluated before it's inserted. After running this command, the expression register will contain the expression, not the result. You can see this for yourself with <code>:reg =</code>, which displays:</p>
 <pre><code>Type Name Content
@@ -87,38 +88,38 @@ Press ENTER or type command to continue
 </code></pre>
 <p>A nice side-effect of this is you can re-evaluate the expression and insert the new result with <code>:put =</code>, leaving out the second argument. You're already thinking of ways to exploit this, aren't you?</p>
 <p>Anyways, I can never remember this command. I'd much rather create a user-defined function with a blatantly obvious name:</p>
-<pre><code>function! InsertDate()
-    put = strftime('%FT%T%z')
-endfunction
+<pre><code class="language-vim"><span class="hljs-keyword">function!</span> <span class="hljs-title">InsertDate</span><span class="hljs-params">()</span>
+    <span class="hljs-keyword">put</span> = <span class="hljs-built_in">strftime</span>(<span class="hljs-string">&#x27;%FT%T%z&#x27;</span>)
+<span class="hljs-keyword">endfunction</span>
 </code></pre>
 <p>I can call this function with <code>:call InsertDate()</code>, but I prefer to make it even easier with a user-defined command:</p>
-<pre><code>command! InsertDate call InsertDate()
+<pre><code class="language-vim">command! InsertDate <span class="hljs-keyword">call</span> InsertDate()
 </code></pre>
 <p>This way, I can just enter <code>:InsertDate</code>.</p>
 <p>Now, say you'd like to insert the date and time on the <em>current</em> line after the cursor instead of on a <em>new</em> line. The <code>:put</code> command only works &quot;linewise&quot;, meaning it can only insert text on a new line, and there's no alternative command that works like <code>:put</code> that is &quot;charwise.&quot; You can use the normal mapping <code>&quot;xp</code> to insert the contents of register <code>x</code> on the current line after the cursor, but <code>&quot;=p</code> doesn't insert anything. Instead, it prompts you to enter an expression. So you type <code>&quot;=strftime('%FT%T%z')</code> and hit the Enter key and -- what happened? Turns out this is just another way to set the contents of the expression register. To insert the result of the expression, use the normal mapping <code>p</code> to insert the contents of the unnamed register, which contains the result of the expression until you use it, at which point its contents are replaced by whatever was there before. If you want to insert the result of the expression again, you have to type <code>&quot;=</code>, followed by the Enter key, followed by <code>p</code>. This crazy behavior is undocumented as far as I can tell.</p>
 <p>Whatever. This is why we created a function, so we don't have to jump through all these inane hoops every time we want to insert the date and time:</p>
-<pre><code>function! InsertDate()
-    normal &quot;=strftime('%FT%T%z')^Mp
-endfunction
+<pre><code class="language-vim"><span class="hljs-keyword">function!</span> <span class="hljs-title">InsertDate</span><span class="hljs-params">()</span>
+    <span class="hljs-keyword">normal</span> <span class="hljs-comment">&quot;=strftime(&#x27;%FT%T%z&#x27;)^Mp</span>
+<span class="hljs-keyword">endfunction</span>
 </code></pre>
 <p>This technically works but it contains a literal carriage return character. The <code>^M</code> is a single character, not caret followed by M, which you can enter in insert mode with <code>Ctrl-V</code> followed by the Enter key. Control characters don't always play nice with other programs -- I had to use a caret followed by M to display it correctly in the browser. You can replace it with the string <code>&lt;CR&gt;</code>, which vim interprets as the Enter key. But the <code>:normal</code> command doesn't recognize special characters like <code>&lt;CR&gt;</code> or <code>&lt;Esc&gt;</code>, so we have to wrap the whole line in the <code>:execute</code> command:</p>
-<pre><code>function! InsertDate()
-    execute &quot;normal \&quot;=strftime('%FT%T%z')\&lt;CR&gt;p&quot;
-endfunction
+<pre><code class="language-vim"><span class="hljs-keyword">function!</span> <span class="hljs-title">InsertDate</span><span class="hljs-params">()</span>
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">&quot;normal \&quot;=strftime(&#x27;%FT%T%z&#x27;)\&lt;CR&gt;p&quot;</span>
+<span class="hljs-keyword">endfunction</span>
 </code></pre>
 <p>Make sure to escape the double quote in the middle of the command <em>and</em> the <code>&lt;CR&gt;</code>. Clear as mud, right?</p>
 <p>I started translating this to Lua, hoping it would simplify things. While it's arguably easier to understand, it's also quite verbose:</p>
-<pre><code>function insert_date()
-  local pos = vim.api.nvim_win_get_cursor(0)[2]
-  local line = vim.api.nvim_get_current_line()
-  local new_line = line:sub(0, pos) .. os.date('%FT%T%z') .. line:sub(pos + 1)
+<pre><code class="language-lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insert_date</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">local</span> pos = vim.api.nvim_win_get_cursor(<span class="hljs-number">0</span>)[<span class="hljs-number">2</span>]
+  <span class="hljs-keyword">local</span> line = vim.api.nvim_get_current_line()
+  <span class="hljs-keyword">local</span> new_line = line:<span class="hljs-built_in">sub</span>(<span class="hljs-number">0</span>, pos) .. <span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&#x27;%FT%T%z&#x27;</span>) .. line:<span class="hljs-built_in">sub</span>(pos + <span class="hljs-number">1</span>)
   vim.api.nvim_set_current_line(new_line)
-end
+<span class="hljs-keyword">end</span>
 </code></pre>
 <p>What I really want is something like this:</p>
-<pre><code>function insert_date()
-    vim.buffer.insert(os.date('%FT%T%z'))
-end
+<pre><code class="language-lua"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insert_date</span><span class="hljs-params">()</span></span>
+    vim.buffer.<span class="hljs-built_in">insert</span>(<span class="hljs-built_in">os</span>.<span class="hljs-built_in">date</span>(<span class="hljs-string">&#x27;%FT%T%z&#x27;</span>))
+<span class="hljs-keyword">end</span>
 </code></pre>
 <p>I love the idea of an editor that's easy to program and customize, but it often requires a lot more effort than most users are willing to muster. When I'm writing and I need to insert the current date and time, I don't want to think about escape sequences, ex-commands, normal mode, special registers, etc. Whatever efficiency I gained from this exercise is eclipsed by the time I spent poring over documentation and help forums (not to mention writing this article). It might be worth the effort if I could apply what I learned here elsewhere, but I know I'm in for another learning curve the next time I'm tempted to extend my favorite editor.</p>
 <p>Vim is so full of idiosyncrasies like this, I could turn this post into a series. Maybe I will. Then again, maybe I'm done with vim.</p>

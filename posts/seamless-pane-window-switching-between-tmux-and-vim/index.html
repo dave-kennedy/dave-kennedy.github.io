@@ -26,6 +26,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -80,14 +81,14 @@
   </div>
 
   <p>I can't be arsed with an extra keystroke when switching between windows in vim, so I've had this in my vimrc for years:</p>
-<pre><code>&quot; Move the cursor to the next window left/down/up/right
-nnoremap &lt;C-H&gt; &lt;C-W&gt;&lt;C-H&gt;
-nnoremap &lt;C-J&gt; &lt;C-W&gt;&lt;C-J&gt;
-nnoremap &lt;C-K&gt; &lt;C-W&gt;&lt;C-K&gt;
-nnoremap &lt;C-L&gt; &lt;C-W&gt;&lt;C-L&gt;
+<pre><code class="language-vim"><span class="hljs-comment">&quot; Move the cursor to the next window left/down/up/right</span>
+<span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;C-H&gt;</span> <span class="hljs-symbol">&lt;C-W&gt;</span><span class="hljs-symbol">&lt;C-H&gt;</span>
+<span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;C-J&gt;</span> <span class="hljs-symbol">&lt;C-W&gt;</span><span class="hljs-symbol">&lt;C-J&gt;</span>
+<span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;C-K&gt;</span> <span class="hljs-symbol">&lt;C-W&gt;</span><span class="hljs-symbol">&lt;C-K&gt;</span>
+<span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;C-L&gt;</span> <span class="hljs-symbol">&lt;C-W&gt;</span><span class="hljs-symbol">&lt;C-L&gt;</span>
 </code></pre>
 <p>And because the arrow keys are a stretch, I have this in my tmux.conf:</p>
-<pre><code># Select the next pane left/down/up/right
+<pre><code class="language-tmux"># Select the next pane left/down/up/right
 bind h selectp -L
 bind j selectp -D
 bind k selectp -U
@@ -95,35 +96,35 @@ bind l selectp -R
 </code></pre>
 <p>With this configuration, jumping out of vim into another tmux pane only requires one extra keystroke: the tmux prefix. Fortunately, <a href="https://github.com/christoomey/vim-tmux-navigator">Vim Tmux Navigator</a> solves that problem. But it's a bit complicated and messy. Turns out all it requires is a tiny vimscript and a few relatively simple tmux bindings.</p>
 <p>Here's the vimscript:</p>
-<pre><code>&quot; Only load this plugin if running inside tmux
-if empty($TMUX)
-    finish
-endif
+<pre><code class="language-vim"><span class="hljs-comment">&quot; Only load this plugin if running inside tmux</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">empty</span>($TMUX)
+    <span class="hljs-keyword">finish</span>
+<span class="hljs-keyword">endif</span>
 
-function! NextWindow(direction)
-    let l:win_num = winnr()
-    execute &quot;wincmd&quot; a:direction
+<span class="hljs-keyword">function!</span> <span class="hljs-title">NextWindow</span><span class="hljs-params">(direction)</span>
+    <span class="hljs-keyword">let</span> <span class="hljs-variable">l:win_num</span> = <span class="hljs-built_in">winnr</span>()
+    <span class="hljs-keyword">execute</span> <span class="hljs-string">&quot;wincmd&quot;</span> <span class="hljs-variable">a:direction</span>
 
-    &quot; If the window number changed, then the command succeeded. Otherwise,
-    &quot; we're at an edge window and we'll let tmux handle it.
-    if l:win_num != winnr()
-        return
-    endif
+    <span class="hljs-comment">&quot; If the window number changed, then the command succeeded. Otherwise,</span>
+    <span class="hljs-comment">&quot; we&#x27;re at an edge window and we&#x27;ll let tmux handle it.</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-variable">l:win_num</span> != <span class="hljs-built_in">winnr</span>()
+        <span class="hljs-keyword">return</span>
+    <span class="hljs-keyword">endif</span>
 
-    let l:tmux_direction = tr(a:direction, 'hjkl', 'LDUR')
-    call system('tmux select-pane -' . l:tmux_direction)
-endfunction
+    <span class="hljs-keyword">let</span> <span class="hljs-variable">l:tmux_direction</span> = <span class="hljs-keyword">tr</span>(<span class="hljs-variable">a:direction</span>, <span class="hljs-string">&#x27;hjkl&#x27;</span>, <span class="hljs-string">&#x27;LDUR&#x27;</span>)
+    <span class="hljs-keyword">call</span> <span class="hljs-built_in">system</span>(<span class="hljs-string">&#x27;tmux select-pane -&#x27;</span> . <span class="hljs-variable">l:tmux_direction</span>)
+<span class="hljs-keyword">endfunction</span>
 
-nmap &lt;silent&gt; &lt;C-H&gt; :call NextWindow('h')&lt;CR&gt;
-nmap &lt;silent&gt; &lt;C-J&gt; :call NextWindow('j')&lt;CR&gt;
-nmap &lt;silent&gt; &lt;C-K&gt; :call NextWindow('k')&lt;CR&gt;
-nmap &lt;silent&gt; &lt;C-L&gt; :call NextWindow('l')&lt;CR&gt;
+<span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-H&gt;</span> :<span class="hljs-keyword">call</span> NextWindow(<span class="hljs-string">&#x27;h&#x27;</span>)<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-J&gt;</span> :<span class="hljs-keyword">call</span> NextWindow(<span class="hljs-string">&#x27;j&#x27;</span>)<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-K&gt;</span> :<span class="hljs-keyword">call</span> NextWindow(<span class="hljs-string">&#x27;k&#x27;</span>)<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-L&gt;</span> :<span class="hljs-keyword">call</span> NextWindow(<span class="hljs-string">&#x27;l&#x27;</span>)<span class="hljs-symbol">&lt;CR&gt;</span>
 </code></pre>
 <p>The tmux bindings are a little tricky. At first, I tried this:</p>
-<pre><code>bind -n C-h if -F &quot;#{==:#{pane_current_command},nvim}&quot; &quot;send C-h&quot; &quot;selectp -L&quot;
+<pre><code class="language-tmux">bind -n C-h if -F &quot;#{==:#{pane_current_command},nvim}&quot; &quot;send C-h&quot; &quot;selectp -L&quot;
 </code></pre>
 <p>That funky nested format is required for comparing strings in tmux commands. Other than that, it's pretty straightforward. The problem is this doesn't work if vim is used as a pager, is reading from stdin, or was started from a script. In those cases, <code>pane_current_command</code> might be bash, less, man, or whatever command was entered at the command line. Instead, we have to get a list of processes belonging to the terminal attached to the pane:</p>
-<pre><code># If nvim is running in the foreground of the current pane, let it handle these
+<pre><code class="language-tmux"># If nvim is running in the foreground of the current pane, let it handle these
 # keys. Otherwise, select the next pane left/down/up/right.
 is_nvim=&quot;[ $(ps -o comm -t #{pane_tty} | tail -1) = nvim ]&quot;
 

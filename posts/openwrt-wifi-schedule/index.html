@@ -26,6 +26,7 @@
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
       
@@ -77,49 +78,49 @@
 
   <p>If I let them, my kids will stay up all night watching YouTube or TikTok or whatever. We have a no-devices-in-room policy, but disabling the wi-fi gives me a little more peace of mind.</p>
 <p>Of course, I don't want to disable the wi-fi to <em>all</em> the devices in the house at bedtime. So I wrote this script:</p>
-<pre><code>#!/usr/bin/env sh
+<pre><code class="language-sh"><span class="hljs-meta">#!/usr/bin/env sh</span>
 
-if [ -z &quot;$1&quot; ]; then
-    logger -st 'wifi-schedule' 'Missing argument'
-    exit 1
-fi
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+    logger -st <span class="hljs-string">&#x27;wifi-schedule&#x27;</span> <span class="hljs-string">&#x27;Missing argument&#x27;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
 
-if [ &quot;$1&quot; != 'up' -a &quot;$1&quot; != 'down' ]; then
-    logger -st 'wifi-schedule' &quot;Invalid argument: $1&quot;
-    exit 1
-fi
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> != <span class="hljs-string">&#x27;up&#x27;</span> -a <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> != <span class="hljs-string">&#x27;down&#x27;</span> ]; <span class="hljs-keyword">then</span>
+    logger -st <span class="hljs-string">&#x27;wifi-schedule&#x27;</span> <span class="hljs-string">&quot;Invalid argument: <span class="hljs-variable">$1</span>&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
 
-logger -st 'wifi-schedule' &quot;Toggling wifi schedule $1&quot;
+logger -st <span class="hljs-string">&#x27;wifi-schedule&#x27;</span> <span class="hljs-string">&quot;Toggling wifi schedule <span class="hljs-variable">$1</span>&quot;</span>
 
-add_mac() {
-    if ! echo &quot;$1&quot; | grep -Eiq '^([a-f0-9]{2}:){5}[a-f0-9]{2}$'; then
-        logger -st 'wifi-schedule' &quot;Invalid MAC address: $1&quot;
-        return 1
-    fi
+<span class="hljs-function"><span class="hljs-title">add_mac</span></span>() {
+    <span class="hljs-keyword">if</span> ! <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> | grep -Eiq <span class="hljs-string">&#x27;^([a-f0-9]{2}:){5}[a-f0-9]{2}$&#x27;</span>; <span class="hljs-keyword">then</span>
+        logger -st <span class="hljs-string">&#x27;wifi-schedule&#x27;</span> <span class="hljs-string">&quot;Invalid MAC address: <span class="hljs-variable">$1</span>&quot;</span>
+        <span class="hljs-built_in">return</span> 1
+    <span class="hljs-keyword">fi</span>
 
-    logger -st 'wifi-schedule' &quot;Adding MAC address: $1&quot;
-    uci add_list wireless.@wifi-iface[0].maclist=&quot;$1&quot;
-    uci add_list wireless.@wifi-iface[1].maclist=&quot;$1&quot;
+    logger -st <span class="hljs-string">&#x27;wifi-schedule&#x27;</span> <span class="hljs-string">&quot;Adding MAC address: <span class="hljs-variable">$1</span>&quot;</span>
+    uci add_list wireless.@wifi-iface[0].maclist=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
+    uci add_list wireless.@wifi-iface[1].maclist=<span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span>
 }
 
-# Remove all MAC addresses
-sed -i '/list maclist/d' /etc/config/wireless
+<span class="hljs-comment"># Remove all MAC addresses</span>
+sed -i <span class="hljs-string">&#x27;/list maclist/d&#x27;</span> /etc/config/wireless
 
-# Add unscheduled MAC addresses
-add_mac 'a1:b2:c3:d4:e5:f6' # Laptop
-add_mac 'aa:bb:cc:dd:ee:ff' # Phone
+<span class="hljs-comment"># Add unscheduled MAC addresses</span>
+add_mac <span class="hljs-string">&#x27;a1:b2:c3:d4:e5:f6&#x27;</span> <span class="hljs-comment"># Laptop</span>
+add_mac <span class="hljs-string">&#x27;aa:bb:cc:dd:ee:ff&#x27;</span> <span class="hljs-comment"># Phone</span>
 
-# Add scheduled MAC addresses if argument is &quot;up&quot;
-if [ &quot;$1&quot; = 'up' ]; then
-    add_mac '11:22:33:44:55:66' # Kids tablet
-    add_mac '1a:2b:3c:4d:5e:6f' # Nintendo Switch
-fi
+<span class="hljs-comment"># Add scheduled MAC addresses if argument is &quot;up&quot;</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> = <span class="hljs-string">&#x27;up&#x27;</span> ]; <span class="hljs-keyword">then</span>
+    add_mac <span class="hljs-string">&#x27;11:22:33:44:55:66&#x27;</span> <span class="hljs-comment"># Kids tablet</span>
+    add_mac <span class="hljs-string">&#x27;1a:2b:3c:4d:5e:6f&#x27;</span> <span class="hljs-comment"># Nintendo Switch</span>
+<span class="hljs-keyword">fi</span>
 
 uci commit wireless
 wifi reload
 </code></pre>
 <p>Replace the MAC addresses and save the script at <code>/root/wifi-schedule.sh</code>. Then add this to <code>/etc/crontabs/root</code>:</p>
-<pre><code>00 06 * * * /root/wifi-schedule.sh up
+<pre><code class="language-cron">00 06 * * * /root/wifi-schedule.sh up
 00 22 * * * /root/wifi-schedule.sh down
 </code></pre>
 <p>Adjust the on/off time as desired. Your kids will hate it.</p>
