@@ -15,5 +15,8 @@ Based on [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
     * [Id Attribute](https://www.11ty.dev/docs/plugins/id-attribute/)
     * [Image](https://www.11ty.dev/docs/plugins/image/)
     * [Inclusive Language](https://www.11ty.dev/docs/plugins/inclusive-language/)
-* Better organization/navigation for web development notes
+* Add to JavaScript notes:
+    * Special values, e.g. `undefined` and `null`
+    * Truthiness
+    * HTML API
 * Add Bash/Nix/Vim/etc. notes

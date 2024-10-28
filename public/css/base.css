@@ -179,6 +179,10 @@ header nav a:nth-child(4) {
   color: var(--fg-accent-4);
 }
 
+header nav a:nth-child(5) {
+  color: var(--fg-accent-5);
+}
+
 header nav a:focus,
 header nav a:hover {
   color: var(--fg-normal);
@@ -212,6 +216,11 @@ header nav a:nth-child(3)::before {
 header nav a:nth-child(4)::before {
   background-color: var(--fg-accent-4);
   mask: url('/img/contact.svg');
+}
+
+header nav a:nth-child(5)::before {
+  background-color: var(--fg-accent-5);
+  mask: url('/img/feed.svg');
 }
 
 header nav a:focus::before,
