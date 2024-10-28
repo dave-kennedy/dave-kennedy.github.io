@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    
+      <title>CSS | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="Dave Kennedy">
+    
+
+    
+      <meta name="description" content="A virtual escape hatch for the stuff in my head.">
+    
+
+    
+
+    <meta name="generator" content="Eleventy v3.0.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/feed/atom.xml" rel="alternate" title="dkennedy.io" type="application/atom+xml">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
+
+    <style>
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <img src="/img/header.png">
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/notes/">Notes</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/feed/atom.xml">Feed</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>CSS</h1>
+
+<ul>
+<li>CSS is used to modify the style (appearance) of elements on the page.</li>
+<li>A CSS file, also called a <strong>stylesheet</strong>, is a plain text file ending in <code>.css</code>.</li>
+<li>Like HTML files, stylesheets can be edited in any plain text editor or in an IDE.</li>
+<li>CSS stands for Cascading Style Sheets, which refers to the order in which styles are applied to elements and is outside the scope of this brief intro.</li>
+<li>CSS consists of <strong>comments</strong>, <strong>rules</strong>, <strong>selectors</strong>, and <strong>media queries</strong>.</li>
+</ul>
+<h2>Adding styles to a web page</h2>
+<ul>
+<li>The <code>style</code> attribute can be used to modify the style of a single element, like so: <code>&lt;div style=&quot;color: red;&quot;&gt;Warning!&lt;/div&gt;</code></li>
+<li>Excessive use of the <code>style</code> attribute can make your HTML difficult to read and modify. For this reason, it's better to use a stylesheet.</li>
+<li>Stylesheets must be added to the <code>head</code> element and can be <strong>inline</strong> or <strong>external</strong>.</li>
+<li>An inline stylesheet is added with the <code>style</code> element:<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Notes<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</code></pre>
+The <code>...</code> between the <code>style</code> tags is just a placeholder. On a real web page, it would be replaced with CSS code.</li>
+<li>An external stylesheet is added with the <code>link</code> element:<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;utf-8&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>My Notes<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;style.css&quot;</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">&quot;stylesheet&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+</code></pre>
+In order for this example to work, the <code>style.css</code> file must be located in the same directory as the HTML file that references it.</li>
+</ul>
+<h2>Comments</h2>
+<ul>
+<li>Like in HTML, <strong>comments</strong> in CSS are intended for developers and are ignored by the browser.</li>
+<li>Here's an example of a single-line comment: <code>/* This is a comment */</code></li>
+<li>Here's an example of a multi-line comment:<pre><code class="language-css"><span class="hljs-comment">/*
+The greatest danger facing us is ourselves, and irrational
+fear of the unknown. There is no such thing as the unknown. Only
+things temporarily hidden, temporarily not understood.
+*/</span>
+</code></pre>
+</li>
+</ul>
+<h2>Rules</h2>
+<ul>
+<li>A <strong>rule</strong> looks like this: <code>color: red;</code></li>
+<li>In the example above, the <code>color</code> <strong>property</strong> is assigned a <strong>value</strong> of <code>red</code>.</li>
+<li>Other properties include:
+<ul>
+<li><code>background-color</code></li>
+<li><code>border-color</code></li>
+<li><code>border-width</code></li>
+<li><code>font-family</code></li>
+<li><code>font-size</code></li>
+<li><code>margin</code></li>
+<li><code>padding</code></li>
+</ul>
+</li>
+<li>While not strictly required, it's recommended to end every rule with a semi-colon in order to reduce bugs.</li>
+<li>For a complete list of all available properties and documentation, including examples, see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index">CSS reference</a>.</li>
+</ul>
+<h2>Selectors</h2>
+<ul>
+<li>A <strong>selector</strong> looks like this: <code>body &gt; div:first-child</code></li>
+<li>The example above would match the first <code>div</code> element that is a child of the <code>body</code> element.</li>
+<li>Selectors group one or more rules and apply them to all elements that match, like this:<pre><code class="language-css"><span class="hljs-selector-tag">a</span> {
+    <span class="hljs-attribute">color</span>: red;
+    <span class="hljs-attribute">text-decoration</span>: none;
+}
+</code></pre>
+In this example, the selector would match all <code>a</code> elements, modifying their <code>color</code> and <code>text-decoration</code> properties.</li>
+<li>Selectors can be extremely broad or specific. Here are a few examples:
+<ul>
+<li>All elements on the page: <code>*</code></li>
+<li>All <code>div</code> elements: <code>div</code></li>
+<li>All <code>div</code> elements with a <code>title</code> attribute: <code>div[title]</code></li>
+<li>All <code>div</code> elements with a <code>title</code> attribute of Products: <code>div[title=Products]</code></li>
+<li>All <code>div</code> elements that are descendants of the <code>body</code> element: <code>body div</code></li>
+<li>All <code>div</code> elements that are children of the <code>body</code> element: <code>body &gt; div</code></li>
+<li>The first <code>div</code> element that is a child of the <code>body</code> element: <code>body &gt; div:first-child</code></li>
+<li>All elements with a <code>class</code> attribute of <code>product</code>: <code>.product</code></li>
+<li>The element with an <code>id</code> attribute of <code>products</code>: <code>#products</code></li>
+</ul>
+</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators">CSS selectors and combinators</a> for more info.</li>
+</ul>
+<h3>Pseudo-classes</h3>
+<ul>
+<li>When added to a selector, a <strong>pseudo-class</strong> selects elements based on their state. Here are some examples:
+<ul>
+<li>The <code>a</code> element that is under the mouse pointer: <code>a:hover</code>
+<ul>
+<li>Keep in mind this doesn't work on devices without a mouse, including most phones and tablets.</li>
+</ul>
+</li>
+<li>The <code>a</code> element that is selected by clicking, tapping, or pressing the Tab key (until another element is selected): <code>a:focus</code></li>
+<li>The <code>a</code> element that is activated by clicking or tapping (until the mouse button or the user's finger is released): <code>a:active</code></li>
+</ul>
+</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> for more info.</li>
+</ul>
+<h2>Media queries</h2>
+<ul>
+<li>A <strong>media query</strong> allows us to apply styles only on certain device types or only when certain device features are present.</li>
+<li>In this example, the rules are only applied when the page is printed (a device type):<pre><code class="language-css"><span class="hljs-keyword">@media</span> print {
+    <span class="hljs-selector-tag">body</span> {
+        <span class="hljs-attribute">background-color</span>: white;
+        <span class="hljs-attribute">color</span>: black;
+    }
+}
+</code></pre>
+</li>
+<li>In this example, all <code>span</code> elements that are children of a <code>header</code> element would be displayed vertically (stacked) on screens smaller than 800 pixels wide (a device feature):<pre><code class="language-css"><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">max-width</span>: <span class="hljs-number">800px</span>) {
+    <span class="hljs-selector-tag">header</span> &gt; <span class="hljs-selector-tag">span</span> {
+        <span class="hljs-attribute">display</span>: block;
+    }
+}
+</code></pre>
+</li>
+<li>In this example, all <code>div</code> elements that are children of a <code>footer</code> element would be displayed horizontally (side-by-side) on screens larger than 800 pixels wide (a device feature):<pre><code class="language-css"><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">min-width</span>: <span class="hljs-number">800px</span>) {
+    <span class="hljs-selector-tag">footer</span> &gt; <span class="hljs-selector-tag">div</span> {
+        <span class="hljs-attribute">display</span>: inline;
+    }
+}
+</code></pre>
+</li>
+<li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries">Using media queries</a> for more info</li>
+</ul>
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
+
+    <script>
+      
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    
+      <title>JavaScript | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="Dave Kennedy">
+    
+
+    
+      <meta name="description" content="A virtual escape hatch for the stuff in my head.">
+    
+
+    
+
+    <meta name="generator" content="Eleventy v3.0.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/feed/atom.xml" rel="alternate" title="dkennedy.io" type="application/atom+xml">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
+
+    <style>
+      
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <img src="/img/header.png">
+
+        <nav>
+          <a href="/">Blog</a>
+          <a href="/notes/">Notes</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
+          <a href="/feed/atom.xml">Feed</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>JavaScript</h1>
+
+<ul>
+<li>JavaScript was originally used to add behavior to web pages, like animating elements or loading additional data. Today, JavaScript is used as the main programming language in many other applications.</li>
+<li>A JavaScript file is a plain text file ending in <code>.js</code>.</li>
+<li>Like HTML and CSS files, JavaScript files can be edited in any plain text editor or in an IDE.</li>
+<li>JavaScript has nothing to do with the Java programming language, country, or beverage.</li>
+<li>JavaScript is an implementation of the ECMAScript standard. Sometimes these terms are used interchangeably, though they are technically distinct.</li>
+<li>JavaScript files are executed by a JavaScript engine, which runs in a web browser or a server runtime like Node.js.</li>
+</ul>
+<h2>Adding scripts to a web page</h2>
+<ul>
+<li>Like styles, scripts can be <strong>inline</strong> or <strong>external</strong> to the web page.</li>
+<li>Both inline and external scripts are added with the <code>script</code> element.</li>
+<li>The <code>script</code> element can be added to the <code>head</code> or <code>body</code> of a web page, though right before the closing <code>body</code> tag is generally recommended for accessibility and performance reasons.</li>
+<li>Here's an example of an inline script:<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Notes<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>HTML is neat!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</code></pre>
+The <code>...</code> between the <code>script</code> tags is just a placeholder. On a real web page, it would be replaced with JavaScript code.</li>
+<li>Here's an example of an external script:<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>My Notes<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>HTML is neat!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;script.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+</code></pre>
+In order for this example to work, the <code>script.js</code> file must be located in the same directory as the HTML file that references it.</li>
+</ul>
+<h2>Comments</h2>
+<ul>
+<li>Like in HTML and CSS, <strong>comments</strong> in JavaScript are intended for developers and are ignored by the engine.</li>
+<li>Here's an example of a single-line comment: <code>// This is a comment</code></li>
+<li>Here's an example of a multi-line comment:<pre><code class="language-js"><span class="hljs-comment">/*
+The greatest danger facing us is ourselves, and irrational
+fear of the unknown. There is no such thing as the unknown. Only
+things temporarily hidden, temporarily not understood.
+*/</span>
+</code></pre>
+</li>
+<li>In the examples below, whenever you see a line of code followed by a single-line comment, the comment indicates the result of the code before it. For instance:<pre><code class="language-js"><span class="hljs-number">1</span> + <span class="hljs-number">2</span>; <span class="hljs-comment">// 3</span>
+</code></pre>
+In this case, <code>3</code> is the result of adding <code>1</code> and <code>2</code>. If you copy this code, you can omit the comment or leave it as a reminder.</li>
+</ul>
+<h2>Statements</h2>
+<ul>
+<li>A <strong>statement</strong> is an instruction given to the engine.</li>
+<li>There are several types of statements. Here are a few:
+<ul>
+<li>A <strong>block</strong> of code, e.g. <code>{...}</code></li>
+<li>A <strong>conditional</strong>, e.g. <code>if (x &gt; 0) {...}</code></li>
+<li>A <strong>loop</strong>, e.g. <code>for (const item of items) {...}</code></li>
+<li>A <strong>function declaration</strong>, e.g. <code>function add(a, b) {...}</code></li>
+<li>A <strong>function call</strong>, e.g. <code>add(2, 3);</code></li>
+<li>A <strong>variable declaration</strong>, e.g. <code>let x;</code></li>
+<li>A <strong>variable assignment</strong>, e.g. <code>x = 2;</code></li>
+</ul>
+</li>
+<li>A single statement can span multiple lines.</li>
+<li>Multiple statements can be placed on a single line, but they must be separated by semi-colons.</li>
+<li>While not strictly required, it's recommended to end every function call, variable declaration, or variable assignment with a semi-colon in order to reduce bugs.</li>
+</ul>
+<h2>Variables</h2>
+<ul>
+<li>A <strong>variable</strong> is a name that refers to some data.</li>
+<li>A variable must be declared and assigned a value before it can be referenced.</li>
+<li>Here are some examples:<pre><code class="language-js"><span class="hljs-comment">// This statement declares a new variable named `x`</span>
+<span class="hljs-keyword">let</span> x;
+
+<span class="hljs-comment">// Its value is `undefined` until it&#x27;s assigned, like this</span>
+x = <span class="hljs-number">2</span>;
+
+<span class="hljs-comment">// This statement declares and initializes the variable `y`</span>
+<span class="hljs-keyword">let</span> y = <span class="hljs-number">3</span>;
+</code></pre>
+</li>
+<li>Instead of the <code>let</code> keyword, a variable can be declared with <code>const</code> or <code>var</code>.</li>
+<li><code>const</code> declares a <strong>constant</strong> variable. Constants must be initialized and can't be reassigned.</li>
+<li><code>var</code> is an older syntax with complicated side-effects that can lead to bugs. It is best avoided.</li>
+<li>Variables defined by the engine, such as <code>Boolean</code>, <code>Number</code>, and <code>String</code>, are called <strong>built-in objects</strong> or <strong>global objects</strong> because they can be referenced from anywhere in your code.</li>
+<li>Variables have different properties depending on the <strong>type</strong> of value they contain.</li>
+</ul>
+<h2>Booleans</h2>
+<ul>
+<li>A <strong>boolean</strong> is either <code>true</code> or <code>false</code>.</li>
+<li>Booleans are mostly used for as <strong>conditions</strong> in <strong>control structures</strong> (addressed later).</li>
+<li>A condition is an expression that returns a boolean.</li>
+<li>Comparison operators compare two values and return a boolean, like this:<pre><code class="language-js"><span class="hljs-comment">// Returns true if `x` is greater than `y`</span>
+x &gt; y;
+
+<span class="hljs-comment">// Returns true if `x` is less than `y`</span>
+x &lt; y;
+
+<span class="hljs-comment">// Returns true if `x` is greater than or equal to `y`</span>
+x &gt;= y;
+
+<span class="hljs-comment">// Returns true if `x` is less than or equal to `y`</span>
+x &lt;= y;
+
+<span class="hljs-comment">// Returns true if `x` is equal to `y`</span>
+x == y;
+
+<span class="hljs-comment">// Returns true if `x` is not equal to `y`</span>
+x != y;
+
+<span class="hljs-comment">// Returns true if `x` is strictly equal to `y`</span>
+x === y;
+
+<span class="hljs-comment">// Returns true if `x` is strictly not equal to `y`</span>
+x !== y;
+</code></pre>
+</li>
+</ul>
+<h2>Control structures</h2>
+<blockquote>
+<p>In the examples below, <code>console.log</code> is used to print messages to the JavaScript console. If you're running JavaScript in a web browser, the console can be found in your browser's developer tools. (See <a href="https://firefox-source-docs.mozilla.org/devtools-user/index.html">Firefox</a>, <a href="https://developer.chrome.com/docs/devtools/console/api/">Chrome</a>, <a href="https://learn.microsoft.com/en-us/archive/microsoft-edge/legacy/developer/">Edge</a>, or <a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/Console/Console.html">Safari</a>). If you're running Node.js, the console is usually your terminal.</p>
+</blockquote>
+<ul>
+<li>Use an <code>if...else</code> statement to run some code only if a condition is <code>true</code>:<pre><code class="language-js"><span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is positive&#x27;</span>);
+}
+</code></pre>
+Add an <code>else</code> clause to run some code if a condition is <code>false</code>:<pre><code class="language-js"><span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is positive&#x27;</span>);
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is not positive&#x27;</span>);
+}
+</code></pre>
+Additional conditions can be tested with <code>else if</code> clauses:<pre><code class="language-js"><span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is positive&#x27;</span>);
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is negative&#x27;</span>);
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is zero&#x27;</span>);
+}
+</code></pre>
+Conditions can be inverted like this:<pre><code class="language-js"><span class="hljs-keyword">if</span> (!(x &gt; <span class="hljs-number">0</span>)) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is less than or equal to zero&#x27;</span>);
+}
+</code></pre>
+The code between the backets below will only run if both conditions are true:<pre><code class="language-js"><span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">0</span> &amp;&amp; x &lt; <span class="hljs-number">5</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is between zero and five&#x27;</span>);
+}
+</code></pre>
+The code between the backets below will run if either condition is true:<pre><code class="language-js"><span class="hljs-keyword">if</span> (x &lt; <span class="hljs-number">0</span> || x &gt; <span class="hljs-number">5</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is less than zero or greater than five&#x27;</span>);
+}
+</code></pre>
+</li>
+<li>Use a <code>for</code> statement to run some code a limited number of times:<pre><code class="language-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(i);
+}
+</code></pre>
+</li>
+<li>Use a <code>for...of</code> statement to run some code for each item in an array:<pre><code class="language-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> item <span class="hljs-keyword">of</span> items) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item);
+}
+</code></pre>
+</li>
+<li>Use a <code>for...in</code> statement to run some code for each property in an object:<pre><code class="language-js"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> key <span class="hljs-keyword">in</span> obj) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj[key]);
+}
+</code></pre>
+</li>
+<li>Use a <code>while</code> statement to run some code until a condition is <code>false</code>:<pre><code class="language-js"><span class="hljs-keyword">while</span> (x &gt; <span class="hljs-number">0</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is positive&#x27;</span>);
+    x--;
+}
+</code></pre>
+</li>
+<li>A <code>do...while</code> statement is similar to a <code>while</code> statement, except the code will always run at least once:<pre><code class="language-js"><span class="hljs-keyword">do</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;x is positive&#x27;</span>);
+    x--;
+} <span class="hljs-keyword">while</span> (x &gt; <span class="hljs-number">0</span>);
+</code></pre>
+</li>
+</ul>
+<h2>Numbers</h2>
+<ul>
+<li>A <strong>number</strong> can be an integer or a floating-point number.</li>
+<li>Here are some examples:<pre><code class="language-js"><span class="hljs-keyword">let</span> answer = <span class="hljs-number">42</span>;
+<span class="hljs-keyword">let</span> pi = <span class="hljs-number">3.14159</span>;
+</code></pre>
+</li>
+<li>Numbers can be added, subtracted, multiplied, and divided as you would expect:<pre><code class="language-js"><span class="hljs-number">2</span> + <span class="hljs-number">3</span>; <span class="hljs-comment">// 5</span>
+<span class="hljs-number">2</span> - <span class="hljs-number">3</span>; <span class="hljs-comment">// -1</span>
+<span class="hljs-number">2</span> * <span class="hljs-number">3</span>; <span class="hljs-comment">// 6</span>
+<span class="hljs-number">2</span> / <span class="hljs-number">3</span>; <span class="hljs-comment">// 0.6666666666666666</span>
+</code></pre>
+</li>
+<li>A shorthand exists for assigning the result of an arithmetic operation to a variable:<pre><code class="language-js">answer += <span class="hljs-number">2</span>; <span class="hljs-comment">// 44</span>
+answer -= <span class="hljs-number">2</span>; <span class="hljs-comment">// 42</span>
+answer *= <span class="hljs-number">2</span>; <span class="hljs-comment">// 84</span>
+answer /= <span class="hljs-number">2</span>; <span class="hljs-comment">// 42</span>
+</code></pre>
+</li>
+<li>Another shorthand exists for incrementing or decrementing a variable by 1:<pre><code class="language-js">++answer; <span class="hljs-comment">// 43</span>
+--answer; <span class="hljs-comment">// 42</span>
+</code></pre>
+If the increment or decrement operator appears after the variable name, the value is returned before it is incremented or decremented:<pre><code class="language-js">answer++; <span class="hljs-comment">// 42</span>
+answer;   <span class="hljs-comment">// 43</span>
+
+answer--; <span class="hljs-comment">// 43</span>
+answer;   <span class="hljs-comment">// 42</span>
+</code></pre>
+</li>
+<li>Modular arithmetic also works as you would expect:<pre><code class="language-js"><span class="hljs-number">22</span> % <span class="hljs-number">12</span>; <span class="hljs-comment">// 10</span>
+</code></pre>
+</li>
+</ul>
+<h2>Strings</h2>
+<ul>
+<li>A <strong>string</strong> is a sequence of letters enclosed in single quotes (''), double quotes (&quot;&quot;), or backticks (``).</li>
+<li>Here are some examples:<pre><code class="language-js"><span class="hljs-keyword">let</span> firstName = <span class="hljs-string">&#x27;James&#x27;</span>;
+<span class="hljs-keyword">let</span> middleInitial = <span class="hljs-string">&quot;T.&quot;</span>;
+<span class="hljs-keyword">let</span> lastName = <span class="hljs-string">`Kirk`</span>;
+</code></pre>
+</li>
+<li>Strings can be added together like this:<pre><code class="language-js"><span class="hljs-keyword">let</span> fullName = firstName + <span class="hljs-string">&#x27; &#x27;</span> + middleInitial + <span class="hljs-string">&#x27; &#x27;</span> + lastName;
+</code></pre>
+This is called <strong>string concatenation</strong>.</li>
+<li>String concatenation can be used to create long strings spanning multiple lines, like this:<pre><code class="language-js"><span class="hljs-keyword">let</span> quote = <span class="hljs-string">&#x27;The greatest danger facing us is ourselves, and irrational &#x27;</span> +
+    <span class="hljs-string">&#x27;fear of the unknown. There is no such thing as the unknown. Only &#x27;</span> +
+    <span class="hljs-string">&#x27;things temporarily hidden, temporarily not understood.&#x27;</span>;
+</code></pre>
+</li>
+<li>Backticks can be used to inject variables into a string without concatenation:<pre><code class="language-js"><span class="hljs-keyword">let</span> greeting = <span class="hljs-string">`Hello, my name is <span class="hljs-subst">${fullName}</span>.`</span>;
+</code></pre>
+This is called <strong>string interpolation</strong>.</li>
+<li>Backticks can also be used to create long strings without concatentation:<pre><code class="language-js"><span class="hljs-keyword">let</span> quote = <span class="hljs-string">`The greatest danger facing us is ourselves, and irrational
+    fear of the unknown. There is no such thing as the unknown. Only
+    things temporarily hidden, temporarily not understood.`</span>;
+</code></pre>
+</li>
+<li>A string's characters can be accessed by <strong>index</strong>, starting at zero:<pre><code class="language-js">fullName[<span class="hljs-number">0</span>];  <span class="hljs-comment">// &#x27;J&#x27;</span>
+fullName[<span class="hljs-number">1</span>];  <span class="hljs-comment">// &#x27;a&#x27;</span>
+fullName[<span class="hljs-number">12</span>]; <span class="hljs-comment">// &#x27;k&#x27;</span>
+fullName[<span class="hljs-number">13</span>]; <span class="hljs-comment">// undefined</span>
+</code></pre>
+</li>
+<li>Strings come with many useful properties and methods. Here are a few:<pre><code class="language-js"><span class="hljs-comment">// This property returns the number of characters in the string</span>
+fullName.<span class="hljs-property">length</span>; <span class="hljs-comment">// 13</span>
+
+<span class="hljs-comment">// This method returns true if the string starts with the argument</span>
+fullName.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">&#x27;James&#x27;</span>); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// This method returns true if the string ends with the argument</span>
+fullName.<span class="hljs-title function_">endsWith</span>(<span class="hljs-string">&#x27;Kirk&#x27;</span>); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// This method returns true if the string includes the argument</span>
+fullName.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;T.&#x27;</span>); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// This method returns the first index where the argument occurs in the string</span>
+<span class="hljs-comment">// or -1 if it doesn&#x27;t</span>
+fullName.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;T&#x27;</span>); <span class="hljs-comment">// 6</span>
+fullName.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;Z&#x27;</span>); <span class="hljs-comment">// -1</span>
+
+<span class="hljs-comment">// These methods return the part of the string between the arguments</span>
+fullName.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">5</span>);      <span class="hljs-comment">// &#x27;James&#x27;</span>
+fullName.<span class="hljs-title function_">substring</span>(<span class="hljs-number">9</span>, <span class="hljs-number">13</span>); <span class="hljs-comment">// &#x27;Kirk&#x27;</span>
+
+<span class="hljs-comment">// This method splits the string into an array (discussed below)</span>
+fullName.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27; &#x27;</span>); <span class="hljs-comment">// [&#x27;James&#x27;, &#x27;T.&#x27;, &#x27;Kirk&#x27;]</span>
+</code></pre>
+</li>
+</ul>
+<h2>Functions</h2>
+<ul>
+<li>A <strong>function</strong> is a reusable block of code.</li>
+<li>A function can accept one or more input values, called its <strong>arguments</strong> or <strong>parameters</strong>.</li>
+<li>A function can only return one output value.</li>
+<li>Here are some examples:<pre><code class="language-js"><span class="hljs-comment">// This function accepts no arguments and returns nothing</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello, World!&#x27;</span>);
+}
+
+<span class="hljs-comment">// This function accepts two arguments and returns their sum</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b</span>) {
+    <span class="hljs-keyword">return</span> a + b;
+}
+</code></pre>
+</li>
+<li>Functions are <strong>called</strong> or <strong>invoked</strong> by name, like this:<pre><code class="language-js"><span class="hljs-title function_">sayHello</span>(); <span class="hljs-comment">// undefined</span>
+<span class="hljs-title function_">add</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>);  <span class="hljs-comment">// 5</span>
+</code></pre>
+</li>
+<li>When a function is called with arguments, we say the arguments are <strong>passed</strong> to the function.</li>
+<li>A function without a name is called an <strong>anonymous function</strong>.</li>
+<li>Here are some examples of anonymous functions:<pre><code class="language-js"><span class="hljs-comment">// This anonymous function is assigned to the variable `logTime`</span>
+<span class="hljs-keyword">let</span> logTime = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>());
+};
+
+<span class="hljs-comment">// It&#x27;s called just like a named function</span>
+<span class="hljs-title function_">logTime</span>(); <span class="hljs-comment">// &#x27;2023-12-31T00:57:00.448Z&#x27;</span>
+
+<span class="hljs-comment">// `setTimeout` is a global function provided by the engine.</span>
+<span class="hljs-comment">// It calls a function (first argument) after a delay (second argument).</span>
+<span class="hljs-comment">// In this example, `logTime` will be called after a delay of three seconds.</span>
+<span class="hljs-built_in">setTimeout</span>(logTime, <span class="hljs-number">3000</span>);
+
+<span class="hljs-comment">// Alternatively, we can pass the function directly without a variable</span>
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>());
+}, <span class="hljs-number">3000</span>);
+</code></pre>
+</li>
+<li>Arrow function expressions allow more compact anonymous functions, like this:<pre><code class="language-js"><span class="hljs-keyword">let</span> <span class="hljs-title function_">multiply</span> = (<span class="hljs-params">x, y</span>) =&gt; {
+    <span class="hljs-keyword">return</span> x * y;
+};
+
+<span class="hljs-comment">// The parens are optional if there&#x27;s only one argument</span>
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">double</span> = x =&gt; {
+    <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>;
+};
+
+<span class="hljs-comment">// The curly brackets and `return` are optional if there&#x27;s only one statement</span>
+<span class="hljs-comment">// in the function body</span>
+<span class="hljs-keyword">let</span> <span class="hljs-title function_">triple</span> = x =&gt; x * <span class="hljs-number">3</span>;
+
+<span class="hljs-comment">// Each of these is still called just like a named function</span>
+<span class="hljs-title function_">multiply</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">// 6</span>
+<span class="hljs-title function_">double</span>(<span class="hljs-number">4</span>);      <span class="hljs-comment">// 8</span>
+<span class="hljs-title function_">triple</span>(<span class="hljs-number">5</span>);      <span class="hljs-comment">// 15</span>
+</code></pre>
+</li>
+</ul>
+<h2>Arrays</h2>
+<ul>
+<li>An <strong>array</strong> is a list of values enclosed in square brackets ([]) and separated by commas.</li>
+<li>Here are some examples:<pre><code class="language-js"><span class="hljs-comment">// This array contains six numbers</span>
+<span class="hljs-keyword">let</span> fibonacci = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">11</span>];
+
+<span class="hljs-comment">// This array contains three strings</span>
+<span class="hljs-keyword">let</span> fruits = [
+    <span class="hljs-string">&#x27;Apple&#x27;</span>,
+    <span class="hljs-string">&#x27;Banana&#x27;</span>,
+    <span class="hljs-string">&#x27;Orange&#x27;</span>
+];
+
+<span class="hljs-comment">// This array contains mixed types</span>
+<span class="hljs-keyword">let</span> items = [<span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-number">3</span>, <span class="hljs-literal">true</span>];
+</code></pre>
+</li>
+<li>An array's values can be accessed by <strong>index</strong>, starting at zero:<pre><code class="language-js">fruits[<span class="hljs-number">0</span>]; <span class="hljs-comment">// &#x27;Apple&#x27;</span>
+fruits[<span class="hljs-number">1</span>]; <span class="hljs-comment">// &#x27;Banana&#x27;</span>
+fruits[<span class="hljs-number">2</span>]; <span class="hljs-comment">// &#x27;Orange&#x27;</span>
+fruits[<span class="hljs-number">3</span>]; <span class="hljs-comment">// undefined</span>
+</code></pre>
+</li>
+<li>Arrays come with many useful properties and methods. Here are a few:<pre><code class="language-js"><span class="hljs-comment">// This property returns the number of items in the array</span>
+fruits.<span class="hljs-property">length</span>; <span class="hljs-comment">// 3</span>
+
+<span class="hljs-comment">// This method returns true if the array includes the argument</span>
+fruits.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&#x27;Banana&#x27;</span>); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// This method returns the first index where the argument occurs in the array</span>
+<span class="hljs-comment">// or -1 if it doesn&#x27;t</span>
+fruits.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;Orange&#x27;</span>); <span class="hljs-comment">// 2</span>
+fruits.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;Grape&#x27;</span>);  <span class="hljs-comment">// -1</span>
+
+<span class="hljs-comment">// This method joins the items into a string</span>
+fruits.<span class="hljs-title function_">join</span>(<span class="hljs-string">&#x27;|&#x27;</span>); <span class="hljs-comment">// &#x27;Apple|Banana|Orange&#x27;</span>
+</code></pre>
+</li>
+<li>Some methods <strong>mutate</strong> the array, changing its contents in place:<pre><code class="language-js"><span class="hljs-comment">// This method removes the last item from the array and returns it</span>
+fruits.<span class="hljs-title function_">pop</span>(); <span class="hljs-comment">// &#x27;Orange&#x27;</span>
+fruits;       <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;]</span>
+
+<span class="hljs-comment">// This method adds an item to the end of the array and returns its length</span>
+fruits.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;Orange&#x27;</span>); <span class="hljs-comment">// 3</span>
+fruits;                <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+
+<span class="hljs-comment">// This method removes the first item from the array and returns it</span>
+fruits.<span class="hljs-title function_">shift</span>(); <span class="hljs-comment">// &#x27;Apple&#x27;</span>
+fruits;         <span class="hljs-comment">// [&#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+
+<span class="hljs-comment">// This method adds an item to the beginning of the array and returns its</span>
+<span class="hljs-comment">// length</span>
+fruits.<span class="hljs-title function_">unshift</span>(<span class="hljs-string">&#x27;Apple&#x27;</span>); <span class="hljs-comment">// 3</span>
+fruits;                  <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+
+<span class="hljs-comment">// This method reverses the array and returns it</span>
+fruits.<span class="hljs-title function_">reverse</span>(); <span class="hljs-comment">// [&#x27;Orange&#x27;, &#x27;Banana&#x27;, &#x27;Apple&#x27;];</span>
+fruits;           <span class="hljs-comment">// [&#x27;Orange&#x27;, &#x27;Banana&#x27;, &#x27;Apple&#x27;];</span>
+
+<span class="hljs-comment">// This method sorts the array and returns it</span>
+fruits.<span class="hljs-title function_">sort</span>(); <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+fruits;        <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+</code></pre>
+</li>
+<li>Some methods return a new array, without changing the original:<pre><code class="language-js"><span class="hljs-comment">// This method returns a new array containing the items from the original and</span>
+<span class="hljs-comment">// its arguments</span>
+fruits.<span class="hljs-title function_">concat</span>([<span class="hljs-string">&#x27;Lemon&#x27;</span>, <span class="hljs-string">&#x27;Lime&#x27;</span>]); <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;, &#x27;Lemon&#x27;, &#x27;Lime&#x27;]</span>
+fruits;                           <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+
+<span class="hljs-comment">// This method returns a new array containing a subset of the items from the original</span>
+fruits.<span class="hljs-title function_">slice</span>(<span class="hljs-number">0</span>, <span class="hljs-number">2</span>); <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;]</span>
+fruits;             <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+
+<span class="hljs-comment">// This method returns a new array containing the reversed items from the</span>
+<span class="hljs-comment">// original</span>
+fruits.<span class="hljs-title function_">toReversed</span>(); <span class="hljs-comment">// [&#x27;Orange&#x27;, &#x27;Banana&#x27;, &#x27;Apple&#x27;];</span>
+fruits;              <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;];</span>
+
+<span class="hljs-comment">// This method returns a new array containing the sorted items from the original</span>
+fruits.<span class="hljs-title function_">toSorted</span>(); <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+fruits;            <span class="hljs-comment">// [&#x27;Apple&#x27;, &#x27;Banana&#x27;, &#x27;Orange&#x27;]</span>
+</code></pre>
+</li>
+<li>Some methods require a function argument, which is called once for each item with the item as its argument:<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">isEven</span>(<span class="hljs-params">number</span>) {
+    <span class="hljs-keyword">return</span> number % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>;
+}
+
+<span class="hljs-comment">// This method returns `true` if the function argument returns `true` for</span>
+<span class="hljs-comment">// every item</span>
+fibonacci.<span class="hljs-title function_">every</span>(isEven); <span class="hljs-comment">// false</span>
+
+<span class="hljs-comment">// This method returns `true` if the function argument returns `true` for any</span>
+<span class="hljs-comment">// item</span>
+fibonacci.<span class="hljs-title function_">some</span>(isEven); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// This method returns the first item where the function argument returns</span>
+<span class="hljs-comment">// `true`</span>
+fibonacci.<span class="hljs-title function_">find</span>(isEven); <span class="hljs-comment">// 2</span>
+
+<span class="hljs-comment">// This method returns the index of the last item where the function argument</span>
+<span class="hljs-comment">// returns `true`</span>
+fibonacci.<span class="hljs-title function_">findLastIndex</span>(isEven); <span class="hljs-comment">// 4</span>
+
+<span class="hljs-comment">// This method returns a new array containing the items where the function</span>
+<span class="hljs-comment">// argument returns `true`</span>
+fibonacci.<span class="hljs-title function_">filter</span>(isEven); <span class="hljs-comment">// [2, 8]</span>
+
+<span class="hljs-comment">// This method returns a new array containing values returned by the function</span>
+<span class="hljs-comment">// argument</span>
+fibonacci.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> item * <span class="hljs-number">2</span>); <span class="hljs-comment">// [2, 4, 6, 10, 16, 22];</span>
+
+<span class="hljs-comment">// This method doesn&#x27;t return anything, it just calls the function argument</span>
+<span class="hljs-comment">// for each item</span>
+fibonacci.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item));
+</code></pre>
+</li>
+</ul>
+<h2>Objects</h2>
+<ul>
+<li>An <strong>object</strong> is like an array, except its values, or <strong>properties</strong>, are named and are enclosed in curly brackets ({}).</li>
+<li>Here's an example:<pre><code class="language-js"><span class="hljs-keyword">let</span> foo = {
+    <span class="hljs-attr">x</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">doSomething</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">x</span> + <span class="hljs-number">1</span>;
+    }
+};
+</code></pre>
+</li>
+<li>An object's properties are accessed using <strong>dot notation</strong> or <strong>bracket notation</strong>:<pre><code class="language-js"><span class="hljs-comment">// Dot notation</span>
+foo.<span class="hljs-property">x</span>;             <span class="hljs-comment">// 1</span>
+foo.<span class="hljs-title function_">doSomething</span>(); <span class="hljs-comment">// 2</span>
+
+<span class="hljs-comment">// Bracket notation</span>
+foo[<span class="hljs-string">&#x27;x&#x27;</span>];             <span class="hljs-comment">// 1</span>
+foo[<span class="hljs-string">&#x27;doSomething&#x27;</span>](); <span class="hljs-comment">// 2</span>
+</code></pre>
+</li>
+</ul>
+<h2>Classes</h2>
+<ul>
+<li>A <strong>class</strong> is like an object blueprint. A <strong>class definition</strong> can be used to easily create multiple objects with the same properties and methods. An object created from a class definition is called an <strong>instance</strong> of that class.</li>
+<li>Here's an example of a class definition and its usage:<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Foo</span> {
+    <span class="hljs-comment">// This function is called when an instance is created.</span>
+    <span class="hljs-comment">// It assigns its argument to a property named `x`, which is accessed within</span>
+    <span class="hljs-comment">// the class as `this.x`.</span>
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">x</span>) {
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">x</span> = x;
+    }
+
+    <span class="hljs-comment">// When a function is defined in a class, it&#x27;s called a __method__.</span>
+    <span class="hljs-comment">// Method definitions aren&#x27;t preceded by the `function` keyword.</span>
+    <span class="hljs-comment">// Methods are a special kind of property that can be called like a function.</span>
+    <span class="hljs-title function_">doSomething</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">x</span> + <span class="hljs-number">1</span>;
+    }
+}
+
+<span class="hljs-comment">// Instances are created with the `new` keyword</span>
+<span class="hljs-keyword">let</span> f = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Foo</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">let</span> g = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Foo</span>(<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// Properties are accessed with dot notation...</span>
+f.<span class="hljs-property">x</span>;             <span class="hljs-comment">// 1</span>
+f.<span class="hljs-title function_">doSomething</span>(); <span class="hljs-comment">// 2</span>
+
+<span class="hljs-comment">// Or bracket notation</span>
+g[<span class="hljs-string">&#x27;x&#x27;</span>];             <span class="hljs-comment">// 2</span>
+g[<span class="hljs-string">&#x27;doSomething&#x27;</span>](); <span class="hljs-comment">// 3</span>
+</code></pre>
+</li>
+<li>Classes can share properties with other classes via <strong>inheritance</strong> with the <code>extends</code> keyword.</li>
+<li>Here's an example class definition that extends <code>Foo</code>, which is called its parent:<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Bar</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Foo</span> {
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">x, y</span>) {
+        <span class="hljs-comment">// Call the parent constructor</span>
+        <span class="hljs-variable language_">super</span>(x);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">y</span> = y;
+    }
+
+    <span class="hljs-title function_">doSomethingElse</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-comment">// The child class can access its parent&#x27;s properties like they&#x27;re its own</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">x</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">y</span>;
+    }
+}
+
+<span class="hljs-comment">// Instances of `Bar` inherit the properties of `Foo`...</span>
+<span class="hljs-keyword">let</span> b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Bar</span>(<span class="hljs-number">3</span>, <span class="hljs-number">5</span>);
+b.<span class="hljs-property">x</span>;                 <span class="hljs-comment">// 3</span>
+b.<span class="hljs-property">y</span>;                 <span class="hljs-comment">// 5</span>
+b.<span class="hljs-title function_">doSomething</span>();     <span class="hljs-comment">// 4</span>
+b.<span class="hljs-title function_">doSomethingElse</span>(); <span class="hljs-comment">// 8</span>
+
+<span class="hljs-comment">// But not the other way around</span>
+f.<span class="hljs-property">y</span>;                 <span class="hljs-comment">// undefined</span>
+f.<span class="hljs-title function_">doSomethingElse</span>(); <span class="hljs-comment">// Uncaught TypeError: f.doSomethingElse is not a function</span>
+</code></pre>
+</li>
+<li>A child class can <strong>override</strong> its parent's properties by redefining them.</li>
+<li>Here's an example class definition that extends <code>Bar</code> and changes its behavior:<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Qux</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Bar</span> {
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">x, y, z</span>) {
+        <span class="hljs-comment">// Call the parent constructor</span>
+        <span class="hljs-variable language_">super</span>(x, y);
+        <span class="hljs-variable language_">this</span>.<span class="hljs-property">z</span> = z;
+    }
+
+    <span class="hljs-title function_">doSomethingElse</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">x</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">y</span> + <span class="hljs-variable language_">this</span>.<span class="hljs-property">z</span>;
+    }
+}
+
+<span class="hljs-comment">// Instances of `Qux` inherit the properties of `Foo` and `Bar`</span>
+<span class="hljs-keyword">let</span> q = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Qux</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>);
+q.<span class="hljs-property">x</span>; <span class="hljs-comment">// 1</span>
+q.<span class="hljs-property">y</span>; <span class="hljs-comment">// 2</span>
+q.<span class="hljs-property">z</span>; <span class="hljs-comment">// 3</span>
+q.<span class="hljs-title function_">doSomething</span>(); <span class="hljs-comment">// 2</span>
+q.<span class="hljs-title function_">doSomethingElse</span>(); <span class="hljs-comment">// 6</span>
+</code></pre>
+</li>
+<li>Excessive use of inheritance can make your code difficult to read and modify. For this reason, it's best to use another appoach.</li>
+</ul>
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+      </footer>
+    </div>
+
+    <script>
+      
+    </script>
+  </body>
+</html>
+
