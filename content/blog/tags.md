@@ -1,6 +1,7 @@
 ---
 eleventyComputed:
     redirect: "/tags/{{ tag }}/"
+eleventyExcludeFromCollections: true
 layout: redirect.liquid
 pagination:
     data: tags

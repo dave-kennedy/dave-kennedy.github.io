@@ -1,6 +1,7 @@
 ---
 eleventyComputed:
     redirect: "/posts/{{ post }}/"
+eleventyExcludeFromCollections: true
 layout: redirect.liquid
 pagination:
     data: posts
