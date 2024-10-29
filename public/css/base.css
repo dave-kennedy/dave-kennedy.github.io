@@ -31,10 +31,21 @@
 
 body {
   background-color: var(--bg-normal);
+  background-image: url('/img/header-small.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
   color: var(--fg-normal);
   font-family: 'Inter', sans-serif;
   font-size: var(--font-size-m);
   line-height: 1.75;
+}
+
+@media (min-width: 940px) {
+  body {
+    background-image: url('/img/header.svg');
+    background-position: 50% 0%;
+    background-size: auto;
+  }
 }
 
 /* Blockquotes */
@@ -145,18 +156,25 @@ th {
 
 header {
   margin-bottom: var(--space-size-m);
-  margin-top: var(--space-size-m);
+  margin-top: 50%;
+}
+
+@media (min-width: 940px) {
+  header {
+    margin-top: 35%;
+  }
 }
 
 header nav {
   display: flex;
-  gap: var(--space-size-l);
+  gap: 6%;
   justify-content: center;
 }
 
 header nav a {
   align-items: center;
   display: flex;
+  flex-direction: column;
   font-size: var(--font-size-xs);
   font-weight: bold;
   text-decoration: none;
