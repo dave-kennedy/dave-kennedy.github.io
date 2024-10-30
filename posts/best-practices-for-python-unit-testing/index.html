@@ -37,8 +37,6 @@
   <body>
     <div class="container">
       <header>
-        <img src="/img/header.png">
-
         <nav>
           <a href="/">Blog</a>
           <a href="/notes/">Notes</a>
@@ -87,7 +85,7 @@
 <p>Crucially, unit tests should not make network requests, modify database tables, or alter files on disk unless there's an obvious reason for doing so. Unit tests use mocked or stubbed dependencies, optionally verifying that they are called correctly, and make assertions on the results of a single function or module. Integration tests, on the other hand, use concrete dependencies and make assertions on the results of a larger system.</p>
 <p>You might disagree on the finer points, but this distinction works well for me.</p>
 <p>I won't go over unit testing basics, like how to run pytest or how to use the <code>@patch</code> decorator, assuming you're familiar already.</p>
-<h2>Avoid module-level globals</h2>
+<h2 id="avoid-module-level-globals" tabindex="-1">Avoid module-level globals</h2>
 <p>Imagine we have a class defined in validator.py:</p>
 <pre><code class="language-py"><span class="hljs-keyword">import</span> os
 
@@ -190,7 +188,7 @@ E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Pe
     result = handle_event({<span class="hljs-string">&#x27;message&#x27;</span>: <span class="hljs-string">&#x27;Hello!&#x27;</span>}, <span class="hljs-literal">None</span>)
     <span class="hljs-keyword">assert</span> result == {<span class="hljs-string">&#x27;body&#x27;</span>: <span class="hljs-string">&#x27;Goodbye!&#x27;</span>, <span class="hljs-string">&#x27;status&#x27;</span>: <span class="hljs-number">200</span>}
 </code></pre>
-<h3>Globals aren't always bad</h3>
+<h3 id="globals-aren't-always-bad" tabindex="-1">Globals aren't always bad</h3>
 <p>If you must use a global for some reason, set it to <code>None</code> initially:</p>
 <pre><code class="language-py"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Optional</span>
 
@@ -207,7 +205,7 @@ validator: <span class="hljs-type">Optional</span>[Validator] = <span class="hlj
     validator.validate(event)
 </code></pre>
 <p>The key is to prevent any expensive computation or network requests when the module is imported to facilitate patching.</p>
-<h2>Use dependency injection</h2>
+<h2 id="use-dependency-injection" tabindex="-1">Use dependency injection</h2>
 <p>Next, let's test the class:</p>
 <pre><code class="language-py"><span class="hljs-keyword">from</span> validator <span class="hljs-keyword">import</span> Validator
 
@@ -365,6 +363,19 @@ E   requests.exceptions.MissingSchema: Invalid URL 'foo': No scheme supplied. Pe
     </div>
 
     <script>
+      (() => {
+        const toc = document.querySelector('.table-of-contents');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
       
     </script>
   </body>

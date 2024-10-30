@@ -35,8 +35,6 @@
   <body>
     <div class="container">
       <header>
-        <img src="/img/header.png">
-
         <nav>
           <a href="/">Blog</a>
           <a href="/notes/">Notes</a>
@@ -69,19 +67,34 @@
     </div>
 
     <script>
-      const countdown = document.getElementById('countdown');
-  let seconds = 3;
-  countdown.innerHTML = seconds;
+      (() => {
+        const toc = document.querySelector('.table-of-contents');
+        const toggle = toc?.querySelector('.toggle');
 
-  setInterval(() => {
-    if (seconds != 0) {
-      seconds--;
-      countdown.innerHTML = seconds;
-      return;
-    }
+        if (!toc || !toggle) {
+          return;
+        }
 
-    document.location.replace('/posts/special-replacements-in-sed/');
-  }, 1000);
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
+      (() => {
+    const countdown = document.getElementById('countdown');
+    let seconds = 3;
+    countdown.innerHTML = seconds;
+
+    setInterval(() => {
+      if (seconds != 0) {
+        seconds--;
+        countdown.innerHTML = seconds;
+        return;
+      }
+
+      document.location.replace('/posts/special-replacements-in-sed/');
+    }, 1000);
+  })();
     </script>
   </body>
 </html>

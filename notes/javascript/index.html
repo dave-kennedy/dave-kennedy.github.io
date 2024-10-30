@@ -35,8 +35,6 @@
   <body>
     <div class="container">
       <header>
-        <img src="/img/header.png">
-
         <nav>
           <a href="/">Blog</a>
           <a href="/notes/">Notes</a>
@@ -50,6 +48,7 @@
         
 <h1>JavaScript</h1>
 
+<div class="table-of-contents"><div class="toggle">Contents</div><ul><li><a href="#adding-scripts-to-a-web-page">Adding scripts to a web page</a></li><li><a href="#comments">Comments</a></li><li><a href="#statements">Statements</a></li><li><a href="#variables">Variables</a></li><li><a href="#booleans">Booleans</a></li><li><a href="#control-structures">Control structures</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#strings">Strings</a></li><li><a href="#functions">Functions</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#objects">Objects</a></li><li><a href="#classes">Classes</a></li></ul></div>
 <ul>
 <li>JavaScript was originally used to add behavior to web pages, like animating elements or loading additional data. Today, JavaScript is used as the main programming language in many other applications.</li>
 <li>A JavaScript file is a plain text file ending in <code>.js</code>.</li>
@@ -58,7 +57,7 @@
 <li>JavaScript is an implementation of the ECMAScript standard. Sometimes these terms are used interchangeably, though they are technically distinct.</li>
 <li>JavaScript files are executed by a JavaScript engine, which runs in a web browser or a server runtime like Node.js.</li>
 </ul>
-<h2>Adding scripts to a web page</h2>
+<h2 id="adding-scripts-to-a-web-page" tabindex="-1">Adding scripts to a web page</h2>
 <ul>
 <li>Like styles, scripts can be <strong>inline</strong> or <strong>external</strong> to the web page.</li>
 <li>Both inline and external scripts are added with the <code>script</code> element.</li>
@@ -80,7 +79,7 @@ The <code>...</code> between the <code>script</code> tags is just a placeholder.
 </code></pre>
 In order for this example to work, the <code>script.js</code> file must be located in the same directory as the HTML file that references it.</li>
 </ul>
-<h2>Comments</h2>
+<h2 id="comments" tabindex="-1">Comments</h2>
 <ul>
 <li>Like in HTML and CSS, <strong>comments</strong> in JavaScript are intended for developers and are ignored by the engine.</li>
 <li>Here's an example of a single-line comment: <code>// This is a comment</code></li>
@@ -95,7 +94,7 @@ things temporarily hidden, temporarily not understood.
 </code></pre>
 In this case, <code>3</code> is the result of adding <code>1</code> and <code>2</code>. If you copy this code, you can omit the comment or leave it as a reminder.</li>
 </ul>
-<h2>Statements</h2>
+<h2 id="statements" tabindex="-1">Statements</h2>
 <ul>
 <li>A <strong>statement</strong> is an instruction given to the engine.</li>
 <li>There are several types of statements. Here are a few:
@@ -113,7 +112,7 @@ In this case, <code>3</code> is the result of adding <code>1</code> and <code>2<
 <li>Multiple statements can be placed on a single line, but they must be separated by semi-colons.</li>
 <li>While not strictly required, it's recommended to end every function call, variable declaration, or variable assignment with a semi-colon in order to reduce bugs.</li>
 </ul>
-<h2>Variables</h2>
+<h2 id="variables" tabindex="-1">Variables</h2>
 <ul>
 <li>A <strong>variable</strong> is a name that refers to some data.</li>
 <li>A variable must be declared and assigned a value before it can be referenced.</li>
@@ -133,7 +132,7 @@ x = <span class="hljs-number">2</span>;
 <li>Variables defined by the engine, such as <code>Boolean</code>, <code>Number</code>, and <code>String</code>, are called <strong>built-in objects</strong> or <strong>global objects</strong> because they can be referenced from anywhere in your code.</li>
 <li>Variables have different properties depending on the <strong>type</strong> of value they contain.</li>
 </ul>
-<h2>Booleans</h2>
+<h2 id="booleans" tabindex="-1">Booleans</h2>
 <ul>
 <li>A <strong>boolean</strong> is either <code>true</code> or <code>false</code>.</li>
 <li>Booleans are mostly used for as <strong>conditions</strong> in <strong>control structures</strong> (addressed later).</li>
@@ -164,7 +163,7 @@ x !== y;
 </code></pre>
 </li>
 </ul>
-<h2>Control structures</h2>
+<h2 id="control-structures" tabindex="-1">Control structures</h2>
 <blockquote>
 <p>In the examples below, <code>console.log</code> is used to print messages to the JavaScript console. If you're running JavaScript in a web browser, the console can be found in your browser's developer tools. (See <a href="https://firefox-source-docs.mozilla.org/devtools-user/index.html">Firefox</a>, <a href="https://developer.chrome.com/docs/devtools/console/api/">Chrome</a>, <a href="https://learn.microsoft.com/en-us/archive/microsoft-edge/legacy/developer/">Edge</a>, or <a href="https://developer.apple.com/library/archive/documentation/AppleApplications/Conceptual/Safari_Developer_Guide/Console/Console.html">Safari</a>). If you're running Node.js, the console is usually your terminal.</p>
 </blockquote>
@@ -228,7 +227,7 @@ The code between the backets below will run if either condition is true:<pre><co
 </code></pre>
 </li>
 </ul>
-<h2>Numbers</h2>
+<h2 id="numbers" tabindex="-1">Numbers</h2>
 <ul>
 <li>A <strong>number</strong> can be an integer or a floating-point number.</li>
 <li>Here are some examples:<pre><code class="language-js"><span class="hljs-keyword">let</span> answer = <span class="hljs-number">42</span>;
@@ -261,7 +260,7 @@ answer;   <span class="hljs-comment">// 42</span>
 </code></pre>
 </li>
 </ul>
-<h2>Strings</h2>
+<h2 id="strings" tabindex="-1">Strings</h2>
 <ul>
 <li>A <strong>string</strong> is a sequence of letters enclosed in single quotes (''), double quotes (&quot;&quot;), or backticks (``).</li>
 <li>Here are some examples:<pre><code class="language-js"><span class="hljs-keyword">let</span> firstName = <span class="hljs-string">&#x27;James&#x27;</span>;
@@ -317,7 +316,7 @@ fullName.<span class="hljs-title function_">split</span>(<span class="hljs-strin
 </code></pre>
 </li>
 </ul>
-<h2>Functions</h2>
+<h2 id="functions" tabindex="-1">Functions</h2>
 <ul>
 <li>A <strong>function</strong> is a reusable block of code.</li>
 <li>A function can accept one or more input values, called its <strong>arguments</strong> or <strong>parameters</strong>.</li>
@@ -378,7 +377,7 @@ fullName.<span class="hljs-title function_">split</span>(<span class="hljs-strin
 </code></pre>
 </li>
 </ul>
-<h2>Arrays</h2>
+<h2 id="arrays" tabindex="-1">Arrays</h2>
 <ul>
 <li>An <strong>array</strong> is a list of values enclosed in square brackets ([]) and separated by commas.</li>
 <li>Here are some examples:<pre><code class="language-js"><span class="hljs-comment">// This array contains six numbers</span>
@@ -495,7 +494,7 @@ fibonacci.<span class="hljs-title function_">forEach</span>(<span class="hljs-fu
 </code></pre>
 </li>
 </ul>
-<h2>Objects</h2>
+<h2 id="objects" tabindex="-1">Objects</h2>
 <ul>
 <li>An <strong>object</strong> is like an array, except its values, or <strong>properties</strong>, are named and are enclosed in curly brackets ({}).</li>
 <li>Here's an example:<pre><code class="language-js"><span class="hljs-keyword">let</span> foo = {
@@ -516,7 +515,7 @@ foo[<span class="hljs-string">&#x27;doSomething&#x27;</span>](); <span class="hl
 </code></pre>
 </li>
 </ul>
-<h2>Classes</h2>
+<h2 id="classes" tabindex="-1">Classes</h2>
 <ul>
 <li>A <strong>class</strong> is like an object blueprint. A <strong>class definition</strong> can be used to easily create multiple objects with the same properties and methods. An object created from a class definition is called an <strong>instance</strong> of that class.</li>
 <li>Here's an example of a class definition and its usage:<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Foo</span> {
@@ -609,6 +608,19 @@ q.<span class="hljs-title function_">doSomethingElse</span>(); <span class="hljs
     </div>
 
     <script>
+      (() => {
+        const toc = document.querySelector('.table-of-contents');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
       
     </script>
   </body>

@@ -35,8 +35,6 @@
   <body>
     <div class="container">
       <header>
-        <img src="/img/header.png">
-
         <nav>
           <a href="/">Blog</a>
           <a href="/notes/">Notes</a>
@@ -50,6 +48,7 @@
         
 <h1>CSS</h1>
 
+<div class="table-of-contents"><div class="toggle">Contents</div><ul><li><a href="#adding-styles-to-a-web-page">Adding styles to a web page</a></li><li><a href="#comments">Comments</a></li><li><a href="#rules">Rules</a></li><li><a href="#selectors">Selectors</a></li><li><a href="#media-queries">Media queries</a></li></ul></div>
 <ul>
 <li>CSS is used to modify the style (appearance) of elements on the page.</li>
 <li>A CSS file, also called a <strong>stylesheet</strong>, is a plain text file ending in <code>.css</code>.</li>
@@ -57,7 +56,7 @@
 <li>CSS stands for Cascading Style Sheets, which refers to the order in which styles are applied to elements and is outside the scope of this brief intro.</li>
 <li>CSS consists of <strong>comments</strong>, <strong>rules</strong>, <strong>selectors</strong>, and <strong>media queries</strong>.</li>
 </ul>
-<h2>Adding styles to a web page</h2>
+<h2 id="adding-styles-to-a-web-page" tabindex="-1">Adding styles to a web page</h2>
 <ul>
 <li>The <code>style</code> attribute can be used to modify the style of a single element, like so: <code>&lt;div style=&quot;color: red;&quot;&gt;Warning!&lt;/div&gt;</code></li>
 <li>Excessive use of the <code>style</code> attribute can make your HTML difficult to read and modify. For this reason, it's better to use a stylesheet.</li>
@@ -79,7 +78,7 @@ The <code>...</code> between the <code>style</code> tags is just a placeholder. 
 </code></pre>
 In order for this example to work, the <code>style.css</code> file must be located in the same directory as the HTML file that references it.</li>
 </ul>
-<h2>Comments</h2>
+<h2 id="comments" tabindex="-1">Comments</h2>
 <ul>
 <li>Like in HTML, <strong>comments</strong> in CSS are intended for developers and are ignored by the browser.</li>
 <li>Here's an example of a single-line comment: <code>/* This is a comment */</code></li>
@@ -91,7 +90,7 @@ things temporarily hidden, temporarily not understood.
 </code></pre>
 </li>
 </ul>
-<h2>Rules</h2>
+<h2 id="rules" tabindex="-1">Rules</h2>
 <ul>
 <li>A <strong>rule</strong> looks like this: <code>color: red;</code></li>
 <li>In the example above, the <code>color</code> <strong>property</strong> is assigned a <strong>value</strong> of <code>red</code>.</li>
@@ -109,7 +108,7 @@ things temporarily hidden, temporarily not understood.
 <li>While not strictly required, it's recommended to end every rule with a semi-colon in order to reduce bugs.</li>
 <li>For a complete list of all available properties and documentation, including examples, see <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#index">CSS reference</a>.</li>
 </ul>
-<h2>Selectors</h2>
+<h2 id="selectors" tabindex="-1">Selectors</h2>
 <ul>
 <li>A <strong>selector</strong> looks like this: <code>body &gt; div:first-child</code></li>
 <li>The example above would match the first <code>div</code> element that is a child of the <code>body</code> element.</li>
@@ -134,7 +133,7 @@ In this example, the selector would match all <code>a</code> elements, modifying
 </li>
 <li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors/Selectors_and_combinators">CSS selectors and combinators</a> for more info.</li>
 </ul>
-<h3>Pseudo-classes</h3>
+<h3 id="pseudo-classes" tabindex="-1">Pseudo-classes</h3>
 <ul>
 <li>When added to a selector, a <strong>pseudo-class</strong> selects elements based on their state. Here are some examples:
 <ul>
@@ -149,7 +148,7 @@ In this example, the selector would match all <code>a</code> elements, modifying
 </li>
 <li>See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">Pseudo-classes</a> for more info.</li>
 </ul>
-<h2>Media queries</h2>
+<h2 id="media-queries" tabindex="-1">Media queries</h2>
 <ul>
 <li>A <strong>media query</strong> allows us to apply styles only on certain device types or only when certain device features are present.</li>
 <li>In this example, the rules are only applied when the page is printed (a device type):<pre><code class="language-css"><span class="hljs-keyword">@media</span> print {
@@ -187,6 +186,19 @@ In this example, the selector would match all <code>a</code> elements, modifying
     </div>
 
     <script>
+      (() => {
+        const toc = document.querySelector('.table-of-contents');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
       
     </script>
   </body>

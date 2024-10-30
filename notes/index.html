@@ -35,8 +35,6 @@
   <body>
     <div class="container">
       <header>
-        <img src="/img/header.png">
-
         <nav>
           <a href="/">Blog</a>
           <a href="/notes/">Notes</a>
@@ -50,7 +48,7 @@
         
 <h1>Notes</h1>
 
-<h2>Web Development</h2>
+<h2 id="web-development" tabindex="-1">Web Development</h2>
 <ul>
 <li><a href="/notes/html/">HTML</a></li>
 <li><a href="/notes/css/">CSS</a></li>
@@ -67,6 +65,19 @@
     </div>
 
     <script>
+      (() => {
+        const toc = document.querySelector('.table-of-contents');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
       
     </script>
   </body>

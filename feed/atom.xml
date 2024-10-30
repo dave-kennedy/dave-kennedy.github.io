@@ -445,7 +445,7 @@ bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 &lt;p&gt;Crucially, unit tests should not make network requests, modify database tables, or alter files on disk unless there&#39;s an obvious reason for doing so. Unit tests use mocked or stubbed dependencies, optionally verifying that they are called correctly, and make assertions on the results of a single function or module. Integration tests, on the other hand, use concrete dependencies and make assertions on the results of a larger system.&lt;/p&gt;
 &lt;p&gt;You might disagree on the finer points, but this distinction works well for me.&lt;/p&gt;
 &lt;p&gt;I won&#39;t go over unit testing basics, like how to run pytest or how to use the &lt;code&gt;@patch&lt;/code&gt; decorator, assuming you&#39;re familiar already.&lt;/p&gt;
-&lt;h2&gt;Avoid module-level globals&lt;/h2&gt;
+&lt;h2 id=&quot;avoid-module-level-globals&quot; tabindex=&quot;-1&quot;&gt;Avoid module-level globals&lt;/h2&gt;
 &lt;p&gt;Imagine we have a class defined in validator.py:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; os
 
@@ -548,7 +548,7 @@ E   requests.exceptions.MissingSchema: Invalid URL &#39;foo&#39;: No scheme supp
     result = handle_event({&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;message&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Hello!&amp;#x27;&lt;/span&gt;}, &lt;span class=&quot;hljs-literal&quot;&gt;None&lt;/span&gt;)
     &lt;span class=&quot;hljs-keyword&quot;&gt;assert&lt;/span&gt; result == {&lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;body&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;Goodbye!&amp;#x27;&lt;/span&gt;, &lt;span class=&quot;hljs-string&quot;&gt;&amp;#x27;status&amp;#x27;&lt;/span&gt;: &lt;span class=&quot;hljs-number&quot;&gt;200&lt;/span&gt;}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;h3&gt;Globals aren&#39;t always bad&lt;/h3&gt;
+&lt;h3 id=&quot;globals-aren&#39;t-always-bad&quot; tabindex=&quot;-1&quot;&gt;Globals aren&#39;t always bad&lt;/h3&gt;
 &lt;p&gt;If you must use a global for some reason, set it to &lt;code&gt;None&lt;/code&gt; initially:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; typing &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;
 
@@ -565,7 +565,7 @@ validator: &lt;span class=&quot;hljs-type&quot;&gt;Optional&lt;/span&gt;[Validat
     validator.validate(event)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The key is to prevent any expensive computation or network requests when the module is imported to facilitate patching.&lt;/p&gt;
-&lt;h2&gt;Use dependency injection&lt;/h2&gt;
+&lt;h2 id=&quot;use-dependency-injection&quot; tabindex=&quot;-1&quot;&gt;Use dependency injection&lt;/h2&gt;
 &lt;p&gt;Next, let&#39;s test the class:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;language-py&quot;&gt;&lt;span class=&quot;hljs-keyword&quot;&gt;from&lt;/span&gt; validator &lt;span class=&quot;hljs-keyword&quot;&gt;import&lt;/span&gt; Validator
 

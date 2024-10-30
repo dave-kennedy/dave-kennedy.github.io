@@ -35,8 +35,6 @@
   <body>
     <div class="container">
       <header>
-        <img src="/img/header.png">
-
         <nav>
           <a href="/">Blog</a>
           <a href="/notes/">Notes</a>
@@ -50,6 +48,7 @@
         
 <h1>HTML</h1>
 
+<div class="table-of-contents"><div class="toggle">Contents</div><ul><li><a href="#directives">Directives</a></li><li><a href="#comments">Comments</a></li><li><a href="#nodes-and-elements">Nodes and elements</a></li><li><a href="#a-complete-example">A complete example</a></li></ul></div>
 <ul>
 <li>All web pages begin with an HTML file, i.e. a plain text file ending in <code>.html</code>.</li>
 <li>HTML files can be edited in any plain text editor, like Notepad on Windows or TextEdit on Mac, or in an IDE, like IntelliJ or VS Code.</li>
@@ -63,14 +62,14 @@
 </li>
 <li>HTML consists of <strong>directives</strong>, <strong>comments</strong>, and <strong>nodes</strong>.</li>
 </ul>
-<h2>Directives</h2>
+<h2 id="directives" tabindex="-1">Directives</h2>
 <ul>
 <li>A <strong>directive</strong> looks like this: <code>&lt;!doctype html&gt;</code></li>
 <li>Directives aren't rendered. They're just instructions for the browser.</li>
 <li>The <code>doctype</code> directive tells the browser to use the latest version of HTML.</li>
 <li>The first line of every HTML file must contain the <code>doctype</code> directive and nothing else.</li>
 </ul>
-<h2>Comments</h2>
+<h2 id="comments" tabindex="-1">Comments</h2>
 <ul>
 <li>A <strong>comment</strong> is a note left by a developer for others or for themselves and is ignored by the browser.</li>
 <li>Here's an example of a single-line comment: <code>&lt;!-- This is a comment --&gt;</code></li>
@@ -82,7 +81,7 @@ things temporarily hidden, temporarily not understood.
 </code></pre>
 </li>
 </ul>
-<h2>Nodes and elements</h2>
+<h2 id="nodes-and-elements" tabindex="-1">Nodes and elements</h2>
 <ul>
 <li>Almost everything else in an HTML file is a <strong>node</strong>.</li>
 <li>There are two primary types of nodes: <strong>text</strong> and <strong>elements</strong>.</li>
@@ -128,7 +127,7 @@ In this example:
 </li>
 <li>For a complete list of all available elements and documentation, including examples, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">HTML elements reference</a>.</li>
 </ul>
-<h2>A complete example</h2>
+<h2 id="a-complete-example" tabindex="-1">A complete example</h2>
 <ul>
 <li>In addition to the <code>doctype</code> directive, every HTML file should contain:
 <ul>
@@ -174,6 +173,19 @@ In this example:
     </div>
 
     <script>
+      (() => {
+        const toc = document.querySelector('.table-of-contents');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
       
     </script>
   </body>
