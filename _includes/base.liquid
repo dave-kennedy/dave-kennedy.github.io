@@ -64,6 +64,19 @@
     </div>
 
     <script>
+      (() => {
+        const toc = document.querySelector('.toc');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+
       {% getBundle 'js' %}
     </script>
   </body>

@@ -403,3 +403,43 @@ footer {
   text-transform: uppercase;
 }
 
+/* Table of contents */
+
+.toc {
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-size);
+  max-width: fit-content;
+  padding: var(--space-size-m);
+}
+
+.toc .toggle {
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.toc .toggle::before {
+  background: url('/img/arrow-right.svg') no-repeat;
+  content: '';
+  display: inline-block;
+  height: 2em; /* 24px */
+  margin-right: 0.5em; /* 6px */
+  transition: rotate 300ms;
+  vertical-align: bottom;
+  width: 2em; /* 24px */
+}
+
+.toc.open .toggle::before {
+  rotate: 90deg;
+}
+
+.toc ul {
+  display: none;
+  margin-bottom: 0;
+}
+
+.toc.open ul {
+  display: block;
+}
+

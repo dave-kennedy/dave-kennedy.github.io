@@ -2,6 +2,8 @@
 title: JavaScript
 ---
 
+[[toc]]
+
 * JavaScript was originally used to add behavior to web pages, like animating elements or loading additional data. Today, JavaScript is used as the main programming language in many other applications.
 * A JavaScript file is a plain text file ending in `.js`.
 * Like HTML and CSS files, JavaScript files can be edited in any plain text editor or in an IDE.

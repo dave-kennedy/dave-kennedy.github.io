@@ -2,6 +2,8 @@
 title: HTML
 ---
 
+[[toc]]
+
 * All web pages begin with an HTML file, i.e. a plain text file ending in `.html`.
 * HTML files can be edited in any plain text editor, like Notepad on Windows or TextEdit on Mac, or in an IDE, like IntelliJ or VS Code.
 * HTML stands for HyperText Markup Language and is often referred to simply as __markup__.

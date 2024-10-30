@@ -1,7 +1,9 @@
 import { feedPlugin } from '@11ty/eleventy-plugin-rss';
 import getPostsByTag from './_config/get-posts-by-tag.js';
 import hljs from 'highlight.js';
+import mdAnchor from 'markdown-it-anchor';
 import mdFootnote from 'markdown-it-footnote';
+import mdToc from 'markdown-it-table-of-contents';
 
 export default function (eleventy) {
   eleventy.addBundle('css', {toFileDirectory: 'css'});
@@ -55,7 +57,13 @@ export default function (eleventy) {
       return ''; // use external default escaping
     };
 
+    md.use(mdAnchor);
     md.use(mdFootnote);
+
+    md.use(mdToc, {
+      containerClass: 'toc',
+      containerHeaderHtml: '<div class="toggle">Contents</div>',
+    });
   });
 
   eleventy.setInputDirectory('content');

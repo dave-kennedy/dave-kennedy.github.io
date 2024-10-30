@@ -32,6 +32,8 @@
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-rss": "^2.0.2",
     "highlight.js": "^11.10.0",
-    "markdown-it-footnote": "^4.0.0"
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-table-of-contents": "^0.8.0"
   }
 }

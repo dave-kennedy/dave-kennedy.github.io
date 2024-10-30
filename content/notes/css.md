@@ -2,6 +2,8 @@
 title: CSS
 ---
 
+[[toc]]
+
 * CSS is used to modify the style (appearance) of elements on the page.
 * A CSS file, also called a __stylesheet__, is a plain text file ending in `.css`.
 * Like HTML files, stylesheets can be edited in any plain text editor or in an IDE.
