@@ -36,11 +36,9 @@
     <div class="container">
       <header>
         <nav>
-          <a href="/">Blog</a>
-          <a href="/notes/">Notes</a>
-          <a href="/about/">About</a>
-          <a href="/contact/">Contact</a>
-          <a href="/feed/atom.xml">Feed</a>
+          <a class="icon icon-blog" href="/">Blog</a>
+          <a class="icon icon-notes" href="/notes/">Notes</a>
+          <a class="icon icon-about" href="/about/">About</a>
         </nav>
       </header>
 
@@ -55,7 +53,7 @@
 <h2 id="music" tabindex="-1">Music</h2>
 <p>I first learned to play the piano when I was six. I played the clarinet in middle school, then the saxophone in high school, before picking up a guitar. I quickly became obsessed, playing classical, flamenco, blues, and jazz. I continued studying music in college before I changed my major to mathematics. My career took a sharp turn when the housing bubble burst, but I still play and teach private lessons. My musical interests are eclectic, leaning toward the avant-garde and experimental.</p>
 <h2 id="writing" tabindex="-1">Writing</h2>
-<p>Most of my words live in my blog, but some have escaped into the wild. I've written articles for gaming, politics, and tech sites, and several short stories which I'm still working up the nerve to publish. In May 2024, I edited and published my friend's memoir titled <em>A Rhodes Retrospective: Consolidated Edition</em>, available from Amazon in paperback and Kindle ebook format.</p>
+<p>Most of my words live in my blog, but some have escaped into the wild. I've written articles for gaming, politics, and tech sites, and several short stories which I'm still working up the nerve to publish. In May 2024, I edited and published my neighbors's memoir on Amazon KDP in paperback and Kindle ebook format.</p>
 
 
 
@@ -63,12 +61,27 @@
 
       <footer>
         &copy; 2024
+
+        <nav>
+          <a class="icon icon-email" href="mailto:contact@dkennedy.io">
+            <span class="sr-only">Email</span>
+          </a>
+          <a class="icon icon-github" href="https://github.com/dave-kennedy/">
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a class="icon icon-linkedin" href="https://www.linkedin.com/in/dtkennedy/">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+          <a class="icon icon-feed" href="/feed/atom.xml">
+            <span class="sr-only">Feed</span>
+          </a>
+        </nav>
       </footer>
     </div>
 
     <script>
       (() => {
-        const toc = document.querySelector('.table-of-contents');
+        const toc = document.querySelector('.toc');
         const toggle = toc?.querySelector('.toggle');
 
         if (!toc || !toggle) {

@@ -36,11 +36,9 @@
     <div class="container">
       <header>
         <nav>
-          <a href="/">Blog</a>
-          <a href="/notes/">Notes</a>
-          <a href="/about/">About</a>
-          <a href="/contact/">Contact</a>
-          <a href="/feed/atom.xml">Feed</a>
+          <a class="icon icon-blog" href="/">Blog</a>
+          <a class="icon icon-notes" href="/notes/">Notes</a>
+          <a class="icon icon-about" href="/about/">About</a>
         </nav>
       </header>
 
@@ -48,7 +46,7 @@
         
 <h1>CSS</h1>
 
-<div class="table-of-contents"><div class="toggle">Contents</div><ul><li><a href="#adding-styles-to-a-web-page">Adding styles to a web page</a></li><li><a href="#comments">Comments</a></li><li><a href="#rules">Rules</a></li><li><a href="#selectors">Selectors</a></li><li><a href="#media-queries">Media queries</a></li></ul></div>
+<div class="toc"><div class="icon icon-right toggle">Contents</div><ul><li><a href="#adding-styles-to-a-web-page">Adding styles to a web page</a></li><li><a href="#comments">Comments</a></li><li><a href="#rules">Rules</a></li><li><a href="#selectors">Selectors</a></li><li><a href="#media-queries">Media queries</a></li></ul></div>
 <ul>
 <li>CSS is used to modify the style (appearance) of elements on the page.</li>
 <li>A CSS file, also called a <strong>stylesheet</strong>, is a plain text file ending in <code>.css</code>.</li>
@@ -182,12 +180,27 @@ In this example, the selector would match all <code>a</code> elements, modifying
 
       <footer>
         &copy; 2024
+
+        <nav>
+          <a class="icon icon-email" href="mailto:contact@dkennedy.io">
+            <span class="sr-only">Email</span>
+          </a>
+          <a class="icon icon-github" href="https://github.com/dave-kennedy/">
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a class="icon icon-linkedin" href="https://www.linkedin.com/in/dtkennedy/">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+          <a class="icon icon-feed" href="/feed/atom.xml">
+            <span class="sr-only">Feed</span>
+          </a>
+        </nav>
       </footer>
     </div>
 
     <script>
       (() => {
-        const toc = document.querySelector('.table-of-contents');
+        const toc = document.querySelector('.toc');
         const toggle = toc?.querySelector('.toggle');
 
         if (!toc || !toggle) {

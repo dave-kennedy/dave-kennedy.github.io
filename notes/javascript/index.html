@@ -36,11 +36,9 @@
     <div class="container">
       <header>
         <nav>
-          <a href="/">Blog</a>
-          <a href="/notes/">Notes</a>
-          <a href="/about/">About</a>
-          <a href="/contact/">Contact</a>
-          <a href="/feed/atom.xml">Feed</a>
+          <a class="icon icon-blog" href="/">Blog</a>
+          <a class="icon icon-notes" href="/notes/">Notes</a>
+          <a class="icon icon-about" href="/about/">About</a>
         </nav>
       </header>
 
@@ -48,7 +46,7 @@
         
 <h1>JavaScript</h1>
 
-<div class="table-of-contents"><div class="toggle">Contents</div><ul><li><a href="#adding-scripts-to-a-web-page">Adding scripts to a web page</a></li><li><a href="#comments">Comments</a></li><li><a href="#statements">Statements</a></li><li><a href="#variables">Variables</a></li><li><a href="#booleans">Booleans</a></li><li><a href="#control-structures">Control structures</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#strings">Strings</a></li><li><a href="#functions">Functions</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#objects">Objects</a></li><li><a href="#classes">Classes</a></li></ul></div>
+<div class="toc"><div class="icon icon-right toggle">Contents</div><ul><li><a href="#adding-scripts-to-a-web-page">Adding scripts to a web page</a></li><li><a href="#comments">Comments</a></li><li><a href="#statements">Statements</a></li><li><a href="#variables">Variables</a></li><li><a href="#booleans">Booleans</a></li><li><a href="#control-structures">Control structures</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#strings">Strings</a></li><li><a href="#functions">Functions</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#objects">Objects</a></li><li><a href="#classes">Classes</a></li></ul></div>
 <ul>
 <li>JavaScript was originally used to add behavior to web pages, like animating elements or loading additional data. Today, JavaScript is used as the main programming language in many other applications.</li>
 <li>A JavaScript file is a plain text file ending in <code>.js</code>.</li>
@@ -604,12 +602,27 @@ q.<span class="hljs-title function_">doSomethingElse</span>(); <span class="hljs
 
       <footer>
         &copy; 2024
+
+        <nav>
+          <a class="icon icon-email" href="mailto:contact@dkennedy.io">
+            <span class="sr-only">Email</span>
+          </a>
+          <a class="icon icon-github" href="https://github.com/dave-kennedy/">
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a class="icon icon-linkedin" href="https://www.linkedin.com/in/dtkennedy/">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+          <a class="icon icon-feed" href="/feed/atom.xml">
+            <span class="sr-only">Feed</span>
+          </a>
+        </nav>
       </footer>
     </div>
 
     <script>
       (() => {
-        const toc = document.querySelector('.table-of-contents');
+        const toc = document.querySelector('.toc');
         const toggle = toc?.querySelector('.toggle');
 
         if (!toc || !toggle) {
