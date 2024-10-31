@@ -13,7 +13,7 @@ layout: base.liquid
     {% endif %}
 
     {% if date %}
-      <div class="date">{{ date | date: '%B %e, %Y' }}</div>
+      <div class="date icon icon-date">{{ date | date: '%B %e, %Y' }}</div>
     {% endif %}
 
     {% assign tags = tags | except: 'posts' %}

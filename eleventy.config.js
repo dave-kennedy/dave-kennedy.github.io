@@ -62,7 +62,7 @@ export default function (eleventy) {
 
     md.use(mdToc, {
       containerClass: 'toc',
-      containerHeaderHtml: '<div class="toggle">Contents</div>',
+      containerHeaderHtml: '<div class="icon icon-right toggle">Contents</div>',
     });
   });
 
