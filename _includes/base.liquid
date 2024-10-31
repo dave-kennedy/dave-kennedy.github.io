@@ -47,8 +47,6 @@
           <a class="icon icon-blog" href="/">Blog</a>
           <a class="icon icon-notes" href="/notes/">Notes</a>
           <a class="icon icon-about" href="/about/">About</a>
-          <a class="icon icon-contact" href="/contact/">Contact</a>
-          <a class="icon icon-feed" href="/feed/atom.xml">Feed</a>
         </nav>
       </header>
 
@@ -58,6 +56,21 @@
 
       <footer>
         &copy; {{ 'now' | date: '%Y' }}
+
+        <nav>
+          <a class="icon icon-email" href="mailto:contact@dkennedy.io" />
+            <span class="sr-only">Email</span>
+          </a>
+          <a class="icon icon-github" href="https://github.com/dave-kennedy/" />
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a class="icon icon-linkedin" href="https://www.linkedin.com/in/dtkennedy/" />
+            <span class="sr-only">LinkedIn</span>
+          </a>
+          <a class="icon icon-feed" href="/feed/atom.xml">
+            <span class="sr-only">Feed</span>
+          </a>
+        </nav>
       </footer>
     </div>
 

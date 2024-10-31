@@ -97,7 +97,7 @@ a {
   transition: color 300ms;
 }
 
-a:focus, a:hover {
+a:is(:focus, :hover) {
   color: var(--fg-accent-1);
 }
 
@@ -167,12 +167,11 @@ header {
 
 header nav {
   display: flex;
-  gap: 6%;
+  gap: var(--space-size-l);
   justify-content: center;
 }
 
 header nav a {
-  flex-direction: column;
   text-decoration: none;
 }
 
@@ -196,8 +195,7 @@ header nav a:nth-child(5) {
   color: var(--fg-accent-5);
 }
 
-header nav a:focus,
-header nav a:hover {
+header nav a:is(:focus, :hover) {
   color: var(--fg-normal);
 }
 
@@ -225,17 +223,22 @@ header nav a:nth-child(5)::before {
   background-color: var(--fg-accent-5);
 }
 
-header nav a:focus::before,
-header nav a:hover::before {
+header nav a:is(:focus, :hover)::before {
   background-color: var(--fg-normal);
 }
 
 /* Footer */
 
 footer {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: var(--space-size-m);
   margin-top: var(--space-size-m);
-  text-align: center;
+}
+
+footer nav {
+  display: flex;
+  gap: var(--space-size-m);
 }
 
 /* Icons */
@@ -258,9 +261,11 @@ footer {
 
 .icon.icon-about::before { mask: url('/img/about.svg'); }
 .icon.icon-blog::before { mask: url('/img/blog.svg'); }
-.icon.icon-contact::before { mask: url('/img/contact.svg'); }
 .icon.icon-date::before { mask: url('/img/date.svg'); }
+.icon.icon-email::before { mask: url('/img/email.svg'); }
 .icon.icon-feed::before { mask: url('/img/feed.svg'); }
+.icon.icon-github::before { mask: url('/img/github.svg'); }
+.icon.icon-linkedin::before { mask: url('/img/linkedin.svg'); }
 .icon.icon-notes::before { mask: url('/img/notes.svg'); }
 .icon.icon-right::before { mask: url('/img/right.svg'); }
 
@@ -372,8 +377,7 @@ footer {
   transition: background-color 300ms, color 300ms;
 }
 
-.post .header .tags a:focus,
-.post .header .tags a:hover {
+.post .header .tags a:is(:focus, :hover) {
   background-color: var(--fg-accent-5);
   color: var(--bg-light);
 }
@@ -444,5 +448,17 @@ footer {
 
 .toc.open ul {
   display: block;
+}
+
+/* Screen readers */
+
+.sr-only:not(:focus, :active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
