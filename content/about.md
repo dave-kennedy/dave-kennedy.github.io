@@ -16,5 +16,5 @@ I first learned to play the piano when I was six. I played the clarinet in middl
 
 ## Writing
 
-Most of my words live in my blog, but some have escaped into the wild. I've written articles for gaming, politics, and tech sites, and several short stories which I'm still working up the nerve to publish. In May 2024, I edited and published my friend's memoir titled _A Rhodes Retrospective: Consolidated Edition_, available from Amazon in paperback and Kindle ebook format.
+Most of my words live in my blog, but some have escaped into the wild. I've written articles for gaming, politics, and tech sites, and several short stories which I'm still working up the nerve to publish. In May 2024, I edited and published my neighbors's memoir on Amazon KDP in paperback and Kindle ebook format.
 
