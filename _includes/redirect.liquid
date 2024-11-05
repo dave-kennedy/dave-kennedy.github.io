@@ -14,21 +14,23 @@ redirect: /
   Otherwise, go <a href="{{ redirect }}">here</a>.
 </p>
 
-{% js %}
-  (() => {
-    const countdown = document.getElementById('countdown');
-    let seconds = 3;
-    countdown.innerHTML = seconds;
+{% body %}
+  <script>
+    (() => {
+      const countdown = document.getElementById('countdown');
+      let seconds = 3;
+      countdown.innerHTML = seconds;
 
-    setInterval(() => {
-      if (seconds != 0) {
-        seconds--;
-        countdown.innerHTML = seconds;
-        return;
-      }
+      setInterval(() => {
+        if (seconds != 0) {
+          seconds--;
+          countdown.innerHTML = seconds;
+          return;
+        }
 
-      document.location.replace('{{ redirect }}');
-    }, 1000);
-  })();
-{% endjs %}
+        document.location.replace('{{ redirect }}');
+      }, 1000);
+    })();
+  </script>
+{% endbody %}
 

@@ -35,9 +35,7 @@
     <link href="/css/base.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet" />
 
-    <style>
-      {% getBundle 'css' %}
-    </style>
+    {% getBundle 'head' %}
   </head>
 
   <body>
@@ -88,9 +86,9 @@
           toc.classList.toggle('open');
         });
       })();
-
-      {% getBundle 'js' %}
     </script>
+
+    {% getBundle 'body' %}
   </body>
 </html>
 

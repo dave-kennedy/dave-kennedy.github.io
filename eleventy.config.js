@@ -6,8 +6,8 @@ import mdFootnote from 'markdown-it-footnote';
 import mdToc from 'markdown-it-table-of-contents';
 
 export default function (eleventy) {
-  eleventy.addBundle('css', {toFileDirectory: 'css'});
-  eleventy.addBundle('js', {toFileDirectory: 'js'});
+  eleventy.addBundle('head');
+  eleventy.addBundle('body');
 
   // Copy public directory to output
   eleventy.addPassthroughCopy({'public': '/'});
