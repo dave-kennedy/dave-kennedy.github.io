@@ -237,10 +237,11 @@ title: JavaScript
   answer--; // 43
   answer;   // 42
   ```
-* Modular arithmetic also works as you would expect:
+* The remainder operator returns the remainder after division:
   ```js
   22 % 12; // 10
   ```
+  (This is different from the modulo operator in other languages.)
 
 ## Strings
 
