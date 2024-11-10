@@ -260,6 +260,7 @@ footer nav {
 }
 
 .icon.icon-about::before { mask: url('/img/about.svg'); }
+.icon.icon-apps::before { mask: url('/img/apps.svg'); }
 .icon.icon-blog::before { mask: url('/img/blog.svg'); }
 .icon.icon-date::before { mask: url('/img/date.svg'); }
 .icon.icon-email::before { mask: url('/img/email.svg'); }
