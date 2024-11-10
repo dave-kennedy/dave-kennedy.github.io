@@ -1,0 +1,139 @@
+---
+title: Fretboard
+---
+
+<div>
+  <label for="notes">Enter notes, separated by spaces</label>
+  <input id="notes" type="text" value="C E G" />
+</div>
+
+<div>
+  <label for="root">Or select a root</label>
+  <select id="root">
+    <option selected>C</option>
+    <option>C#</option>
+    <option>Db</option>
+    <option>D</option>
+    <option>D#</option>
+    <option>Eb</option>
+    <option>E</option>
+    <option>F</option>
+    <option>F#</option>
+    <option>Gb</option>
+    <option>G</option>
+    <option>G#</option>
+    <option>Ab</option>
+    <option>A</option>
+    <option>A#</option>
+    <option>Bb</option>
+    <option>B</option>
+  </select>
+
+  <label for="chord">and a chord</label>
+  <select id="chord">
+    <option>5</option>
+    <option>7sus2</option>
+    <option>7sus4</option>
+    <option>9sus4</option>
+    <option>add2</option>
+    <option>add4</option>
+    <option>aug</option>
+    <option>aug7</option>
+    <option>aug9</option>
+    <option>aug11</option>
+    <option>aug13</option>
+    <option>dim</option>
+    <option>dim7</option>
+    <option>dim9</option>
+    <option>dim11</option>
+    <option>dom7</option>
+    <option>dom9</option>
+    <option>dom11</option>
+    <option>dom13</option>
+    <option selected>maj</option>
+    <option>maj6</option>
+    <option>maj7</option>
+    <option>maj9</option>
+    <option>maj11</option>
+    <option>maj13</option>
+    <option>min</option>
+    <option>min6</option>
+    <option>min7</option>
+    <option>min7b5</option>
+    <option>min9</option>
+    <option>min11</option>
+    <option>min13</option>
+    <option>sus2</option>
+    <option>sus4</option>
+  </select>
+</div>
+
+<div id="fretboard"></div>
+
+{% body %}
+  <script type="module">
+    import { SVGuitarChord } from 'https://cdn.jsdelivr.net/npm/svguitar@2.4.1/+esm';
+    import { chromaticScale, makeChord } from '/js/music.js';
+
+    const chart = new SVGuitarChord('#fretboard')
+      .configure({
+        color: 'white',
+        fingerTextColor: 'black',
+        fingerTextSize: 16,
+        fretMarkerColor: '#666',
+        fretMarkers: [2, 4, 6, 8, {double: true, fret: 11}],
+        frets: 12,
+        orientation: 'horizontal',
+      });
+
+    const fretboard = [
+      chromaticScale.slice(4).concat(chromaticScale.slice(0, 4)),
+      chromaticScale.slice(11).concat(chromaticScale.slice(0, 11)),
+      chromaticScale.slice(7).concat(chromaticScale.slice(0, 7)),
+      chromaticScale.slice(2).concat(chromaticScale.slice(0, 2)),
+      chromaticScale.slice(9).concat(chromaticScale.slice(0, 9)),
+      chromaticScale.slice(4).concat(chromaticScale.slice(0, 4)),
+    ];
+
+    const notesInput = document.getElementById('notes');
+    notesInput.addEventListener('input', drawNotes);
+
+    function drawNotes() {
+      const notes = notesInput.value.split(' ');
+
+      chart.chord({
+        barres: [],
+        fingers: getFingers(notes),
+      }).draw();
+    }
+
+    // TODO: dim optional notes
+    function getFingers(notes) {
+      return fretboard.flatMap((string, stringIndex) => {
+        return string.flatMap((fret, fretIndex) => {
+          return fret.map(note => {
+            if (notes.includes(note)) {
+              return [stringIndex + 1, fretIndex, note];
+            }
+          }).filter(f => f);
+        });
+      });
+    }
+
+    const rootSelect = document.getElementById('root');
+    rootSelect.addEventListener('change', changeNotes);
+
+    const chordSelect = document.getElementById('chord');
+    chordSelect.addEventListener('change', changeNotes);
+
+    function changeNotes() {
+      const notes = makeChord(rootSelect.value, chordSelect.value);
+      notesInput.value = notes.join(' ');
+      drawNotes();
+    }
+
+    // Render on page load
+    changeNotes();
+  </script>
+{% endbody %}
+

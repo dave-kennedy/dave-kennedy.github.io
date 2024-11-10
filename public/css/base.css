@@ -88,6 +88,12 @@ pre code {
   padding: 0;
 }
 
+/* Forms */
+
+input, select {
+  font-size: var(--font-size-s);
+}
+
 /* Links */
 
 a {

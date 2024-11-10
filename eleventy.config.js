@@ -71,6 +71,6 @@ export default function (eleventy) {
   eleventy.setDataDirectory('../_data');
 
   // Nunjucks is used by the feed plugin virtual template
-  eleventy.setTemplateFormats(['md', 'njk']);
+  eleventy.setTemplateFormats(['html', 'md', 'njk']);
 };
 
