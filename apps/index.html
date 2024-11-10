@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     
-      <title>Page Moved | dkennedy.io</title>
+      <title>Apps | dkennedy.io</title>
     
 
     
@@ -15,8 +15,6 @@
       <meta name="description" content="A virtual escape hatch for the stuff in my head.">
     
 
-    
-      <meta name="keywords" content="computering, networking, nix, open-wrt, programming, python, sed, til, tmux, ubuntu, unit-testing, vim">
     
 
     <meta name="generator" content="Eleventy v3.0.0">
@@ -45,16 +43,22 @@
 
       <main>
         
-<h1>Page Moved</h1>
+<h1>Apps</h1>
 
-<p>
-  You should be redirected in <a id="countdown"></a> seconds.
-</p>
-
-<p>
-  Otherwise, go <a href="/tags/til/">here</a>.
-</p>
-
+<h2 id="games" tabindex="-1">Games</h2>
+<ul>
+<li><a href="/CharacterSheet/">D&amp;D v3.5 Character Sheet</a></li>
+<li><a href="/por-code-wheel/">Pool of Radiance Code Wheel</a></li>
+</ul>
+<h2 id="music" tabindex="-1">Music</h2>
+<ul>
+<li><a href="/apps/fretboard/">Fretboard</a></li>
+<li><a href="/apps/scales/">Scales</a></li>
+</ul>
+<h2 id="productivity" tabindex="-1">Productivity</h2>
+<ul>
+<li><a href="/motivator/">Motivator</a></li>
+</ul>
 
 
 
@@ -95,23 +99,7 @@
       })();
     </script>
 
-    <script>
-    (() => {
-      const countdown = document.getElementById('countdown');
-      let seconds = 3;
-      countdown.innerHTML = seconds;
-
-      setInterval(() => {
-        if (seconds != 0) {
-          seconds--;
-          countdown.innerHTML = seconds;
-          return;
-        }
-
-        document.location.replace('/tags/til/');
-      }, 1000);
-    })();
-  </script>
+    
   </body>
 </html>
 

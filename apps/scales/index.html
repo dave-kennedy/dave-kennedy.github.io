@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     
-      <title>Page Moved | dkennedy.io</title>
+      <title>Scales | dkennedy.io</title>
     
 
     
@@ -15,8 +15,6 @@
       <meta name="description" content="A virtual escape hatch for the stuff in my head.">
     
 
-    
-      <meta name="keywords" content="computering, networking, nix, open-wrt, programming, python, sed, til, tmux, ubuntu, unit-testing, vim">
     
 
     <meta name="generator" content="Eleventy v3.0.0">
@@ -45,15 +43,46 @@
 
       <main>
         
-<h1>Page Moved</h1>
+<h1>Scales</h1>
 
-<p>
-  You should be redirected in <a id="countdown"></a> seconds.
-</p>
 
-<p>
-  Otherwise, go <a href="/tags/til/">here</a>.
-</p>
+<div>
+  <label for="root">Select a root</label>
+  <select id="root">
+    <option selected="">C</option>
+    <option>C#</option>
+    <option>Db</option>
+    <option>D</option>
+    <option>D#</option>
+    <option>Eb</option>
+    <option>E</option>
+    <option>F</option>
+    <option>F#</option>
+    <option>Gb</option>
+    <option>G</option>
+    <option>G#</option>
+    <option>Ab</option>
+    <option>A</option>
+    <option>A#</option>
+    <option>Bb</option>
+    <option>B</option>
+  </select>
+
+  <label for="mode">and a mode</label>
+  <select id="mode">
+    <option selected="">ionian</option>
+    <option>dorian</option>
+    <option>phrygian</option>
+    <option>lydian</option>
+    <option>mixolydian</option>
+    <option>aeolian</option>
+    <option>locrian</option>
+  </select>
+</div>
+
+<div id="staff"></div>
+
+
 
 
 
@@ -95,22 +124,57 @@
       })();
     </script>
 
-    <script>
-    (() => {
-      const countdown = document.getElementById('countdown');
-      let seconds = 3;
-      countdown.innerHTML = seconds;
+    <script type="module">
+    import abcjs from 'https://cdn.jsdelivr.net/npm/abcjs@6.4.4/+esm';
+    import { makeScale } from '/js/music.js';
 
-      setInterval(() => {
-        if (seconds != 0) {
-          seconds--;
-          countdown.innerHTML = seconds;
-          return;
-        }
+    const rootSelect = document.getElementById('root');
+    rootSelect.addEventListener('change', drawScale);
 
-        document.location.replace('/tags/til/');
-      }, 1000);
-    })();
+    const modeSelect = document.getElementById('mode');
+    modeSelect.addEventListener('change', drawScale);
+
+    function drawScale() {
+      const notes = makeScale(rootSelect.value, modeSelect.value);
+
+      const abcString = 'L: 1/4\n' +
+        notes.map(translateAbc).join('') + notes[0].toLowerCase();
+
+      abcjs.renderAbc(
+        'staff',
+        abcString,
+        {responsive: 'resize', staffwidth: 400}
+      );
+    }
+
+    function translateAbc(note, index) {
+      if (note.endsWith('bb')) {
+        note = `__${note[0]}`;
+      } else if (note.endsWith('b')) {
+        note = `_${note[0]}`;
+      } else if (note.endsWith('##')) {
+        note = `^^${note[0]}`;
+      } else if (note.endsWith('#')) {
+        note = `^${note[0]}`;
+      }
+
+      if (
+        note.endsWith('C') && index > 0
+        || note.endsWith('D') && index > 1
+        || note.endsWith('E') && index > 2
+        || note.endsWith('F') && index > 3
+        || note.endsWith('G') && index > 4
+        || note.endsWith('A') && index > 5
+        || note.endsWith('B') && index > 6
+      ) {
+        return note.toLowerCase();
+      }
+
+      return note;
+    }
+
+    // Render on page load
+    drawScale();
   </script>
   </body>
 </html>

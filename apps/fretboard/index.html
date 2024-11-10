@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    
+      <title>Fretboard | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="Dave Kennedy">
+    
+
+    
+      <meta name="description" content="A virtual escape hatch for the stuff in my head.">
+    
+
+    
+
+    <meta name="generator" content="Eleventy v3.0.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/feed/atom.xml" rel="alternate" title="dkennedy.io" type="application/atom+xml">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
+
+    
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+          <a class="icon icon-blog" href="/">Blog</a>
+          <a class="icon icon-apps" href="/apps/">Apps</a>
+          <a class="icon icon-notes" href="/notes/">Notes</a>
+          <a class="icon icon-about" href="/about/">About</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>Fretboard</h1>
+
+
+<div>
+  <label for="notes">Enter notes, separated by spaces</label>
+  <input id="notes" type="text" value="C E G">
+</div>
+
+<div>
+  <label for="root">Or select a root</label>
+  <select id="root">
+    <option selected="">C</option>
+    <option>C#</option>
+    <option>Db</option>
+    <option>D</option>
+    <option>D#</option>
+    <option>Eb</option>
+    <option>E</option>
+    <option>F</option>
+    <option>F#</option>
+    <option>Gb</option>
+    <option>G</option>
+    <option>G#</option>
+    <option>Ab</option>
+    <option>A</option>
+    <option>A#</option>
+    <option>Bb</option>
+    <option>B</option>
+  </select>
+
+  <label for="chord">and a chord</label>
+  <select id="chord">
+    <option>5</option>
+    <option>7sus2</option>
+    <option>7sus4</option>
+    <option>9sus4</option>
+    <option>add2</option>
+    <option>add4</option>
+    <option>aug</option>
+    <option>aug7</option>
+    <option>aug9</option>
+    <option>aug11</option>
+    <option>aug13</option>
+    <option>dim</option>
+    <option>dim7</option>
+    <option>dim9</option>
+    <option>dim11</option>
+    <option>dom7</option>
+    <option>dom9</option>
+    <option>dom11</option>
+    <option>dom13</option>
+    <option selected="">maj</option>
+    <option>maj6</option>
+    <option>maj7</option>
+    <option>maj9</option>
+    <option>maj11</option>
+    <option>maj13</option>
+    <option>min</option>
+    <option>min6</option>
+    <option>min7</option>
+    <option>min7b5</option>
+    <option>min9</option>
+    <option>min11</option>
+    <option>min13</option>
+    <option>sus2</option>
+    <option>sus4</option>
+  </select>
+</div>
+
+<div id="fretboard"></div>
+
+
+
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2024
+
+        <nav>
+          <a class="icon icon-email" href="mailto:contact@dkennedy.io">
+            <span class="sr-only">Email</span>
+          </a>
+          <a class="icon icon-github" href="https://github.com/dave-kennedy/">
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a class="icon icon-linkedin" href="https://www.linkedin.com/in/dtkennedy/">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+          <a class="icon icon-feed" href="/feed/atom.xml">
+            <span class="sr-only">Feed</span>
+          </a>
+        </nav>
+      </footer>
+    </div>
+
+    <script>
+      (() => {
+        const toc = document.querySelector('.toc');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+    </script>
+
+    <script type="module">
+    import { SVGuitarChord } from 'https://cdn.jsdelivr.net/npm/svguitar@2.4.1/+esm';
+    import { chromaticScale, makeChord } from '/js/music.js';
+
+    const chart = new SVGuitarChord('#fretboard')
+      .configure({
+        color: 'white',
+        fingerTextSize: 16,
+        fretMarkerColor: '#666',
+        fretMarkers: [2, 4, 6, 8, {double: true, fret: 11}],
+        frets: 12,
+        orientation: 'horizontal',
+      })
+      .configure({
+        color: 'white',
+        fingerTextColor: 'black',
+      });
+
+    const fretboard = [
+      chromaticScale.slice(4).concat(chromaticScale.slice(0, 4)),
+      chromaticScale.slice(11).concat(chromaticScale.slice(0, 11)),
+      chromaticScale.slice(7).concat(chromaticScale.slice(0, 7)),
+      chromaticScale.slice(2).concat(chromaticScale.slice(0, 2)),
+      chromaticScale.slice(9).concat(chromaticScale.slice(0, 9)),
+      chromaticScale.slice(4).concat(chromaticScale.slice(0, 4)),
+    ];
+
+    const notesInput = document.getElementById('notes');
+    notesInput.addEventListener('input', drawNotes);
+
+    function drawNotes() {
+      const notes = notesInput.value.split(' ');
+
+      chart.chord({
+        barres: [],
+        fingers: getFingers(notes),
+      }).draw();
+    }
+
+    // TODO: dim optional notes
+    function getFingers(notes) {
+      return fretboard.flatMap((string, stringIndex) => {
+        return string.flatMap((fret, fretIndex) => {
+          return fret.map(note => {
+            if (notes.includes(note)) {
+              return [stringIndex + 1, fretIndex, note];
+            }
+          }).filter(f => f);
+        });
+      });
+    }
+
+    const rootSelect = document.getElementById('root');
+    rootSelect.addEventListener('change', changeNotes);
+
+    const chordSelect = document.getElementById('chord');
+    chordSelect.addEventListener('change', changeNotes);
+
+    function changeNotes() {
+      const notes = makeChord(rootSelect.value, chordSelect.value);
+      notesInput.value = notes.join(' ');
+      drawNotes();
+    }
+
+    // Render on page load
+    changeNotes();
+  </script>
+  </body>
+</html>
+
