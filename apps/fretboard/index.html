@@ -163,15 +163,12 @@
     const chart = new SVGuitarChord('#fretboard')
       .configure({
         color: 'white',
+        fingerTextColor: 'black',
         fingerTextSize: 16,
         fretMarkerColor: '#666',
         fretMarkers: [2, 4, 6, 8, {double: true, fret: 11}],
         frets: 12,
         orientation: 'horizontal',
-      })
-      .configure({
-        color: 'white',
-        fingerTextColor: 'black',
       });
 
     const fretboard = [
