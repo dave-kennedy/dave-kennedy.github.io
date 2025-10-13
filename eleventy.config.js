@@ -19,6 +19,12 @@ export default function (eleventy) {
     return (items || []).filter(item => excludes.indexOf(item) === -1);
   });
 
+  eleventy.addCollection('commandLineNotes', collections => {
+    return collections
+      .getFilteredByGlob('content/notes/cli/data/*.md')
+      .sort((a, b) => a.data.title.localeCompare(b.data.title));
+  });
+
   eleventy.addCollection('postsByTag', getPostsByTag);
 
   const metadata = {

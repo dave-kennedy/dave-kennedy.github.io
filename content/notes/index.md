@@ -2,6 +2,10 @@
 title: Notes
 ---
 
+## Command Line
+
+* [Index](/notes/cli/)
+
 ## Web Development
 
 * [HTML](/notes/html/)
