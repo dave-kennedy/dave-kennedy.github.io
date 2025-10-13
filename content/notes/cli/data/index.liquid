@@ -1,0 +1,15 @@
+---
+eleventyExcludeFromCollections: true
+permalink: "/notes/cli/data/index.json"
+---
+
+[
+  {%- for note in collections.notes %}
+  {
+    "title": "{{ note.data.title }}",
+    "keywords": {{ note.data.keywords | json }},
+    "url": "{{ note.page.url }}"
+  }{% if forloop.last != true %},{% endif %}
+  {%- endfor %}
+]
+

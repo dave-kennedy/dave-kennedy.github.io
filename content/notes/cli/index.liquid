@@ -1,0 +1,154 @@
+---
+title: Command Line Index
+description: A searchable index of command line notes.
+---
+
+{% head %}
+  <style>
+    #loading {
+        animation: 1s ease-out infinite loading;
+        background-image: linear-gradient(var(--fg-accent-5), var(--fg-accent-5));
+        background-repeat: no-repeat;
+        background-size: 50%;
+        display: none;
+        height: 2px;
+    }
+
+    @keyframes loading {
+        0%   {background-position: -200% 0;}
+        100% {background-position:  300% 0;}
+    }
+
+    #results {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    h2 {
+      border-bottom: 2px dotted;
+      color: var(--fg-accent-1);
+    }
+  </style>
+{% endhead %}
+
+<div>
+  <label for="search">Enter program name or keywords:</label>
+  <input id="search" type="text" />
+</div>
+
+<div>
+  <label for="title">Or select one:</label>
+  <select id="title">
+    <option></option>
+    {% for note in collections.notes %}
+      <option>{{ note.data.title }}</option>
+    {% endfor %}
+  </select>
+</div>
+
+<div id="loading"></div>
+
+<div id="results"></div>
+
+{% body %}
+  <script type="module">
+    import notes from './data/index.json' with {type: 'json'};
+
+    const loadingDiv = document.getElementById('loading');
+    const resultsDiv = document.getElementById('results');
+
+    const searchInput = document.getElementById('search');
+    searchInput.addEventListener('input', debounce);
+
+    const titleSelect = document.getElementById('title');
+    titleSelect.addEventListener('change', select);
+
+    let timeoutId;
+
+    function debounce(event) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(search, 500);
+    }
+
+    function search(event) {
+      resultsDiv.innerHTML = '';
+
+      const searchText = searchInput.value.toLowerCase().trim();
+
+      if (!searchText) {
+        return;
+      }
+
+      const searchWords = searchText.split(/\s+/);
+
+      const results = notes.map(note => {
+        if (note.title === searchText) {
+          return {...note, score: 1000000};
+        }
+
+        const matchingWords = searchWords.reduce((total, word) => {
+          if (note.title.includes(word) || note.keywords.includes(word)) {
+            return total + 1
+          }
+
+          return total;
+        }, 0);
+
+        return {...note, score: matchingWords};
+      }).filter(result => result.score > 0);
+
+      if (!results.length) {
+        alert('No results found');
+        return;
+      }
+
+      load(results);
+    }
+
+    function select(event) {
+      resultsDiv.innerHTML = '';
+
+      const titleText = titleSelect.value.toLowerCase().trim();
+
+      if (!titleText) {
+        return;
+      }
+
+      const result = notes.find(note => note.title === titleText);
+
+      if (!result) {
+        alert('No results found');
+        return;
+      }
+
+      load([result]);
+    }
+
+    async function load(results) {
+      loadingDiv.style.display = 'block';
+
+      await Promise.all(results.map(async result => {
+        const response = await fetch(result.url);
+
+        if (!response.ok) {
+          alert(`Error: unable to load ${result.url}`);
+          return;
+        }
+
+        const resultDiv = document.createElement('div');
+        resultDiv.innerHTML = await response.text();
+        resultDiv.style.order = result.score;
+        resultsDiv.append(resultDiv);
+      }));
+
+      loadingDiv.style.display = 'none';
+    }
+
+    if (titleSelect.value) {
+      select();
+    } else if (searchInput.value) {
+      search();
+    }
+  </script>
+{% endbody %}
+
