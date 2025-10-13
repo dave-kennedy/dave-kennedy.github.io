@@ -28,9 +28,28 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
 
     <style>
+    #loading {
+        animation: 1s ease-out infinite loading;
+        background-image: linear-gradient(var(--fg-accent-5), var(--fg-accent-5));
+        background-repeat: no-repeat;
+        background-size: 50%;
+        display: none;
+        height: 2px;
+    }
+
+    @keyframes loading {
+        0%   {background-position: -200% 0;}
+        100% {background-position:  300% 0;}
+    }
+
     #results {
       display: flex;
       flex-direction: column-reverse;
+    }
+
+    h2 {
+      border-bottom: 2px dotted;
+      color: var(--fg-accent-1);
     }
   </style>
   </head>
@@ -54,9 +73,11 @@
 
 
 <div>
-  <label for="keywords">Enter one or more keywords</label>
+  <label for="keywords">Enter program name or keywords:</label>
   <input id="keywords" type="text">
 </div>
+
+<div id="loading"></div>
 
 <div id="results"></div>
 
@@ -105,19 +126,22 @@
     <script type="module">
     import notes from './data/index.json' with {type: 'json'};
 
+    const loadingDiv = document.getElementById('loading');
     const resultsDiv = document.getElementById('results');
 
     const keywordsInput = document.getElementById('keywords');
-    keywordsInput.addEventListener('input', throttleInput);
+    keywordsInput.addEventListener('input', debounceInput);
 
     let timeoutId;
 
-    function throttleInput() {
+    function debounceInput() {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(updateResults, 1000);
+      timeoutId = setTimeout(updateResults, 500);
     }
 
-    function updateResults() {
+    async function updateResults() {
+      resultsDiv.innerHTML = '';
+
       const inputText = keywordsInput.value.toLowerCase().trim();
 
       if (!inputText) {
@@ -126,20 +150,21 @@
 
       const inputWords = inputText.split(/\s+/);
 
-      const results = notes.map(note => scoreResult(note, inputText, inputWords))
-        .filter(result => result.score > 0)
-        .sort((a, b) => a.score > b.score ? -1 : 1);
+      const results = notes
+        .map(note => scoreResult(note, inputText, inputWords))
+        .filter(result => result.score > 0);
 
       if (!results.length) {
         resultsDiv.innerHTML = 'No results found';
         return;
       }
 
-      resultsDiv.innerHTML = '';
+      loadingDiv.style.display = 'block';
 
-      for (const result of results) {
-        load(result);
-      }
+      const resultDivs = await Promise.all(results.map(loadNote));
+      resultsDiv.append(...resultDivs);
+
+      loadingDiv.style.display = 'none';
     }
 
     function scoreResult(note, inputText, inputWords) {
@@ -158,22 +183,16 @@
       return {...note, score: matchingWords};
     }
 
-    async function load(result) {
+    async function loadNote(result) {
       const response = await fetch(result.url);
+      const resultDiv = document.createElement('div');
 
-      if (!response.ok) {
-        resultsDiv.innerHTML += `<div style="order: ${result.score};">
-            <pre><code>Error: unable to load ${result.url}</code></pre>
-          </div>`;
+      resultDiv.innerHTML = response.ok
+        ? await response.text()
+        : `Error: unable to load ${result.url}`;
 
-        return;
-      }
-
-      const responseText = await response.text();
-
-      resultsDiv.innerHTML += `<div style="order: ${result.score};">
-          ${responseText}
-        </div>`;
+      resultDiv.style.order = result.score;
+      return resultDiv;
     }
 
     // Render on page load
