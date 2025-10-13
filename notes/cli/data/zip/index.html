@@ -1,0 +1,23 @@
+<h2 id="zip" tabindex="-1">zip</h2>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<pre><code class="language-shell">zip [optional_params] [ARCHIVE_NAME] [FILE_NAMES]
+</code></pre>
+<ul>
+<li><code>ARCHIVE_NAME</code>: Name of archive</li>
+<li><code>FILE_NAMES</code>: One or more files to add to/delete from archive</li>
+</ul>
+<h3 id="options" tabindex="-1">Options</h3>
+<ul>
+<li><code>-d</code>: Delete files from archive</li>
+<li><code>-g</code>: Append files to archive (grow)</li>
+<li><code>-i PATTERN</code>: Include file names matching pattern</li>
+<li><code>-r</code>: Include directories recursively</li>
+<li><code>-x PATTERN</code>: Exclude file names matching pattern</li>
+</ul>
+<h3 id="examples" tabindex="-1">Examples</h3>
+<h4 id="create-archive-containing-files-a%2C-b%2C-and-c" tabindex="-1">Create archive containing files a, b, and c</h4>
+<pre><code class="language-shell">zip files.zip a b c
+</code></pre>
+<h4 id="create-archive-containing-all-files-in-repo-directory-except-those-in-.git-directory" tabindex="-1">Create archive containing all files in repo directory except those in .git directory</h4>
+<pre><code class="language-shell">zip -r files.zip repo -x &#x27;repo/.git/*&#x27;
+</code></pre>

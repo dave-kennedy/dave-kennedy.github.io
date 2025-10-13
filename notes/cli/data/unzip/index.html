@@ -1,0 +1,21 @@
+<h2 id="unzip" tabindex="-1">unzip</h2>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<pre><code class="language-shell">unzip [optional_params] [ARCHIVE_NAME] [FILE_NAMES]
+</code></pre>
+<ul>
+<li><code>ARCHIVE_NAME</code>: Name of archive</li>
+<li><code>FILE_NAMES</code>: One or more files to extract from/list in archive</li>
+</ul>
+<h3 id="options" tabindex="-1">Options</h3>
+<ul>
+<li><code>-d</code>: Directory to extract files to</li>
+<li><code>-l</code>: List files in archive instead of extracting them</li>
+<li><code>-x PATTERN</code>: Exclude file names matching pattern</li>
+</ul>
+<h3 id="examples" tabindex="-1">Examples</h3>
+<h4 id="list-contents-of-archive" tabindex="-1">List contents of archive</h4>
+<pre><code class="language-shell">unzip -l files.zip
+</code></pre>
+<h4 id="extract-files-a%2C-b%2C-and-c-from-archive-to-data-directory" tabindex="-1">Extract files a, b, and c from archive to data directory</h4>
+<pre><code class="language-shell">unzip files.zip -d data a b c
+</code></pre>

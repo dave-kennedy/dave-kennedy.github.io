@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    
+      <title>CLI Index | dkennedy.io</title>
+    
+
+    
+      <meta name="author" content="Dave Kennedy">
+    
+
+    
+      <meta name="description" content="A searchable index of command line interface notes.">
+    
+
+    
+
+    <meta name="generator" content="Eleventy v3.1.2">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/feed/atom.xml" rel="alternate" title="dkennedy.io" type="application/atom+xml">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/monokai.min.css" crossorigin="anonymous" integrity="sha512-pU8Ny4jS7Uq58y/K4YLD+jF/74zC3R5SDco/Ln143vyLEmGQY7MV8p+Z5q7big/mNimhvQsfQpprGvUa2QzihQ==" referrerpolicy="no-referrer" rel="stylesheet">
+
+    <style>
+    #results {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+          <a class="icon icon-blog" href="/">Blog</a>
+          <a class="icon icon-apps" href="/apps/">Apps</a>
+          <a class="icon icon-notes" href="/notes/">Notes</a>
+          <a class="icon icon-about" href="/about/">About</a>
+        </nav>
+      </header>
+
+      <main>
+        
+<h1>CLI Index</h1>
+
+
+
+
+<div>
+  <label for="keywords">Enter one or more keywords</label>
+  <input id="keywords" type="text">
+</div>
+
+<div id="results"></div>
+
+
+
+
+
+
+      </main>
+
+      <footer>
+        &copy; 2025
+
+        <nav>
+          <a class="icon icon-email" href="mailto:contact@dkennedy.io">
+            <span class="sr-only">Email</span>
+          </a>
+          <a class="icon icon-github" href="https://github.com/dave-kennedy/">
+            <span class="sr-only">GitHub</span>
+          </a>
+          <a class="icon icon-linkedin" href="https://www.linkedin.com/in/dtkennedy/">
+            <span class="sr-only">LinkedIn</span>
+          </a>
+          <a class="icon icon-feed" href="/feed/atom.xml">
+            <span class="sr-only">Feed</span>
+          </a>
+        </nav>
+      </footer>
+    </div>
+
+    <script>
+      (() => {
+        const toc = document.querySelector('.toc');
+        const toggle = toc?.querySelector('.toggle');
+
+        if (!toc || !toggle) {
+          return;
+        }
+
+        toggle.addEventListener('click', () => {
+          toc.classList.toggle('open');
+        });
+      })();
+    </script>
+
+    <script type="module">
+    import notes from './data/index.json' with {type: 'json'};
+
+    const resultsDiv = document.getElementById('results');
+
+    const keywordsInput = document.getElementById('keywords');
+    keywordsInput.addEventListener('input', throttleInput);
+
+    let timeoutId;
+
+    function throttleInput() {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateResults, 1000);
+    }
+
+    function updateResults() {
+      resultsDiv.innerHTML = 'Loading...';
+
+      const inputText = keywordsInput.value.toLowerCase().trim();
+
+      if (!inputText) {
+        return;
+      }
+
+      const inputWords = inputText.split(/\s+/);
+
+      const results = notes.map(note => scoreResult(note, inputText, inputWords))
+        .filter(result => result.score > 0)
+        .sort((a, b) => a.score > b.score ? -1 : 1);
+
+      if (!results.length) {
+        resultsDiv.innerHTML = 'No results found';
+        return;
+      }
+
+      resultsDiv.innerHTML = '';
+
+      for (const result of results) {
+        load(result);
+      }
+    }
+
+    function scoreResult(note, inputText, inputWords) {
+      if (note.title === inputText) {
+        return {...note, score: 1000000};
+      }
+
+      const matchingWords = inputWords.reduce((total, word) => {
+        if (note.title.includes(word) || note.keywords.includes(word)) {
+          return total + 1
+        }
+
+        return total;
+      }, 0);
+
+      return {...note, score: matchingWords};
+    }
+
+    async function load(result) {
+      const response = await fetch(result.url);
+
+      if (!response.ok) {
+        resultsDiv.innerHTML += `<div style="order: ${result.score};">
+            <pre><code>Error: unable to load ${result.url}</code></pre>
+          </div>`;
+
+        return;
+      }
+
+      const responseText = await response.text();
+
+      resultsDiv.innerHTML += `<div style="order: ${result.score};">
+          ${responseText}
+        </div>`;
+    }
+
+    // Render on page load
+    updateResults();
+  </script>
+  </body>
+</html>
+
