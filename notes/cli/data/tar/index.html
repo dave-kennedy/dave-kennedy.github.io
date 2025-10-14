@@ -23,15 +23,15 @@
 <li><code>-z</code>: Use gzip compression</li>
 </ul>
 <h3 id="examples" tabindex="-1">Examples</h3>
-<h4 id="create-gzip-compressed-archive-containing-files-a%2C-b%2C-and-c" tabindex="-1">Create gzip compressed archive containing files a, b, and c</h4>
+<p>Create gzip compressed archive containing files a, b, and c:</p>
 <pre><code class="language-shell">tar -czf files.tar.gz a b c
 </code></pre>
-<h4 id="add-file-x-to-uncompressed-archive" tabindex="-1">Add file x to uncompressed archive</h4>
+<p>Add file x to uncompressed archive:</p>
 <pre><code class="language-shell">tar -rf files.tar x
 </code></pre>
-<h4 id="list-contents-of-bzip2-compressed-archive" tabindex="-1">List contents of bzip2 compressed archive</h4>
+<p>List contents of bzip2 compressed archive:</p>
 <pre><code class="language-shell">tar -tjf files.tar.bzip2
 </code></pre>
-<h4 id="extract-files-a%2C-b%2C-and-d-from-xz-compressed-archive-to-data-directory" tabindex="-1">Extract files a, b, and d from xz compressed archive to data directory</h4>
+<p>Extract files a, b, and d from xz compressed archive to data directory:</p>
 <pre><code class="language-shell">tar -xJf files.tar.xz -C data a b c
 </code></pre>
