@@ -4,11 +4,13 @@
     "title": "tar",
     "keywords": ["archive","compress","decompress","extract","unarchive","untar"],
     "url": "/notes/cli/data/tar/"
-  }, {
+  },
+  {
     "title": "unzip",
     "keywords": ["archive","compress","decompress","extract","unarchive","zip"],
     "url": "/notes/cli/data/unzip/"
-  }, {
+  },
+  {
     "title": "zip",
     "keywords": ["archive","compress","decompress","extract","unarchive","unzip"],
     "url": "/notes/cli/data/zip/"

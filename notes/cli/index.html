@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     
-      <title>CLI Index | dkennedy.io</title>
+      <title>Command Line Index | dkennedy.io</title>
     
 
     
@@ -12,7 +12,7 @@
     
 
     
-      <meta name="description" content="A searchable index of command line interface notes.">
+      <meta name="description" content="A searchable index of command line notes.">
     
 
     
@@ -67,14 +67,28 @@
 
       <main>
         
-<h1>CLI Index</h1>
+<h1>Command Line Index</h1>
 
 
 
 
 <div>
-  <label for="keywords">Enter program name or keywords:</label>
-  <input id="keywords" type="text">
+  <label for="search">Enter program name or keywords:</label>
+  <input id="search" type="text">
+</div>
+
+<div>
+  <label for="title">Or select one:</label>
+  <select id="title">
+    <option></option>
+    
+      <option>tar</option>
+    
+      <option>unzip</option>
+    
+      <option>zip</option>
+    
+  </select>
 </div>
 
 <div id="loading"></div>
@@ -129,74 +143,98 @@
     const loadingDiv = document.getElementById('loading');
     const resultsDiv = document.getElementById('results');
 
-    const keywordsInput = document.getElementById('keywords');
-    keywordsInput.addEventListener('input', debounceInput);
+    const searchInput = document.getElementById('search');
+    searchInput.addEventListener('input', debounce);
+
+    const titleSelect = document.getElementById('title');
+    titleSelect.addEventListener('change', select);
 
     let timeoutId;
 
-    function debounceInput() {
+    function debounce(event) {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(updateResults, 500);
+      timeoutId = setTimeout(search, 500);
     }
 
-    async function updateResults() {
+    function search(event) {
       resultsDiv.innerHTML = '';
 
-      const text = keywordsInput.value.toLowerCase().trim();
+      const searchText = searchInput.value.toLowerCase().trim();
 
-      if (!text) {
+      if (!searchText) {
         return;
       }
 
-      const words = text.split(/\s+/);
+      const searchWords = searchText.split(/\s+/);
 
-      const results = notes
-        .map(note => scoreResult(note, text, words))
-        .filter(result => result.score > 0);
+      const results = notes.map(note => {
+        if (note.title === searchText) {
+          return {...note, score: 1000000};
+        }
+
+        const matchingWords = searchWords.reduce((total, word) => {
+          if (note.title.includes(word) || note.keywords.includes(word)) {
+            return total + 1
+          }
+
+          return total;
+        }, 0);
+
+        return {...note, score: matchingWords};
+      }).filter(result => result.score > 0);
 
       if (!results.length) {
-        resultsDiv.innerHTML = 'No results found';
+        alert('No results found');
         return;
       }
 
+      load(results);
+    }
+
+    function select(event) {
+      resultsDiv.innerHTML = '';
+
+      const titleText = titleSelect.value.toLowerCase().trim();
+
+      if (!titleText) {
+        return;
+      }
+
+      const result = notes.find(note => note.title === titleText);
+
+      if (!result) {
+        alert('No results found');
+        return;
+      }
+
+      load([result]);
+    }
+
+    async function load(results) {
       loadingDiv.style.display = 'block';
 
-      const resultDivs = await Promise.all(results.map(loadNote));
-      resultsDiv.append(...resultDivs);
+      await Promise.all(results.map(async result => {
+        const response = await fetch(result.url);
+
+        if (!response.ok) {
+          alert(`Error: unable to load ${result.url}`);
+          return;
+        }
+
+        const resultDiv = document.createElement('div');
+        resultDiv.innerHTML = await response.text();
+        resultDiv.style.order = result.score;
+        resultsDiv.append(resultDiv);
+      }));
 
       loadingDiv.style.display = 'none';
     }
 
-    function scoreResult(note, text, words) {
-      if (note.title === text) {
-        return {...note, score: 1000000};
-      }
-
-      const matchingWords = words.reduce((total, word) => {
-        if (note.title.includes(word) || note.keywords.includes(word)) {
-          return total + 1
-        }
-
-        return total;
-      }, 0);
-
-      return {...note, score: matchingWords};
+    if (titleSelect.value) {
+      select();
+    } else if (searchInput.value) {
+      search();
     }
-
-    async function loadNote(result) {
-      const response = await fetch(result.url);
-      const resultDiv = document.createElement('div');
-
-      resultDiv.innerHTML = response.ok
-        ? await response.text()
-        : `Error: unable to load ${result.url}`;
-
-      resultDiv.style.order = result.score;
-      return resultDiv;
-    }
-
-    // Render on page load
-    updateResults();
   </script>
   </body>
 </html>
