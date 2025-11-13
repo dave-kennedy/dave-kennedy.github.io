@@ -1,6 +1,16 @@
 
 [
   {
+    "title": "curl",
+    "keywords": ["download","fetch","http","https","network","request","send"],
+    "url": "/notes/cli/data/curl/"
+  },
+  {
+    "title": "date",
+    "keywords": ["time"],
+    "url": "/notes/cli/data/date/"
+  },
+  {
     "title": "tar",
     "keywords": ["archive","compress","decompress","extract","unarchive","untar"],
     "url": "/notes/cli/data/tar/"

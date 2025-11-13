@@ -1,0 +1,132 @@
+<h2 id="date" tabindex="-1">date</h2>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> [options]
+</code></pre>
+<h3 id="options" tabindex="-1">Options</h3>
+<ul>
+<li><code>-I[FORMAT]</code>: Output date/time in ISO 8601 format (e.g. YYYY-MM-DDThh:mm:ss±hhmm) where <code>FORMAT</code> is one of:
+<ul>
+<li><code>d</code>: date only (default)</li>
+<li><code>h</code>: date and hours</li>
+<li><code>m</code>: date, hours, and minutes</li>
+<li><code>s</code>: date, hours, minutes, and seconds</li>
+<li><code>ns</code>: date, hours, minutes, seconds, and nanoseconds</li>
+</ul>
+</li>
+<li><code>-u</code>, <code>--utc</code>, <code>--univeral</code>: Use Coordinated Universal Time (UTC) instead of local time zone</li>
+<li><code>+[FORMAT]</code>: Output date/time in format, where <code>FORMAT</code> is any combination of:
+<ul>
+<li><code>%%</code>: a literal %</li>
+<li><code>%a</code>: locale's abbreviated weekday name (e.g. Sun)</li>
+<li><code>%A</code>: locale's full weekday name (e.g. Sunday)</li>
+<li><code>%b</code>: locale's abbreviated month name (e.g. Jan)</li>
+<li><code>%B</code>: locale's full month name (e.g. January)</li>
+<li><code>%c</code>: locale's date and time (e.g. Thu Mar  3 23:05:25 2005)</li>
+<li><code>%C</code>: century; like <code>%Y</code>, except omit last two digits (e.g. 20)</li>
+<li><code>%d</code>: day of month (e.g. 01)</li>
+<li><code>%D</code>: date; same as <code>%m/%d/%y</code></li>
+<li><code>%e</code>: day of month, space padded; same as <code>%_d</code></li>
+<li><code>%F</code>: full date; like <code>%+4Y-%m-%d</code></li>
+<li><code>%g</code>: last two digits of year of ISO week number (see <code>%G</code>)</li>
+<li><code>%G</code>: year of ISO week number (see <code>%V</code>); normally useful only with <code>%V</code></li>
+<li><code>%h</code>: same as <code>%b</code></li>
+<li><code>%H</code>: hour (00..23)</li>
+<li><code>%I</code>: hour (01..12)</li>
+<li><code>%j</code>: day of year (001..366)</li>
+<li><code>%k</code>: hour, space padded ( 0..23); same as <code>%_H</code></li>
+<li><code>%l</code>: hour, space padded ( 1..12); same as <code>%_I</code></li>
+<li><code>%m</code>: month (01..12)</li>
+<li><code>%M</code>: minute (00..59)</li>
+<li><code>%n</code>: a newline</li>
+<li><code>%N</code>: nanoseconds (000000000..999999999)</li>
+<li><code>%p</code>: locale's equivalent of either AM or PM; blank if not known</li>
+<li><code>%P</code>: like <code>%p</code>, but lower case</li>
+<li><code>%q</code>: quarter of year (1..4)</li>
+<li><code>%r</code>: locale's 12-hour clock time (e.g. 11:11:04 PM)</li>
+<li><code>%R</code>: 24-hour hour and minute; same as <code>%H:%M</code></li>
+<li><code>%s</code>: seconds since the Epoch (1970-01-01 00:00 UTC)</li>
+<li><code>%S</code>: second (00..60)</li>
+<li><code>%t</code>: a tab</li>
+<li><code>%T</code>: time; same as <code>%H:%M:%S</code></li>
+<li><code>%u</code>: day of week (1..7); 1 is Monday</li>
+<li><code>%U</code>: week number of year, with Sunday as first day of week (00..53)</li>
+<li><code>%V</code>: ISO week number, with Monday as first day of week (01..53)</li>
+<li><code>%w</code>: day of week (0..6); 0 is Sunday</li>
+<li><code>%W</code>: week number of year, with Monday as first day of week (00..53)</li>
+<li><code>%x</code>: locale's date representation (e.g. 12/31/99)</li>
+<li><code>%X</code>: locale's time representation (e.g. 23:13:48)</li>
+<li><code>%y</code>: last two digits of year (00..99)</li>
+<li><code>%Y</code>: year</li>
+<li><code>%z</code>: ±hhmm numeric time zone (e.g. -0400)</li>
+<li><code>%:z</code>: ±hh:mm numeric time zone (e.g. -04:00)</li>
+<li><code>%::z</code>: ±hh:mm:ss numeric time zone (e.g. -04:00:00)</li>
+<li><code>%:::z</code>: numeric time zone with : to necessary precision (e.g. -04, +05:30)</li>
+<li><code>%Z</code>: alphabetic time zone abbreviation (e.g. EDT)</li>
+</ul>
+</li>
+</ul>
+<h3 id="examples" tabindex="-1">Examples</h3>
+<ol>
+<li>
+<p>Print current date/time in default format:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span>  <span class="hljs-comment"># Mon Nov 10 10:30:00 AM MST 2025</span>
+</code></pre>
+</li>
+<li>
+<p>Print current date/time in ISO 8601 format:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> -Is  <span class="hljs-comment"># 2025-11-10T10:30:00-07:00</span>
+</code></pre>
+</li>
+<li>
+<p>Print current date/time in UTC time zone in ISO 8601 format:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> -Is -u  <span class="hljs-comment"># 2025-11-10T17:30:00+00:00</span>
+</code></pre>
+</li>
+<li>
+<p>Print current date/time in US Pacific time zone in ISO 8601 format
+(Use <code>tzselect</code> to lookup value):</p>
+<pre><code class="language-sh">TZ=America/Los_Angeles <span class="hljs-built_in">date</span> -Is  <span class="hljs-comment"># 2025-11-10T09:30:00-08:00</span>
+</code></pre>
+</li>
+<li>
+<p>Print current date/time in ISO 8601 format; omit time zone from output:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> +%FT%T  <span class="hljs-comment"># 2025-11-10T10:30:00</span>
+</code></pre>
+</li>
+<li>
+<p>Print current date/time in ISO 8601 format; omit time zone, dashes, and colons from output:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> +%Y%m%dT%H%M%S  <span class="hljs-comment"># 20251110T103000</span>
+</code></pre>
+</li>
+<li>
+<p>Convert date/time to local time zone:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> -d <span class="hljs-string">&#x27;2025-11-10T17:30:00Z&#x27;</span>  <span class="hljs-comment"># Mon Nov 10 10:30:00 AM MST 2025</span>
+</code></pre>
+</li>
+<li>
+<p>Convert date/time to US Pacific time zone
+(Use <code>tzselect</code> to lookup value):</p>
+<pre><code class="language-sh">TZ=America/Los_Angeles <span class="hljs-built_in">date</span> -d <span class="hljs-string">&#x27;2025-11-10 10:30:00 MST&#x27;</span>  <span class="hljs-comment"># Mon Nov 10 09:30:00 AM PST 2025</span>
+</code></pre>
+</li>
+<li>
+<p>Print date/time 100 days from now:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> -d <span class="hljs-string">&#x27;+100 days&#x27;</span>  <span class="hljs-comment"># Wed Feb 18 10:30:00 AM MST 2026</span>
+</code></pre>
+</li>
+<li>
+<p>Print current Unix Epoch time (seconds since 1970-01-01 00:00:00 UTC):</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> +%s  <span class="hljs-comment"># 1762795800</span>
+</code></pre>
+</li>
+<li>
+<p>Convert Unix Epoch time to date/time in local time zone:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> -d @1762795800  <span class="hljs-comment"># Mon Nov 10 10:30:00 AM MST 2025</span>
+</code></pre>
+</li>
+<li>
+<p>Convert date/time to Unix Epoch time:</p>
+<pre><code class="language-sh"><span class="hljs-built_in">date</span> -d <span class="hljs-string">&#x27;2025-11-10 10:30:00 MST&#x27;</span> +%s  <span class="hljs-comment"># 1762795800</span>
+</code></pre>
+</li>
+</ol>

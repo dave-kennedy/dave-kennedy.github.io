@@ -1,6 +1,6 @@
 <h2 id="tar" tabindex="-1">tar</h2>
 <h3 id="usage" tabindex="-1">Usage</h3>
-<pre><code class="language-shell">tar [OPERATION_MODE] -f [ARCHIVE_NAME] [options] [FILE_NAMES]
+<pre><code class="language-sh">tar [OPERATION_MODE] -f [ARCHIVE_NAME] [option ...] [FILE ...]
 </code></pre>
 <ul>
 <li><code>OPERATION_MODE</code>:
@@ -13,25 +13,36 @@
 </ul>
 </li>
 <li><code>ARCHIVE_NAME</code>: Name of archive</li>
-<li><code>FILE_NAMES</code>: One or more files to add to/delete from/extract from/list in archive</li>
+<li><code>FILE ...</code>: One or more files to add to/delete from/extract from/list in archive</li>
 </ul>
 <h3 id="options" tabindex="-1">Options</h3>
-<h4 id="compression" tabindex="-1">Compression</h4>
 <ul>
+<li><code>-C</code>: Directory to add files from/extract files to</li>
 <li><code>-j</code>: Use bzip2 compression</li>
 <li><code>-J</code>: Use xz compression</li>
 <li><code>-z</code>: Use gzip compression</li>
+<li><code>--exclude [PATTERN]</code>: Exclude file names matching pattern</li>
 </ul>
 <h3 id="examples" tabindex="-1">Examples</h3>
+<ol>
+<li>
 <p>Create gzip compressed archive containing files a, b, and c:</p>
-<pre><code class="language-shell">tar -czf files.tar.gz a b c
+<pre><code class="language-sh">tar -czf files.tar.gz a b c
 </code></pre>
+</li>
+<li>
 <p>Add file x to uncompressed archive:</p>
-<pre><code class="language-shell">tar -rf files.tar x
+<pre><code class="language-sh">tar -rf files.tar x
 </code></pre>
+</li>
+<li>
 <p>List contents of bzip2 compressed archive:</p>
-<pre><code class="language-shell">tar -tjf files.tar.bzip2
+<pre><code class="language-sh">tar -tjf files.tar.bzip2
 </code></pre>
+</li>
+<li>
 <p>Extract files a, b, and d from xz compressed archive to data directory:</p>
-<pre><code class="language-shell">tar -xJf files.tar.xz -C data a b c
+<pre><code class="language-sh">tar -xJf files.tar.xz -C data a b c
 </code></pre>
+</li>
+</ol>

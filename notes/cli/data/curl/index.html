@@ -1,0 +1,42 @@
+<h2 id="curl" tabindex="-1">curl</h2>
+<h3 id="usage" tabindex="-1">Usage</h3>
+<pre><code class="language-sh">curl [option ...] [URL]
+</code></pre>
+<h3 id="options" tabindex="-1">Options</h3>
+<ul>
+<li><code>-d [DATA]</code>: Add data to request body
+<ul>
+<li>This option implies <code>-X POST</code> and <code>-H &quot;Content-Type: application/x-www-form-urlencoded&quot;</code></li>
+</ul>
+</li>
+<li><code>-H [HEADER]</code>: Add header to request</li>
+<li><code>-i</code>: Show response headers</li>
+<li><code>-L</code>: Follow redirects</li>
+<li><code>-o [FILE]</code>: Save output to file</li>
+<li><code>-O</code>: Save output to file, use remote file name</li>
+<li><code>-s</code>: Hide progress meter and errors</li>
+<li><code>-S</code>: With <code>-s</code>, hide progress meter but show errors</li>
+<li><code>-v</code>: Show request and response headers</li>
+<li><code>-X [METHOD]</code>: Set request method</li>
+</ul>
+<h3 id="examples" tabindex="-1">Examples</h3>
+<ol>
+<li>
+<p>Download file, follow redirects, hide progress meter, show errors:</p>
+<pre><code class="language-sh">curl -LOsS <span class="hljs-string">&#x27;https://example.com/hello.txt&#x27;</span>
+</code></pre>
+</li>
+<li>
+<p>Send HTTP POST request with HTML form data:</p>
+<pre><code class="language-sh">curl -d <span class="hljs-string">&#x27;name=James%20Kirk&amp;age=32&#x27;</span> <span class="hljs-string">&#x27;https://example.com/register&#x27;</span>
+</code></pre>
+</li>
+<li>
+<p>Send HTTP PUT request with JSON data:</p>
+<pre><code class="language-sh">curl -d <span class="hljs-string">&#x27;{&quot;name&quot;: &quot;James Kirk&quot;, &quot;age&quot;: 32}&#x27;</span> \
+    -H <span class="hljs-string">&#x27;Content-Type: application/json&#x27;</span> \
+    -X PUT \
+    <span class="hljs-string">&#x27;https://example.com/users/123&#x27;</span>
+</code></pre>
+</li>
+</ol>
