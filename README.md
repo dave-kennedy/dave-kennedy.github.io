@@ -10,7 +10,6 @@ Based on [eleventy-base-blog](https://github.com/11ty/eleventy-base-blog).
 
 ## TODO
 
-* Add page that lists all tags
 * Add plugins:
     * [Image](https://www.11ty.dev/docs/plugins/image/)
     * [Inclusive Language](https://www.11ty.dev/docs/plugins/inclusive-language/)

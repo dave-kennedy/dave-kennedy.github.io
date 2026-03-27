@@ -1,5 +1,5 @@
 import { feedPlugin } from '@11ty/eleventy-plugin-rss';
-import getPostsByTag from './_config/get-posts-by-tag.js';
+import { getPostsByTag, getUniqueTags } from './_config/get-posts-by-tag.js';
 import hljs from 'highlight.js';
 import mdAnchor from 'markdown-it-anchor';
 import mdFootnote from 'markdown-it-footnote';
@@ -26,6 +26,12 @@ export default function (eleventy) {
   });
 
   eleventy.addCollection('postsByTag', getPostsByTag);
+
+  eleventy.addCollection('allTags', collections => {
+    return getUniqueTags(collections)
+      .filter(tag => tag != 'posts')
+      .sort((a, b) => a.localeCompare(b));
+  });
 
   const metadata = {
     'author': 'Dave Kennedy',

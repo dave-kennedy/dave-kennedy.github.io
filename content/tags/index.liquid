@@ -1,0 +1,13 @@
+---
+title: Tags
+description: All the tags.
+---
+
+<ul>
+  {% for tag in collections.allTags %}
+    <li>
+      <a href="/tags/{{ tag | slugify }}/">#{{ tag }}</a>
+    </li>
+  {% endfor %}
+</ul>
+

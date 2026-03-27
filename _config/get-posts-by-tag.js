@@ -1,7 +1,7 @@
 import lodash from '@11ty/lodash-custom';
 import slugify from '@sindresorhus/slugify';
 
-export default function getPostsByTag(collections) {
+export function getPostsByTag(collections) {
   return getUniqueTags(collections)
     .filter(tag => tag != 'posts')
     .flatMap(tag => {
@@ -26,7 +26,7 @@ export default function getPostsByTag(collections) {
     });
 }
 
-function getUniqueTags(collections) {
+export function getUniqueTags(collections) {
   const allPosts = collections.getFilteredByTag('posts');
   const allTags = allPosts.flatMap(post => post.data.tags);
   return [...new Set(allTags)];
