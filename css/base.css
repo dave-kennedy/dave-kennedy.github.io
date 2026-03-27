@@ -37,7 +37,7 @@ body {
   color: var(--fg-normal);
   font-family: 'Inter', sans-serif;
   font-size: var(--font-size-m);
-  line-height: 1.75;
+  line-height: 1.5;
 }
 
 @media (min-width: 940px) {
@@ -276,12 +276,7 @@ footer nav {
 .icon.icon-notes::before { mask: url('/img/notes.svg'); }
 .icon.icon-right::before { mask: url('/img/right.svg'); }
 
-/* Posts */
-
-.post .description {
-  color: var(--fg-dark);
-  font-style: italic;
-}
+/* Post */
 
 .post .header {
   align-items: center;
@@ -372,6 +367,11 @@ footer nav {
   }
 }
 
+.post .header .description {
+  color: var(--fg-dark);
+  font-style: italic;
+}
+
 .post .header .tags a {
   background-color: var(--bg-light);
   border-radius: var(--border-radius-size);
@@ -389,12 +389,30 @@ footer nav {
   color: var(--bg-light);
 }
 
+/* Posts */
+
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-size-l);
+}
+
+.posts .post {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-size-s);
+}
+
 .posts .post .title {
   font-size: var(--font-size-l);
-  line-height: normal;
-  margin-bottom: var(--space-size-s);
-  margin-top: var(--space-size-l);
 }
+
+.posts .post .description {
+  color: var(--fg-dark);
+  font-style: italic;
+}
+
+/* Pagination */
 
 .pagination {
   display: flex;
