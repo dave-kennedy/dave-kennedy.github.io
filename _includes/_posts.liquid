@@ -10,6 +10,10 @@
       {% if post.data.description %}
         <div class="description">{{ post.data.description }}</div>
       {% endif %}
+
+      {% if post.data.date %}
+        <div class="date icon icon-date">{{ post.data.date | date: '%B %e, %Y' }}</div>
+      {% endif %}
     </div>
   {% endfor %}
 </div>
