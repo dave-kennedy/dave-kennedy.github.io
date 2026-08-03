@@ -18,15 +18,20 @@
     <content type="html">&lt;style&gt;
     .thumbnails {
         display: flex;
+        flex-wrap: wrap;
         gap: var(--space-size-m);
-        justify-content: center;
         margin-bottom: var(--space-size-m);
         margin-top: var(--space-size-m);
     }
 
+    .thumbnails a {
+        display: flex;
+        flex: 1 0 10rem;
+        justify-content: center;
+    }
+
     .thumbnails img {
-        max-height: 30rem;
-        object-fit: contain;
+        object-fit: cover;
     }
 &lt;/style&gt;
 &lt;p&gt;I was cleaning off my desk the other day and found a mysterious, unlabeled hard drive. Plugging it in and examining its contents turned into a trip down memory lane and a bit of an emotional roller coaster: pride at my early ideas and ambitions mixed with embarrassment at my lack of self-awareness.&lt;/p&gt;
@@ -62,9 +67,6 @@
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/endgame-creations-2.png&quot;&gt;
         &lt;img alt=&quot;EndGame Creations 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/endgame-creations-2.png&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/endgame-creations-3.png&quot;&gt;
-        &lt;img alt=&quot;EndGame Creations 3&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/endgame-creations-3.png&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;The idea was to host all kinds of level-design-related stuff: textures, skies, maps, etc. But my contributors didn&#39;t contribute much, and I was more productive in 2D.&lt;/p&gt;
 &lt;h2&gt;EndGame Network&lt;/h2&gt;
@@ -95,13 +97,13 @@
 &lt;/div&gt;
 &lt;p&gt;I don&#39;t know why I thought my inflated ego would comfort anyone, but Jimmy Buffet and Nine Inch Nails on the same playlist is sure to make their skin crawl.&lt;/p&gt;
 &lt;h2&gt;Portfolio 2003&lt;/h2&gt;
-&lt;p&gt;For my first portfolio, I opted for a gray box floating in an empty white void, with light text on a light background, and gray butterflies because, you know, they&#39;re so drab. Nothing says &amp;quot;experienced designer&amp;quot; quite like this:&lt;/p&gt;
+&lt;p&gt;For my first portfolio, I opted for a gray box floating in an empty white void, with light text on a light background. Nothing says &amp;quot;experienced designer&amp;quot; quite like this:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/portfolio-2003-1.png&quot;&gt;
         &lt;img alt=&quot;Portfolio 2003 1&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/portfolio-2003-1.png&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-&lt;p&gt;That bear fur rug in the background is more of my original photography. At least I had the presence of mind to redesign it less than a year later:&lt;/p&gt;
+&lt;p&gt;At least I had the presence of mind to redesign it less than a year later:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/portfolio-2003-2.png&quot;&gt;
         &lt;img alt=&quot;Portfolio 2003 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/portfolio-2003-2.png&quot; loading=&quot;lazy&quot;&gt;
@@ -116,13 +118,13 @@
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;h2&gt;1031 Corporation&lt;/h2&gt;
-&lt;p&gt;The first time I applied for a job at a real software shop, the interviewer was reasonably skeptical at my lack of professional experience. They gave me some text and images and asked me to come up with a proof of concept, which I turned around overnight:&lt;/p&gt;
+&lt;p&gt;The first time I applied for a job at a real software shop, they gave me some text and images and asked me to come up with a proof of concept, which I turned around overnight:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/1031-corporation.png&quot;&gt;
         &lt;img alt=&quot;1031 Corporation&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/1031-corporation.png&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-&lt;p&gt;They must have been impressed because they offered me the job on the spot. Unfortunately, I had to decline because the nine-to-five schedule conflicted with my studies. I still remember the look on their face when they realized I was more interested in teaching than programming.&lt;/p&gt;
+&lt;p&gt;They must have been impressed because they offered me the job, but I had to decline because the nine-to-five schedule conflicted with my studies. I was more interested in teaching than programming.&lt;/p&gt;
 &lt;h2&gt;CK Hardwood Floors&lt;/h2&gt;
 &lt;p&gt;I don&#39;t remember much about this client. I think they paid me for the design but then had to put it on hold. Too bad, it looks halfway decent:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
@@ -140,7 +142,7 @@
         &lt;img alt=&quot;Mike&#39;s Colorado Fishing 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/mikes-colorado-fishing-2.png&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-&lt;p&gt;I&#39;m pretty sure his website received more traffic than all of mine combined. It certainly had more content.&lt;/p&gt;
+&lt;p&gt;I&#39;m pretty sure his website received more traffic than all of mine combined. It definitely had more content.&lt;/p&gt;
 &lt;h2&gt;Yonder DeZine/Swell Designs&lt;/h2&gt;
 &lt;p&gt;My brother and I finally changed the name of our company around 2005:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
@@ -186,14 +188,11 @@
 &lt;h2&gt;Law Office of Aaron Fethke&lt;/h2&gt;
 &lt;p&gt;This lawyer made the wise choice to go pro with an online business card designed by yours truly:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fethke-law-1.png&quot;&gt;
-        &lt;img alt=&quot;Law Office of Aaron Fethke 1&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fethke-law-1.png&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fethke-law-2.png&quot;&gt;
-        &lt;img alt=&quot;Law Office of Aaron Fethke 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fethke-law-2.png&quot; loading=&quot;lazy&quot;&gt;
+    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fethke-law.png&quot;&gt;
+        &lt;img alt=&quot;Law Office of Aaron Fethke&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fethke-law.png&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
-&lt;p&gt;The copyright says 2015 because that&#39;s when I grabbed the screenshot. It was more like &#39;07 or &#39;08 when I made this.&lt;/p&gt;
+&lt;p&gt;The copyright says 2010 because that&#39;s when I grabbed the screenshot. It was more like &#39;07 or &#39;08 when I made this.&lt;/p&gt;
 &lt;h2&gt;Mica Photography&lt;/h2&gt;
 &lt;p&gt;This photographer knew exactly what she wanted. She provided the design, colors, logo, and other assets, which made my job very easy:&lt;/p&gt;
 &lt;div class=&quot;thumbnails&quot;&gt;
@@ -202,9 +201,6 @@
     &lt;/a&gt;
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/mica-photography-2.png&quot;&gt;
         &lt;img alt=&quot;Mica Photography 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/mica-photography-2.png&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/mica-photography-3.png&quot;&gt;
-        &lt;img alt=&quot;Mica Photography 3&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/mica-photography-3.png&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;h2&gt;Mr. Kennedy&#39;s Classroom&lt;/h2&gt;
@@ -224,9 +220,6 @@
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/chris-steinbach-2.jpg&quot;&gt;
         &lt;img alt=&quot;Chris Steinbach 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/chris-steinbach-2.jpg&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/chris-steinbach-3.jpg&quot;&gt;
-        &lt;img alt=&quot;Chris Steinbach 3&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/chris-steinbach-3.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;I worked with Chris for years, redesigning his website several times. It was never quite minimalist enough for him.&lt;/p&gt;
 &lt;h2&gt;Portfolio 2010&lt;/h2&gt;
@@ -244,9 +237,6 @@
     &lt;/a&gt;
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/cmsnap-2.jpg&quot;&gt;
         &lt;img alt=&quot;CMSnap 2&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/cmsnap-2.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/cmsnap-3.jpg&quot;&gt;
-        &lt;img alt=&quot;CMSnap 3&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/cmsnap-3.jpg&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Eventually I converted all my clients&#39; websites to use CMSnap, for free, because it was fun.&lt;/p&gt;
@@ -278,27 +268,6 @@
     &lt;/a&gt;
     &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-03.jpg&quot;&gt;
         &lt;img alt=&quot;Fun or Not Fun 3&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-03.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-04.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 4&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-04.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-05.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 5&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-05.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-06.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 6&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-06.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-07.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 7&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-07.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-08.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 8&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-08.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-09.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 9&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-09.jpg&quot; loading=&quot;lazy&quot;&gt;
-    &lt;/a&gt;
-    &lt;a href=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-10.jpg&quot;&gt;
-        &lt;img alt=&quot;Fun or Not Fun 10&quot; src=&quot;https://dkennedy.io/posts/yesterdays-web/fun-or-not-fun-10.jpg&quot; loading=&quot;lazy&quot;&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;I had a staff of unpaid writers. We were all hoping it would take off like Destructoid or GameTrailers, but it turns out that takes a lot more work than any of us had time for. Detecting a theme yet?&lt;/p&gt;
