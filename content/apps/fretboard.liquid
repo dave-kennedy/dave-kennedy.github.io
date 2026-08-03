@@ -72,7 +72,7 @@ title: Fretboard
 
 {% body %}
   <script type="module">
-    import { SVGuitarChord } from 'https://cdn.jsdelivr.net/npm/svguitar@2.4.1/+esm';
+    import { SVGuitarChord } from 'https://cdn.jsdelivr.net/npm/svguitar@2.5.5/+esm';
     import { chromaticScale, makeChord } from '/js/music.js';
 
     const chart = new SVGuitarChord('#fretboard')
@@ -81,6 +81,7 @@ title: Fretboard
         fingerTextColor: 'black',
         fingerTextSize: 16,
         fretMarkerColor: '#666',
+        fretMarkerSize: 0.25,
         fretMarkers: [2, 4, 6, 8, {double: true, fret: 11}],
         frets: 12,
         orientation: 'horizontal',
